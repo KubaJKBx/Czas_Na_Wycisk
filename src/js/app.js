@@ -3728,3 +3728,486 @@ createHistoryWorkoutCard =
     return card;
 
   };
+  /* =========================================
+   v0.07.6 — ROZSZERZONE STATYSTYKI HISTORII
+   ========================================= */
+
+const renderHistorySummaryBase =
+  renderHistorySummary;
+
+
+renderHistorySummary =
+  function (
+    workouts
+  ) {
+
+    if (
+      !historySummary ||
+      !Array.isArray(workouts)
+    ) {
+
+      return;
+
+    }
+
+
+    const now =
+      new Date();
+
+
+    /* =========================================
+       POCZĄTEK TYGODNIA — PONIEDZIAŁEK
+       ========================================= */
+
+    const weekStart =
+      new Date(now);
+
+    const currentDay =
+      weekStart.getDay();
+
+    const daysFromMonday =
+      currentDay === 0
+        ? 6
+        : currentDay - 1;
+
+    weekStart.setDate(
+      weekStart.getDate() -
+      daysFromMonday
+    );
+
+    weekStart.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+
+    /* =========================================
+       POCZĄTEK MIESIĄCA
+       ========================================= */
+
+    const monthStart =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+      );
+
+
+    /* =========================================
+       PODSTAWOWE STATYSTYKI
+       ========================================= */
+
+    const totalDurationSeconds =
+      workouts.reduce(
+        (
+          total,
+          workout
+        ) =>
+          total +
+          getWorkoutDurationSeconds(
+            workout
+          ),
+        0
+      );
+
+
+    const completedExercises =
+      workouts.reduce(
+        (
+          total,
+          workout
+        ) =>
+          total +
+          getWorkoutStatusCount(
+            workout,
+            "completed"
+          ),
+        0
+      );
+
+
+    const averageDurationSeconds =
+      workouts.length > 0
+        ? Math.round(
+            totalDurationSeconds /
+            workouts.length
+          )
+        : 0;
+
+
+    /* =========================================
+       TRENINGI W TYM TYGODNIU
+       ========================================= */
+
+    const workoutsThisWeek =
+      workouts.filter(
+        (workout) => {
+
+          const date =
+            new Date(
+              workout.completedAt
+            );
+
+
+          if (
+            Number.isNaN(
+              date.getTime()
+            )
+          ) {
+
+            return false;
+
+          }
+
+
+          return (
+            date >= weekStart &&
+            date <= now
+          );
+
+        }
+      ).length;
+
+
+    /* =========================================
+       TRENINGI W TYM MIESIĄCU
+       ========================================= */
+
+    const workoutsThisMonth =
+      workouts.filter(
+        (workout) => {
+
+          const date =
+            new Date(
+              workout.completedAt
+            );
+
+
+          if (
+            Number.isNaN(
+              date.getTime()
+            )
+          ) {
+
+            return false;
+
+          }
+
+
+          return (
+            date >= monthStart &&
+            date <= now
+          );
+
+        }
+      ).length;
+
+
+    /* =========================================
+       NAJCZĘŚCIEJ ĆWICZONA PARTIA
+       ========================================= */
+
+    const bodyPartCounts =
+      {};
+
+
+    workouts.forEach(
+      (workout) => {
+
+        const exercises =
+          Array.isArray(
+            workout.exercises
+          )
+            ? workout.exercises
+            : [];
+
+
+        exercises.forEach(
+          (exercise) => {
+
+            /*
+              Liczymy tylko ćwiczenia,
+              które faktycznie wykonano.
+            */
+
+            if (
+              exercise.status !==
+              "completed"
+            ) {
+
+              return;
+
+            }
+
+
+            const bodyParts =
+              Array.isArray(
+                exercise.bodyParts
+              )
+                ? exercise.bodyParts
+                : [];
+
+
+            bodyParts.forEach(
+              (bodyPart) => {
+
+                bodyPartCounts[
+                  bodyPart
+                ] =
+                  (
+                    bodyPartCounts[
+                      bodyPart
+                    ] ||
+                    0
+                  ) +
+                  1;
+
+              }
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+    const mostTrainedBodyPart =
+      Object.entries(
+        bodyPartCounts
+      )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            b[1] -
+            a[1]
+        )[0]?.[0] ||
+      null;
+
+
+    const mostTrainedBodyPartLabel =
+      getHistoryStatisticBodyLabel(
+        mostTrainedBodyPart
+      );
+
+
+    /* =========================================
+       WIDOK
+       ========================================= */
+
+    historySummary.innerHTML = `
+
+      <div class="history-summary-item">
+
+        <span class="history-summary-value">
+          ${workoutsThisWeek}
+        </span>
+
+        <span class="history-summary-label">
+          treningi w tym tygodniu
+        </span>
+
+      </div>
+
+
+      <div class="history-summary-item">
+
+        <span class="history-summary-value">
+          ${workoutsThisMonth}
+        </span>
+
+        <span class="history-summary-label">
+          treningi w tym miesiącu
+        </span>
+
+      </div>
+
+
+      <div class="history-summary-item">
+
+        <span class="history-summary-value">
+          ${workouts.length}
+        </span>
+
+        <span class="history-summary-label">
+          wszystkie treningi
+        </span>
+
+      </div>
+
+
+      <div class="history-summary-item">
+
+        <span class="history-summary-value">
+          ${formatHistoryTotalDuration(
+            totalDurationSeconds
+          )}
+        </span>
+
+        <span class="history-summary-label">
+          łączny czas
+        </span>
+
+      </div>
+
+
+      <div class="history-summary-item">
+
+        <span class="history-summary-value">
+          ${formatHistoryAverageDuration(
+            averageDurationSeconds
+          )}
+        </span>
+
+        <span class="history-summary-label">
+          średni czas treningu
+        </span>
+
+      </div>
+
+
+      <div class="history-summary-item">
+
+        <span class="history-summary-value">
+          ${completedExercises}
+        </span>
+
+        <span class="history-summary-label">
+          wykonane ćwiczenia
+        </span>
+
+      </div>
+
+
+      <div class="history-summary-item history-summary-item--wide">
+
+        <span class="history-summary-value">
+          ${mostTrainedBodyPartLabel}
+        </span>
+
+        <span class="history-summary-label">
+          najczęściej ćwiczona partia
+        </span>
+
+      </div>
+
+    `;
+
+
+    historySummary.classList.remove(
+      "is-hidden"
+    );
+
+  };
+
+
+/* =========================================
+   FORMAT ŚREDNIEGO CZASU
+   ========================================= */
+
+function formatHistoryAverageDuration(
+  totalSeconds
+) {
+
+  const safeSeconds =
+    Math.max(
+      0,
+      Math.round(
+        Number(totalSeconds) ||
+        0
+      )
+    );
+
+
+  const minutes =
+    Math.floor(
+      safeSeconds /
+      60
+    );
+
+
+  const seconds =
+    safeSeconds %
+    60;
+
+
+  if (
+    minutes === 0
+  ) {
+
+    return `${seconds} sek.`;
+
+  }
+
+
+  if (
+    seconds === 0
+  ) {
+
+    return `${minutes} min`;
+
+  }
+
+
+  return (
+    `${minutes} min ${seconds} sek.`
+  );
+
+}
+
+
+/* =========================================
+   NAZWA PARTII W STATYSTYKACH
+   ========================================= */
+
+function getHistoryStatisticBodyLabel(
+  bodyPart
+) {
+
+  const labels = {
+
+    chest:
+      "Klatka",
+
+    back:
+      "Plecy",
+
+    shoulders:
+      "Barki",
+
+    arms:
+      "Ramiona",
+
+    abs:
+      "Brzuch",
+
+    legs:
+      "Nogi",
+
+    glutes:
+      "Pośladki"
+
+  };
+
+
+  if (
+    !bodyPart
+  ) {
+
+    return "—";
+
+  }
+
+
+  return (
+    labels[
+      bodyPart
+    ] ||
+    bodyPart
+  );
+
+}

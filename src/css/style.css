@@ -2197,3 +2197,17 @@ body {
     translateY(0)
     scale(0.99);
 }
+/* =========================================
+   v0.07.6 — ROZSZERZONE STATYSTYKI
+   ========================================= */
+
+.history-summary-item--wide {
+  grid-column: 1 / -1;
+}
+
+.history-summary-item--wide
+.history-summary-value {
+  color: var(--accent-strong);
+
+  font-size: 1.25rem;
+}
