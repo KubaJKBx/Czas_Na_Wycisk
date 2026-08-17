@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    APLIKACJA
-   v0.05.3
+   v0.06.2
    ========================================= */
 
 
@@ -246,6 +246,8 @@ let exercisePreferences = {};
 
 let workoutRating = null;
 
+let workoutHistorySaved = false;
+
 
 /* =========================================
    TIMER ĆWICZENIA CZASOWEGO
@@ -298,6 +300,20 @@ profileButtons.forEach((button) => {
 
       document.body.dataset.theme =
         button.dataset.profile;
+
+
+      const storageProfile =
+        getStorageProfileName(
+          workoutConfig.profile
+        );
+
+
+      exercisePreferences =
+        window.WorkoutStorage
+          ? window.WorkoutStorage.getExercisePreferences(
+              storageProfile
+            )
+          : {};
 
 
       showScreen(
@@ -1176,6 +1192,10 @@ function startWorkoutSession() {
     null;
 
 
+  workoutHistorySaved =
+    false;
+
+
   exerciseStatuses =
     currentWorkout.map(
       () =>
@@ -1366,6 +1386,34 @@ function renderSessionExercise() {
   dislikeExerciseButton.classList.remove(
     "is-selected"
   );
+
+
+  const savedPreference =
+    exercisePreferences[
+      exercise.id
+    ] || null;
+
+
+  if (
+    savedPreference === "like"
+  ) {
+
+    likeExerciseButton.classList.add(
+      "is-selected"
+    );
+
+  }
+
+
+  if (
+    savedPreference === "dislike"
+  ) {
+
+    dislikeExerciseButton.classList.add(
+      "is-selected"
+    );
+
+  }
 
 
   resetCountdownState();
@@ -1697,6 +1745,12 @@ likeExerciseButton.addEventListener(
       "like";
 
 
+    saveExercisePreference(
+      exercise.id,
+      "like"
+    );
+
+
     likeExerciseButton.classList.add(
       "is-selected"
     );
@@ -1724,6 +1778,12 @@ dislikeExerciseButton.addEventListener(
       exercise.id
     ] =
       "dislike";
+
+
+    saveExercisePreference(
+      exercise.id,
+      "dislike"
+    );
 
 
     dislikeExerciseButton.classList.add(
@@ -2193,6 +2253,9 @@ summaryDoneButton.addEventListener(
   "click",
   () => {
 
+    saveCompletedWorkoutToHistory();
+
+
     resetSessionState();
 
 
@@ -2202,6 +2265,134 @@ summaryDoneButton.addEventListener(
 
   }
 );
+
+
+/* =========================================
+   ZAPIS ZAKOŃCZONEGO TRENINGU
+   ========================================= */
+
+function saveCompletedWorkoutToHistory() {
+
+  if (
+    workoutHistorySaved ||
+    !window.WorkoutStorage ||
+    !workoutConfig.profile ||
+    currentWorkout.length === 0
+  ) {
+
+    return;
+
+  }
+
+
+  const storageProfile =
+    getStorageProfileName(
+      workoutConfig.profile
+    );
+
+
+  const completedAt =
+    new Date();
+
+
+  const workoutEntry = {
+
+    id:
+      `workout-${completedAt.getTime()}`,
+
+    completedAt:
+      completedAt.toISOString(),
+
+    profile:
+      workoutConfig.profile,
+
+    plannedMinutes:
+      Number(
+        workoutConfig.time
+      ),
+
+    level:
+      workoutConfig.level,
+
+    intensity:
+      workoutConfig.intensity,
+
+    body:
+      [
+        ...workoutConfig.body
+      ],
+
+    equipment:
+      [
+        ...workoutConfig.equipment
+      ],
+
+    actualDurationMs:
+      finalWorkoutDuration,
+
+    actualDurationSeconds:
+      Math.floor(
+        finalWorkoutDuration / 1000
+      ),
+
+    rating:
+      workoutRating || null,
+
+    exercises:
+      currentWorkout.map(
+        (exercise, index) => {
+
+          return {
+
+            id:
+              exercise.id,
+
+            name:
+              exercise.name,
+
+            bodyParts:
+              [
+                ...(exercise.bodyParts || [])
+              ],
+
+            equipment:
+              [
+                ...(exercise.equipment || [])
+              ],
+
+            difficulty:
+              exercise.difficulty,
+
+            prescription:
+              exercise.prescription,
+
+            status:
+              exerciseStatuses[index] ||
+              "pending"
+
+          };
+
+        }
+      )
+
+  };
+
+
+  const saved =
+    window.WorkoutStorage.addWorkout(
+      storageProfile,
+      workoutEntry
+    );
+
+
+  if (saved) {
+
+    workoutHistorySaved =
+      true;
+
+  }
+
+}
 
 
 /* =========================================
@@ -2232,6 +2423,10 @@ function resetSessionState() {
 
   workoutRating =
     null;
+
+
+  workoutHistorySaved =
+    false;
 
 
   clearInterval(
@@ -2268,6 +2463,59 @@ function resetSessionState() {
 
   restProgressPercent.textContent =
     "0%";
+
+}
+
+
+/* =========================================
+   PAMIĘĆ PROFILU I REAKCJI
+   ========================================= */
+
+function getStorageProfileName(
+  appProfile
+) {
+
+  if (
+    appProfile === "woman"
+  ) {
+
+    return "female";
+
+  }
+
+
+  return "male";
+
+}
+
+
+function saveExercisePreference(
+  exerciseId,
+  preference
+) {
+
+  if (
+    !window.WorkoutStorage ||
+    !workoutConfig.profile
+  ) {
+
+    return;
+
+  }
+
+
+  const storageProfile =
+    getStorageProfileName(
+      workoutConfig.profile
+    );
+
+
+  window.WorkoutStorage
+    .setExercisePreference(
+      storageProfile,
+      exerciseId,
+      preference
+    );
 
 }
 
