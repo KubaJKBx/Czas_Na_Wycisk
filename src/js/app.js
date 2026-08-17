@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    APLIKACJA
-   v0.06.6
+   v0.07.3
    ========================================= */
 
 /* EKRANY */
@@ -17,6 +17,17 @@ const resumeSessionScreen = document.querySelector("#resumeSessionScreen");
 const resumeSessionDetails = document.querySelector("#resumeSessionDetails");
 const resumeSessionContinue = document.querySelector("#resumeSessionContinue");
 const resumeSessionRestart = document.querySelector("#resumeSessionRestart");
+
+/* HISTORIA TRENINGÓW */
+const historyScreen = document.querySelector("#historyScreen");
+const historyOpenButton = document.querySelector("#historyOpenButton");
+const historyBackButton = document.querySelector("#historyBackButton");
+const historyFemaleButton = document.querySelector("#historyFemaleButton");
+const historyMaleButton = document.querySelector("#historyMaleButton");
+const historyProfileButtons = document.querySelectorAll(".history-profile-button");
+const historySummary = document.querySelector("#historySummary");
+const historyList = document.querySelector("#historyList");
+const historyEmpty = document.querySelector("#historyEmpty");
 
 /* START / KONFIGURATOR */
 const profileButtons = document.querySelectorAll(".profile-card");
@@ -103,6 +114,7 @@ let activeSessionScreen = null;
 let activeExercisePhase = "actions";
 let pendingResumeSession = null;
 let pendingResumeProfile = null;
+let currentHistoryProfile = null;
 
 /* TIMER ĆWICZENIA */
 let countdownInterval = null;
@@ -110,66 +122,132 @@ let countdownInitialSeconds = 0;
 let countdownRemainingSeconds = 0;
 let countdownRunning = false;
 
+
 /* =========================================
    PROFIL
    ========================================= */
 
 profileButtons.forEach((button) => {
   const setTheme = () => {
-    document.body.dataset.theme = button.dataset.profile;
+    document.body.dataset.theme =
+      button.dataset.profile;
   };
 
-  button.addEventListener("mouseenter", setTheme);
-  button.addEventListener("focus", setTheme);
+  button.addEventListener(
+    "mouseenter",
+    setTheme
+  );
 
-  button.addEventListener("click", () => {
-    workoutConfig.profile = button.dataset.profile;
-    document.body.dataset.theme = workoutConfig.profile;
+  button.addEventListener(
+    "focus",
+    setTheme
+  );
 
-    const storageProfile = getStorageProfileName(workoutConfig.profile);
+  button.addEventListener(
+    "click",
+    () => {
+      workoutConfig.profile =
+        button.dataset.profile;
 
-    exercisePreferences = window.WorkoutStorage
-      ? window.WorkoutStorage.getExercisePreferences(storageProfile)
-      : {};
+      document.body.dataset.theme =
+        workoutConfig.profile;
 
-    showScreen(configuratorScreen);
-  });
+      const storageProfile =
+        getStorageProfileName(
+          workoutConfig.profile
+        );
+
+      exercisePreferences =
+        window.WorkoutStorage
+          ? window.WorkoutStorage
+              .getExercisePreferences(
+                storageProfile
+              )
+          : {};
+
+      showScreen(
+        configuratorScreen
+      );
+    }
+  );
 });
+
 
 /* =========================================
    KONFIGURATOR
    ========================================= */
 
 optionButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const group = button.dataset.group;
-    const value = button.dataset.value;
+  button.addEventListener(
+    "click",
+    () => {
+      const group =
+        button.dataset.group;
 
-    if (group === "body") {
-      handleBodySelection(button, value);
-      return;
+      const value =
+        button.dataset.value;
+
+      if (group === "body") {
+        handleBodySelection(
+          button,
+          value
+        );
+
+        return;
+      }
+
+      if (group === "equipment") {
+        handleMultipleSelection(
+          button,
+          group,
+          value
+        );
+
+        return;
+      }
+
+      handleSingleSelection(
+        button,
+        group,
+        value
+      );
     }
-
-    if (group === "equipment") {
-      handleMultipleSelection(button, group, value);
-      return;
-    }
-
-    handleSingleSelection(button, group, value);
-  });
+  );
 });
 
-function handleSingleSelection(selectedButton, group, value) {
-  document
-    .querySelectorAll(`[data-group="${group}"]`)
-    .forEach((button) => button.classList.remove("is-selected"));
 
-  selectedButton.classList.add("is-selected");
-  workoutConfig[group] = value;
+function handleSingleSelection(
+  selectedButton,
+  group,
+  value
+) {
+  document
+    .querySelectorAll(
+      `[data-group="${group}"]`
+    )
+    .forEach(
+      (button) =>
+        button.classList.remove(
+          "is-selected"
+        )
+    );
+
+  selectedButton.classList.add(
+    "is-selected"
+  );
+
+  workoutConfig[group] =
+    value;
+
   clearFormMessage();
 }
 
-function handleMultipleSelection(button, group, value) {
+
+function handleMultipleSelection(
+  button,
+  group,
+  value
+) {
   button.classList.toggle(
     "is-selected"
   );
@@ -187,7 +265,11 @@ function handleMultipleSelection(button, group, value) {
   clearFormMessage();
 }
 
-function handleBodySelection(button, value) {
+
+function handleBodySelection(
+  button,
+  value
+) {
   const bodyButtons =
     document.querySelectorAll(
       '[data-group="body"]'
@@ -259,10 +341,12 @@ function handleBodySelection(button, value) {
   clearFormMessage();
 }
 
+
 function validateConfig() {
   /*
-    Przed walidacją synchronizujemy sprzęt
-    bezpośrednio z zaznaczonymi przyciskami.
+    Zawsze synchronizujemy sprzęt
+    z faktycznie zaznaczonymi
+    przyciskami.
   */
   workoutConfig.equipment =
     Array.from(
@@ -301,31 +385,49 @@ function validateConfig() {
   return null;
 }
 
+
 /* =========================================
    GENEROWANIE
    ========================================= */
 
-generateWorkoutButton.addEventListener("click", () => {
-  const validationError = validateConfig();
+generateWorkoutButton.addEventListener(
+  "click",
+  () => {
+    const validationError =
+      validateConfig();
 
-  if (validationError) {
-    showFormMessage(validationError);
-    return;
-  }
+    if (validationError) {
+      showFormMessage(
+        validationError
+      );
 
-  currentWorkout =
-    window.WorkoutGenerator.generateWorkout(workoutConfig);
+      return;
+    }
 
-  if (currentWorkout.length === 0) {
-    showFormMessage(
-      "Nie znaleźliśmy pasujących ćwiczeń. Spróbuj zmienić ustawienia."
+    currentWorkout =
+      window.WorkoutGenerator
+        .generateWorkout(
+          workoutConfig
+        );
+
+    if (
+      currentWorkout.length === 0
+    ) {
+      showFormMessage(
+        "Nie znaleźliśmy pasujących ćwiczeń. Spróbuj zmienić ustawienia."
+      );
+
+      return;
+    }
+
+    renderWorkoutPreview();
+
+    showScreen(
+      workoutPreviewScreen
     );
-    return;
   }
+);
 
-  renderWorkoutPreview();
-  showScreen(workoutPreviewScreen);
-});
 
 /* =========================================
    PODGLĄD TRENINGU
@@ -335,42 +437,65 @@ function renderWorkoutPreview() {
   exerciseList.innerHTML = "";
 
   const estimatedMinutes =
-    calculateEstimatedWorkoutMinutes(currentWorkout);
+    calculateEstimatedWorkoutMinutes(
+      currentWorkout
+    );
 
   previewSummary.textContent =
     `około ${estimatedMinutes} min • ${currentWorkout.length} ćwiczeń`;
 
-  currentWorkout.forEach((exercise, index) => {
-    exerciseList.appendChild(
-      createExerciseCard(exercise, index)
-    );
-  });
+  currentWorkout.forEach(
+    (exercise, index) => {
+      exerciseList.appendChild(
+        createExerciseCard(
+          exercise,
+          index
+        )
+      );
+    }
+  );
 }
 
-function calculateEstimatedWorkoutMinutes(workout) {
-  const exerciseSeconds = workout.reduce(
-    (total, exercise) =>
-      total + (exercise.estimatedSeconds || 0),
-    0
-  );
 
-  const transitionRestSeconds = workout.reduce(
-    (total, exercise) => {
-      if (!exercise.transitionRest?.show) {
-        return total;
-      }
-
-      return total +
+function calculateEstimatedWorkoutMinutes(
+  workout
+) {
+  const exerciseSeconds =
+    workout.reduce(
+      (total, exercise) =>
+        total +
         (
-          exercise.transitionRest.min +
-          exercise.transitionRest.max
-        ) / 2;
-    },
-    0
-  );
+          exercise.estimatedSeconds ||
+          0
+        ),
+      0
+    );
+
+  const transitionRestSeconds =
+    workout.reduce(
+      (total, exercise) => {
+        if (
+          !exercise.transitionRest?.show
+        ) {
+          return total;
+        }
+
+        return (
+          total +
+          (
+            exercise.transitionRest.min +
+            exercise.transitionRest.max
+          ) / 2
+        );
+      },
+      0
+    );
 
   const naturalTransitions =
-    Math.max(0, workout.length - 1) * 15;
+    Math.max(
+      0,
+      workout.length - 1
+    ) * 15;
 
   const totalSeconds =
     exerciseSeconds +
@@ -379,32 +504,55 @@ function calculateEstimatedWorkoutMinutes(workout) {
 
   return Math.max(
     1,
-    Math.round(totalSeconds / 60)
+    Math.round(
+      totalSeconds / 60
+    )
   );
 }
+
 
 /* =========================================
    KARTA ĆWICZENIA
    ========================================= */
 
-function createExerciseCard(exercise, index) {
-  const article = document.createElement("article");
-  article.className = "exercise-card";
+function createExerciseCard(
+  exercise,
+  index
+) {
+  const article =
+    document.createElement(
+      "article"
+    );
+
+  article.className =
+    "exercise-card";
 
   const number =
-    String(index + 1).padStart(2, "0");
+    String(
+      index + 1
+    ).padStart(
+      2,
+      "0"
+    );
 
   const equipment =
-    getEquipmentLabel(exercise.equipment);
+    getEquipmentLabel(
+      exercise.equipment
+    );
 
   const difficulty =
-    createDifficultyDisplay(exercise.difficulty);
+    createDifficultyDisplay(
+      exercise.difficulty
+    );
 
   const bodyParts =
-    getBodyPartsLabel(exercise.bodyParts);
+    getBodyPartsLabel(
+      exercise.bodyParts
+    );
 
   const rest =
-    exercise.rest?.display || "";
+    exercise.rest?.display ||
+    "";
 
   article.innerHTML = `
     <div class="exercise-number">
@@ -415,12 +563,14 @@ function createExerciseCard(exercise, index) {
 
       <h2>
         ${exercise.name}
+
         <span class="exercise-body-parts-inline">
           (${bodyParts})
         </span>
       </h2>
 
       <div class="exercise-meta">
+
         <span>
           ${equipment}
         </span>
@@ -428,6 +578,7 @@ function createExerciseCard(exercise, index) {
         <span class="difficulty">
           ${difficulty}
         </span>
+
       </div>
 
       <p class="exercise-prescription">
@@ -456,89 +607,159 @@ function createExerciseCard(exercise, index) {
   `;
 
   const replaceButton =
-    article.querySelector(".replace-button");
+    article.querySelector(
+      ".replace-button"
+    );
 
   replaceButton.addEventListener(
     "click",
     () => {
-      replaceExercise(index);
+      replaceExercise(
+        index
+      );
     }
   );
 
   return article;
 }
 
+
 /* =========================================
    ZASTĄP
    ========================================= */
 
-function replaceExercise(index) {
+function replaceExercise(
+  index
+) {
   const currentExercise =
-    currentWorkout[index];
+    currentWorkout[
+      index
+    ];
 
   const replacement =
-    window.WorkoutGenerator.findReplacement(
-      currentExercise,
-      currentWorkout,
-      workoutConfig
-    );
+    window.WorkoutGenerator
+      .findReplacement(
+        currentExercise,
+        currentWorkout,
+        workoutConfig
+      );
 
   if (!replacement) {
     showPreviewMessage(
       "Nie mamy teraz innego pasującego ćwiczenia."
     );
+
     return;
   }
 
-  currentWorkout[index] = replacement;
+  currentWorkout[
+    index
+  ] =
+    replacement;
 
   clearPreviewMessage();
+
   renderWorkoutPreview();
 }
+
 
 /* =========================================
    ETYKIETY
    ========================================= */
 
-function getEquipmentLabel(equipment) {
-  if (!equipment || equipment.length === 0) {
+function getEquipmentLabel(
+  equipment
+) {
+  if (
+    !equipment ||
+    equipment.length === 0
+  ) {
     return "Bez sprzętu";
   }
 
   const labels = {
-    bodyweight: "Masa własnego ciała",
-    dumbbells: "Hantle",
-    kettlebell: "Kettlebell",
-    bands: "Gumy",
-    "pullup-bar": "Drążek"
+    bodyweight:
+      "Masa własnego ciała",
+
+    dumbbells:
+      "Hantle",
+
+    kettlebell:
+      "Kettlebell",
+
+    bands:
+      "Gumy",
+
+    "pullup-bar":
+      "Drążek"
   };
 
   return equipment
-    .map((item) => labels[item] || item)
-    .join(" + ");
+    .map(
+      (item) =>
+        labels[item] ||
+        item
+    )
+    .join(
+      " + "
+    );
 }
 
-function getBodyPartsLabel(bodyParts) {
+
+function getBodyPartsLabel(
+  bodyParts
+) {
   const labels = {
-    chest: "klatka",
-    back: "plecy",
-    shoulders: "barki",
-    arms: "ramiona",
-    abs: "brzuch",
-    legs: "nogi",
-    glutes: "pośladki"
+    chest:
+      "klatka",
+
+    back:
+      "plecy",
+
+    shoulders:
+      "barki",
+
+    arms:
+      "ramiona",
+
+    abs:
+      "brzuch",
+
+    legs:
+      "nogi",
+
+    glutes:
+      "pośladki"
   };
 
-  return (bodyParts || [])
-    .map((item) => labels[item] || item)
-    .join(" • ");
+  return (
+    bodyParts ||
+    []
+  )
+    .map(
+      (item) =>
+        labels[item] ||
+        item
+    )
+    .join(
+      " • "
+    );
 }
 
-function createDifficultyDisplay(difficulty) {
+
+function createDifficultyDisplay(
+  difficulty
+) {
   let output = "";
 
-  for (let i = 1; i <= 5; i++) {
-    if (i <= difficulty) {
+  for (
+    let i = 1;
+    i <= 5;
+    i++
+  ) {
+    if (
+      i <= difficulty
+    ) {
       output +=
         `<span class="difficulty-active">💪</span>`;
     } else {
@@ -550,22 +771,37 @@ function createDifficultyDisplay(difficulty) {
   return output;
 }
 
+
 /* =========================================
    EKRANY
    ========================================= */
 
-function showScreen(screenToShow) {
+function showScreen(
+  screenToShow
+) {
   const screens =
-    document.querySelectorAll(".screen");
+    document.querySelectorAll(
+      ".screen"
+    );
 
-  screens.forEach((screen) => {
-    screen.classList.add("is-hidden");
-  });
+  screens.forEach(
+    (screen) => {
+      screen.classList.add(
+        "is-hidden"
+      );
+    }
+  );
 
-  screenToShow?.classList.remove("is-hidden");
+  screenToShow?.classList.remove(
+    "is-hidden"
+  );
 
-  window.scrollTo(0, 0);
+  window.scrollTo(
+    0,
+    0
+  );
 }
+
 
 /* =========================================
    POWROTY
@@ -574,16 +810,22 @@ function showScreen(screenToShow) {
 backToWelcomeButton.addEventListener(
   "click",
   () => {
-    showScreen(welcomeScreen);
+    showScreen(
+      welcomeScreen
+    );
   }
 );
+
 
 backToConfiguratorButton.addEventListener(
   "click",
   () => {
-    showScreen(configuratorScreen);
+    showScreen(
+      configuratorScreen
+    );
   }
 );
+
 
 /* =========================================
    START TRENINGU
@@ -596,17 +838,22 @@ startWorkoutButton.addEventListener(
   }
 );
 
+
 function startWorkoutSession() {
-  currentExerciseIndex = 0;
+  currentExerciseIndex =
+    0;
 
   workoutStartedAt =
     Date.now();
 
-  finalWorkoutDuration = 0;
+  finalWorkoutDuration =
+    0;
 
-  workoutRating = null;
+  workoutRating =
+    null;
 
-  workoutHistorySaved = false;
+  workoutHistorySaved =
+    false;
 
   activeSessionScreen =
     "exercise";
@@ -616,7 +863,8 @@ function startWorkoutSession() {
 
   exerciseStatuses =
     currentWorkout.map(
-      () => "pending"
+      () =>
+        "pending"
     );
 
   startSessionTimer();
@@ -625,10 +873,13 @@ function startWorkoutSession() {
 
   updateProgress();
 
-  showScreen(workoutSessionScreen);
+  showScreen(
+    workoutSessionScreen
+  );
 
   saveActiveWorkoutSession();
 }
+
 
 /* =========================================
    LICZNIK SESJI
@@ -648,8 +899,11 @@ function startSessionTimer() {
     );
 }
 
+
 function updateSessionTimer() {
-  if (!workoutStartedAt) {
+  if (
+    !workoutStartedAt
+  ) {
     return;
   }
 
@@ -658,7 +912,9 @@ function updateSessionTimer() {
     workoutStartedAt;
 
   const formatted =
-    formatDuration(elapsed);
+    formatDuration(
+      elapsed
+    );
 
   sessionTimer.textContent =
     formatted;
@@ -667,7 +923,10 @@ function updateSessionTimer() {
     formatted;
 }
 
-function formatDuration(milliseconds) {
+
+function formatDuration(
+  milliseconds
+) {
   const totalSeconds =
     Math.floor(
       milliseconds / 1000
@@ -686,6 +945,7 @@ function formatDuration(milliseconds) {
     `${String(seconds).padStart(2, "0")}`
   );
 }
+
 
 /* =========================================
    RENDER ĆWICZENIA
@@ -759,10 +1019,12 @@ function renderSessionExercise() {
   const savedPreference =
     exercisePreferences[
       exercise.id
-    ] || null;
+    ] ||
+    null;
 
   if (
-    savedPreference === "like"
+    savedPreference ===
+    "like"
   ) {
     likeExerciseButton.classList.add(
       "is-selected"
@@ -770,7 +1032,8 @@ function renderSessionExercise() {
   }
 
   if (
-    savedPreference === "dislike"
+    savedPreference ===
+    "dislike"
   ) {
     dislikeExerciseButton.classList.add(
       "is-selected"
@@ -779,7 +1042,9 @@ function renderSessionExercise() {
 
   resetCountdownState();
 
-  if (exercise.timed) {
+  if (
+    exercise.timed
+  ) {
     timedControl.classList.remove(
       "is-hidden"
     );
@@ -800,8 +1065,10 @@ function renderSessionExercise() {
   }
 
   sessionBackButton.disabled =
-    currentExerciseIndex === 0;
+    currentExerciseIndex ===
+    0;
 }
+
 
 /* =========================================
    TECHNIKA
@@ -816,6 +1083,7 @@ howButton.addEventListener(
   }
 );
 
+
 /* =========================================
    TIMER ĆWICZENIA
    ========================================= */
@@ -823,18 +1091,22 @@ howButton.addEventListener(
 countdownStart.addEventListener(
   "click",
   () => {
-    if (countdownRunning) {
+    if (
+      countdownRunning
+    ) {
       return;
     }
 
     if (
-      countdownRemainingSeconds <= 0
+      countdownRemainingSeconds <=
+      0
     ) {
       countdownRemainingSeconds =
         countdownInitialSeconds;
     }
 
-    countdownRunning = true;
+    countdownRunning =
+      true;
 
     saveActiveWorkoutSession();
 
@@ -845,7 +1117,8 @@ countdownStart.addEventListener(
             1;
 
           if (
-            countdownRemainingSeconds <= 0
+            countdownRemainingSeconds <=
+            0
           ) {
             countdownRemainingSeconds =
               0;
@@ -868,10 +1141,13 @@ countdownStart.addEventListener(
   }
 );
 
+
 countdownPause.addEventListener(
   "click",
   () => {
-    if (!countdownRunning) {
+    if (
+      !countdownRunning
+    ) {
       return;
     }
 
@@ -888,6 +1164,7 @@ countdownPause.addEventListener(
     saveActiveWorkoutSession();
   }
 );
+
 
 countdownReset.addEventListener(
   "click",
@@ -911,10 +1188,12 @@ countdownReset.addEventListener(
   }
 );
 
+
 function updateCountdownDisplay() {
   countdownDisplay.textContent =
     `${countdownRemainingSeconds} s`;
 }
+
 
 function extractSecondsFromPrescription(
   prescription
@@ -932,6 +1211,7 @@ function extractSecondsFromPrescription(
     match[1]
   );
 }
+
 
 function resetCountdownState() {
   clearInterval(
@@ -953,6 +1233,7 @@ function resetCountdownState() {
   countdownDisplay.textContent =
     "";
 }
+
 
 /* =========================================
    WYKONANE
@@ -986,6 +1267,7 @@ completeExerciseButton.addEventListener(
   }
 );
 
+
 /* =========================================
    POMIŃ
    ========================================= */
@@ -1005,6 +1287,7 @@ skipExerciseButton.addEventListener(
     );
   }
 );
+
 
 /* =========================================
    REAKCJE
@@ -1040,6 +1323,7 @@ likeExerciseButton.addEventListener(
   }
 );
 
+
 dislikeExerciseButton.addEventListener(
   "click",
   () => {
@@ -1070,6 +1354,7 @@ dislikeExerciseButton.addEventListener(
   }
 );
 
+
 /* =========================================
    DALEJ
    ========================================= */
@@ -1083,6 +1368,7 @@ nextExerciseButton.addEventListener(
   }
 );
 
+
 function advanceToNextExercise(
   allowRestScreen
 ) {
@@ -1095,8 +1381,11 @@ function advanceToNextExercise(
     currentExerciseIndex >=
     currentWorkout.length - 1;
 
-  if (isLastExercise) {
+  if (
+    isLastExercise
+  ) {
     finishWorkout();
+
     return;
   }
 
@@ -1130,6 +1419,7 @@ function advanceToNextExercise(
   saveActiveWorkoutSession();
 }
 
+
 /* =========================================
    ODPOCZYNEK
    ========================================= */
@@ -1144,7 +1434,7 @@ function showRestScreen(
 
   restRecommendation.textContent =
     transitionRest.min ===
-      transitionRest.max
+    transitionRest.max
       ? `Odpocznij około ${transitionRest.min} sek.`
       : `Odpocznij około ${transitionRest.min}–${transitionRest.max} sek.`;
 
@@ -1167,6 +1457,7 @@ function showRestScreen(
 
   saveActiveWorkoutSession();
 }
+
 
 restNextButton.addEventListener(
   "click",
@@ -1197,6 +1488,7 @@ restNextButton.addEventListener(
   }
 );
 
+
 /* =========================================
    COFNIĘCIE
    ========================================= */
@@ -1205,7 +1497,8 @@ sessionBackButton.addEventListener(
   "click",
   () => {
     if (
-      currentExerciseIndex <= 0
+      currentExerciseIndex <=
+      0
     ) {
       return;
     }
@@ -1225,6 +1518,7 @@ sessionBackButton.addEventListener(
   }
 );
 
+
 /* =========================================
    POSTĘP
    ========================================= */
@@ -1233,12 +1527,15 @@ function getProgressPercent() {
   const processedExercises =
     exerciseStatuses.filter(
       (status) =>
-        status === "completed" ||
-        status === "skipped"
+        status ===
+          "completed" ||
+        status ===
+          "skipped"
     ).length;
 
   if (
-    currentWorkout.length === 0
+    currentWorkout.length ===
+    0
   ) {
     return 0;
   }
@@ -1250,6 +1547,7 @@ function getProgressPercent() {
     ) * 100
   );
 }
+
 
 function updateProgress() {
   const progress =
@@ -1267,6 +1565,7 @@ function updateProgress() {
   syncRestProgress();
 }
 
+
 function syncRestProgress() {
   const progress =
     getProgressPercent();
@@ -1280,6 +1579,7 @@ function syncRestProgress() {
   restProgressMascot.style.left =
     `${progress}%`;
 }
+
 
 /* =========================================
    KONIEC TRENINGU
@@ -1314,6 +1614,7 @@ function finishWorkout() {
   saveActiveWorkoutSession();
 }
 
+
 /* =========================================
    PODSUMOWANIE
    ========================================= */
@@ -1322,13 +1623,15 @@ function renderSummary() {
   const completed =
     exerciseStatuses.filter(
       (status) =>
-        status === "completed"
+        status ===
+        "completed"
     ).length;
 
   const skipped =
     exerciseStatuses.filter(
       (status) =>
-        status === "skipped"
+        status ===
+        "skipped"
     ).length;
 
   summaryTime.textContent =
@@ -1356,10 +1659,13 @@ function renderSummary() {
         "summary-exercise-row";
 
       const status =
-        exerciseStatuses[index];
+        exerciseStatuses[
+          index
+        ];
 
       const statusLabel =
-        status === "completed"
+        status ===
+        "completed"
           ? "✓ Wykonane"
           : "— Pominięte";
 
@@ -1395,6 +1701,7 @@ function renderSummary() {
   );
 }
 
+
 summaryListToggle.addEventListener(
   "click",
   () => {
@@ -1417,6 +1724,7 @@ summaryListToggle.addEventListener(
         : "Zobacz ćwiczenia";
   }
 );
+
 
 summaryRatingButtons.forEach(
   (button) => {
@@ -1444,6 +1752,7 @@ summaryRatingButtons.forEach(
   }
 );
 
+
 /* =========================================
    GOTOWE
    ========================================= */
@@ -1462,6 +1771,7 @@ summaryDoneButton.addEventListener(
     );
   }
 );
+
 
 /* =========================================
    ZAPIS AKTYWNEJ SESJI
@@ -1486,7 +1796,8 @@ function saveActiveWorkoutSession() {
     version: 1,
 
     savedAt:
-      new Date().toISOString(),
+      new Date()
+        .toISOString(),
 
     profile:
       workoutConfig.profile,
@@ -1498,10 +1809,9 @@ function saveActiveWorkoutSession() {
       time:
         workoutConfig.time,
 
-      body:
-        [
-          ...workoutConfig.body
-        ],
+      body: [
+        ...workoutConfig.body
+      ],
 
       level:
         workoutConfig.level,
@@ -1509,10 +1819,9 @@ function saveActiveWorkoutSession() {
       intensity:
         workoutConfig.intensity,
 
-      equipment:
-        [
-          ...workoutConfig.equipment
-        ]
+      equipment: [
+        ...workoutConfig.equipment
+      ]
     },
 
     workout:
@@ -1521,10 +1830,9 @@ function saveActiveWorkoutSession() {
     currentExerciseIndex:
       currentExerciseIndex,
 
-    exerciseStatuses:
-      [
-        ...exerciseStatuses
-      ],
+    exerciseStatuses: [
+      ...exerciseStatuses
+    ],
 
     workoutStartedAt:
       workoutStartedAt,
@@ -1533,7 +1841,8 @@ function saveActiveWorkoutSession() {
       finalWorkoutDuration,
 
     workoutRating:
-      workoutRating || null,
+      workoutRating ||
+      null,
 
     screen:
       activeSessionScreen ||
@@ -1561,6 +1870,7 @@ function saveActiveWorkoutSession() {
     );
 }
 
+
 function clearSavedActiveSession() {
   if (
     !window.WorkoutStorage ||
@@ -1580,8 +1890,9 @@ function clearSavedActiveSession() {
     );
 }
 
+
 /* =========================================
-   HISTORIA TRENINGÓW
+   HISTORIA — ZAPIS TRENINGU
    ========================================= */
 
 function saveCompletedWorkoutToHistory() {
@@ -1589,7 +1900,8 @@ function saveCompletedWorkoutToHistory() {
     workoutHistorySaved ||
     !window.WorkoutStorage ||
     !workoutConfig.profile ||
-    currentWorkout.length === 0
+    currentWorkout.length ===
+      0
   ) {
     return;
   }
@@ -1623,45 +1935,52 @@ function saveCompletedWorkoutToHistory() {
     intensity:
       workoutConfig.intensity,
 
-    body:
-      [
-        ...workoutConfig.body
-      ],
+    body: [
+      ...workoutConfig.body
+    ],
 
-    equipment:
-      [
-        ...workoutConfig.equipment
-      ],
+    equipment: [
+      ...workoutConfig.equipment
+    ],
 
     actualDurationMs:
       finalWorkoutDuration,
 
     actualDurationSeconds:
       Math.floor(
-        finalWorkoutDuration / 1000
+        finalWorkoutDuration /
+        1000
       ),
 
     rating:
-      workoutRating || null,
+      workoutRating ||
+      null,
 
     exercises:
       currentWorkout.map(
-        (exercise, index) => ({
+        (
+          exercise,
+          index
+        ) => ({
           id:
             exercise.id,
 
           name:
             exercise.name,
 
-          bodyParts:
-            [
-              ...(exercise.bodyParts || [])
-            ],
+          bodyParts: [
+            ...(
+              exercise.bodyParts ||
+              []
+            )
+          ],
 
-          equipment:
-            [
-              ...(exercise.equipment || [])
-            ],
+          equipment: [
+            ...(
+              exercise.equipment ||
+              []
+            )
+          ],
 
           difficulty:
             exercise.difficulty,
@@ -1670,23 +1989,27 @@ function saveCompletedWorkoutToHistory() {
             exercise.prescription,
 
           status:
-            exerciseStatuses[index] ||
+            exerciseStatuses[
+              index
+            ] ||
             "pending"
         })
       )
   };
 
   const saved =
-    window.WorkoutStorage.addWorkout(
-      storageProfile,
-      workoutEntry
-    );
+    window.WorkoutStorage
+      .addWorkout(
+        storageProfile,
+        workoutEntry
+      );
 
   if (saved) {
     workoutHistorySaved =
       true;
   }
 }
+
 
 /* =========================================
    RESET SESJI
@@ -1748,6 +2071,7 @@ function resetSessionState() {
     "0%";
 }
 
+
 /* =========================================
    PAMIĘĆ PROFILU I REAKCJI
    ========================================= */
@@ -1755,10 +2079,12 @@ function resetSessionState() {
 function getStorageProfileName(
   appProfile
 ) {
-  return appProfile === "woman"
-    ? "female"
-    : "male";
+  return appProfile ===
+    "woman"
+      ? "female"
+      : "male";
 }
+
 
 function saveExercisePreference(
   exerciseId,
@@ -1783,6 +2109,847 @@ function saveExercisePreference(
       preference
     );
 }
+
+
+/* =========================================
+   HISTORIA TRENINGÓW — EKRAN
+   ========================================= */
+
+historyOpenButton?.addEventListener(
+  "click",
+  () => {
+    openWorkoutHistory();
+  }
+);
+
+
+historyBackButton?.addEventListener(
+  "click",
+  () => {
+    showScreen(
+      welcomeScreen
+    );
+  }
+);
+
+
+historyFemaleButton?.addEventListener(
+  "click",
+  () => {
+    selectHistoryProfile(
+      "female"
+    );
+  }
+);
+
+
+historyMaleButton?.addEventListener(
+  "click",
+  () => {
+    selectHistoryProfile(
+      "male"
+    );
+  }
+);
+
+
+function openWorkoutHistory() {
+  if (
+    !historyScreen
+  ) {
+    return;
+  }
+
+  currentHistoryProfile =
+    null;
+
+  historyProfileButtons.forEach(
+    (button) => {
+      button.classList.remove(
+        "is-selected"
+      );
+    }
+  );
+
+  clearHistoryView();
+
+  setHistoryEmptyMessage(
+    "Wybierz profil, żeby zobaczyć historię.",
+    "Treningi kobiety i mężczyzny zapisujemy osobno."
+  );
+
+  showScreen(
+    historyScreen
+  );
+}
+
+
+function selectHistoryProfile(
+  storageProfile
+) {
+  if (
+    storageProfile !==
+      "female" &&
+    storageProfile !==
+      "male"
+  ) {
+    return;
+  }
+
+  currentHistoryProfile =
+    storageProfile;
+
+  historyProfileButtons.forEach(
+    (button) => {
+      button.classList.toggle(
+        "is-selected",
+        button.dataset
+          .historyProfile ===
+          storageProfile
+      );
+    }
+  );
+
+  document.body.dataset.theme =
+    storageProfile ===
+    "female"
+      ? "woman"
+      : "man";
+
+  renderWorkoutHistory(
+    storageProfile
+  );
+}
+
+
+function clearHistoryView() {
+  if (
+    historySummary
+  ) {
+    historySummary.innerHTML =
+      "";
+
+    historySummary.classList.add(
+      "is-hidden"
+    );
+  }
+
+  if (
+    historyList
+  ) {
+    historyList.innerHTML =
+      "";
+  }
+
+  if (
+    historyEmpty
+  ) {
+    historyEmpty.classList.remove(
+      "is-hidden"
+    );
+  }
+}
+
+
+function renderWorkoutHistory(
+  storageProfile
+) {
+  clearHistoryView();
+
+  if (
+    !window.WorkoutStorage ||
+    !historyList
+  ) {
+    setHistoryEmptyMessage(
+      "Nie udało się odczytać historii.",
+      "Odśwież aplikację i spróbuj ponownie."
+    );
+
+    return;
+  }
+
+  const workouts =
+    window.WorkoutStorage
+      .getWorkoutHistory(
+        storageProfile
+      ) ||
+    [];
+
+  if (
+    workouts.length === 0
+  ) {
+    setHistoryEmptyMessage(
+      "Nie masz jeszcze zapisanych treningów.",
+      "Ukończ trening i kliknij „Gotowe”, a pojawi się tutaj."
+    );
+
+    return;
+  }
+
+  historyEmpty?.classList.add(
+    "is-hidden"
+  );
+
+  renderHistorySummary(
+    workouts
+  );
+
+  workouts.forEach(
+    (workout) => {
+      historyList.appendChild(
+        createHistoryWorkoutCard(
+          workout
+        )
+      );
+    }
+  );
+}
+
+
+function setHistoryEmptyMessage(
+  title,
+  description
+) {
+  if (
+    !historyEmpty
+  ) {
+    return;
+  }
+
+  const titleElement =
+    historyEmpty.querySelector(
+      "p"
+    );
+
+  const descriptionElement =
+    historyEmpty.querySelector(
+      "span"
+    );
+
+  if (
+    titleElement
+  ) {
+    titleElement.textContent =
+      title;
+  }
+
+  if (
+    descriptionElement
+  ) {
+    descriptionElement.textContent =
+      description;
+  }
+
+  historyEmpty.classList.remove(
+    "is-hidden"
+  );
+}
+
+
+/* =========================================
+   PODSUMOWANIE HISTORII
+   ========================================= */
+
+function renderHistorySummary(
+  workouts
+) {
+  if (
+    !historySummary
+  ) {
+    return;
+  }
+
+  const totalDurationSeconds =
+    workouts.reduce(
+      (
+        total,
+        workout
+      ) =>
+        total +
+        getWorkoutDurationSeconds(
+          workout
+        ),
+      0
+    );
+
+  const completedExercises =
+    workouts.reduce(
+      (
+        total,
+        workout
+      ) =>
+        total +
+        getWorkoutStatusCount(
+          workout,
+          "completed"
+        ),
+      0
+    );
+
+  historySummary.innerHTML = `
+    <div class="history-summary-item">
+
+      <span class="history-summary-value">
+        ${workouts.length}
+      </span>
+
+      <span class="history-summary-label">
+        treningi
+      </span>
+
+    </div>
+
+    <div class="history-summary-item">
+
+      <span class="history-summary-value">
+        ${formatHistoryTotalDuration(totalDurationSeconds)}
+      </span>
+
+      <span class="history-summary-label">
+        łączny czas
+      </span>
+
+    </div>
+
+    <div class="history-summary-item">
+
+      <span class="history-summary-value">
+        ${completedExercises}
+      </span>
+
+      <span class="history-summary-label">
+        wykonane ćwiczenia
+      </span>
+
+    </div>
+  `;
+
+  historySummary.classList.remove(
+    "is-hidden"
+  );
+}
+
+
+/* =========================================
+   KARTA TRENINGU W HISTORII
+   ========================================= */
+
+function createHistoryWorkoutCard(
+  workout
+) {
+  const card =
+    document.createElement(
+      "article"
+    );
+
+  card.className =
+    "history-workout-card";
+
+  const exercises =
+    Array.isArray(
+      workout.exercises
+    )
+      ? workout.exercises
+      : [];
+
+  const completed =
+    getWorkoutStatusCount(
+      workout,
+      "completed"
+    );
+
+  const skipped =
+    getWorkoutStatusCount(
+      workout,
+      "skipped"
+    );
+
+  const durationSeconds =
+    getWorkoutDurationSeconds(
+      workout
+    );
+
+  const dateInfo =
+    formatHistoryDate(
+      workout.completedAt
+    );
+
+  const bodyLabel =
+    getHistoryBodyLabel(
+      workout.body
+    );
+
+  const equipmentLabel =
+    getEquipmentLabel(
+      workout.equipment ||
+      []
+    );
+
+  const ratingLabel =
+    getHistoryRatingLabel(
+      workout.rating
+    );
+
+  card.innerHTML = `
+    <div class="history-workout-main">
+
+      <div class="history-workout-top">
+
+        <div>
+
+          <div class="history-workout-date">
+            ${dateInfo.date}
+          </div>
+
+          <div class="history-workout-time">
+            ${dateInfo.time}
+          </div>
+
+        </div>
+
+        <div class="history-workout-rating">
+          ${ratingLabel}
+        </div>
+
+      </div>
+
+
+      <div class="history-workout-stats">
+
+        <div class="history-workout-stat">
+
+          <strong>
+            ${formatHistoryWorkoutDuration(durationSeconds)}
+          </strong>
+
+          <span>
+            czas treningu
+          </span>
+
+        </div>
+
+
+        <div class="history-workout-stat">
+
+          <strong>
+            ${completed}
+          </strong>
+
+          <span>
+            wykonane
+          </span>
+
+        </div>
+
+
+        <div class="history-workout-stat">
+
+          <strong>
+            ${skipped}
+          </strong>
+
+          <span>
+            pominięte
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="history-workout-meta">
+
+        <span class="history-meta-chip">
+          ${bodyLabel}
+        </span>
+
+        <span class="history-meta-chip">
+          ${equipmentLabel}
+        </span>
+
+        <span class="history-meta-chip">
+          plan: ${Number(workout.plannedMinutes) || 0} min
+        </span>
+
+      </div>
+
+
+      <button
+        class="history-details-toggle"
+        type="button"
+      >
+        Zobacz szczegóły
+      </button>
+
+    </div>
+
+    <div class="history-exercise-details is-hidden"></div>
+  `;
+
+  const details =
+    card.querySelector(
+      ".history-exercise-details"
+    );
+
+  const toggleButton =
+    card.querySelector(
+      ".history-details-toggle"
+    );
+
+  exercises.forEach(
+    (exercise) => {
+      details?.appendChild(
+        createHistoryExerciseRow(
+          exercise
+        )
+      );
+    }
+  );
+
+  toggleButton?.addEventListener(
+    "click",
+    () => {
+      if (
+        !details
+      ) {
+        return;
+      }
+
+      const wasHidden =
+        details.classList.contains(
+          "is-hidden"
+        );
+
+      details.classList.toggle(
+        "is-hidden"
+      );
+
+      toggleButton.textContent =
+        wasHidden
+          ? "Ukryj szczegóły"
+          : "Zobacz szczegóły";
+    }
+  );
+
+  return card;
+}
+
+
+/* =========================================
+   ĆWICZENIE W HISTORII
+   ========================================= */
+
+function createHistoryExerciseRow(
+  exercise
+) {
+  const row =
+    document.createElement(
+      "div"
+    );
+
+  row.className =
+    "history-exercise-row";
+
+  const status =
+    exercise.status ===
+      "completed"
+      ? "completed"
+      : exercise.status ===
+          "skipped"
+        ? "skipped"
+        : "pending";
+
+  const statusLabel =
+    status ===
+      "completed"
+      ? "✓ Wykonane"
+      : status ===
+          "skipped"
+        ? "— Pominięte"
+        : "• Bez statusu";
+
+  const bodyLabel =
+    getBodyPartsLabel(
+      exercise.bodyParts ||
+      []
+    );
+
+  row.innerHTML = `
+    <div class="history-exercise-info">
+
+      <strong>
+        ${exercise.name || "Ćwiczenie"}
+      </strong>
+
+      <span>
+        ${exercise.prescription || ""}
+        ${bodyLabel ? ` • ${bodyLabel}` : ""}
+      </span>
+
+    </div>
+
+    <span
+      class="history-exercise-status ${status === "completed" ? "is-completed" : ""}"
+    >
+      ${statusLabel}
+    </span>
+  `;
+
+  return row;
+}
+
+
+/* =========================================
+   NARZĘDZIA HISTORII
+   ========================================= */
+
+function getWorkoutStatusCount(
+  workout,
+  status
+) {
+  const exercises =
+    Array.isArray(
+      workout.exercises
+    )
+      ? workout.exercises
+      : [];
+
+  return exercises.filter(
+    (exercise) =>
+      exercise.status ===
+      status
+  ).length;
+}
+
+
+function getWorkoutDurationSeconds(
+  workout
+) {
+  const directSeconds =
+    Number(
+      workout.actualDurationSeconds
+    );
+
+  if (
+    Number.isFinite(
+      directSeconds
+    ) &&
+    directSeconds >= 0
+  ) {
+    return Math.floor(
+      directSeconds
+    );
+  }
+
+  const milliseconds =
+    Number(
+      workout.actualDurationMs
+    );
+
+  if (
+    Number.isFinite(
+      milliseconds
+    ) &&
+    milliseconds >= 0
+  ) {
+    return Math.floor(
+      milliseconds /
+      1000
+    );
+  }
+
+  return 0;
+}
+
+
+function formatHistoryDate(
+  isoDate
+) {
+  const date =
+    new Date(
+      isoDate
+    );
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return {
+      date:
+        "Nieznana data",
+
+      time:
+        ""
+    };
+  }
+
+  return {
+    date:
+      new Intl.DateTimeFormat(
+        "pl-PL",
+        {
+          day:
+            "numeric",
+
+          month:
+            "long",
+
+          year:
+            "numeric"
+        }
+      ).format(
+        date
+      ),
+
+    time:
+      new Intl.DateTimeFormat(
+        "pl-PL",
+        {
+          hour:
+            "2-digit",
+
+          minute:
+            "2-digit"
+        }
+      ).format(
+        date
+      )
+  };
+}
+
+
+function formatHistoryWorkoutDuration(
+  totalSeconds
+) {
+  const minutes =
+    Math.floor(
+      totalSeconds /
+      60
+    );
+
+  const seconds =
+    totalSeconds %
+    60;
+
+  return (
+    `${String(minutes).padStart(2, "0")}:` +
+    `${String(seconds).padStart(2, "0")}`
+  );
+}
+
+
+function formatHistoryTotalDuration(
+  totalSeconds
+) {
+  const totalMinutes =
+    Math.floor(
+      totalSeconds /
+      60
+    );
+
+  const hours =
+    Math.floor(
+      totalMinutes /
+      60
+    );
+
+  const minutes =
+    totalMinutes %
+    60;
+
+  if (
+    hours > 0
+  ) {
+    return `${hours} h ${minutes} min`;
+  }
+
+  return `${totalMinutes} min`;
+}
+
+
+function getHistoryRatingLabel(
+  rating
+) {
+  const labels = {
+    easy:
+      "Za lekko",
+
+    good:
+      "W sam raz",
+
+    hard:
+      "Za ciężko"
+  };
+
+  return (
+    labels[rating] ||
+    "Bez oceny"
+  );
+}
+
+
+function getHistoryBodyLabel(
+  body
+) {
+  const values =
+    Array.isArray(
+      body
+    )
+      ? body
+      : [];
+
+  if (
+    values.includes(
+      "full"
+    )
+  ) {
+    return "Całe ciało";
+  }
+
+  const labels = {
+    chest:
+      "Klatka",
+
+    back:
+      "Plecy",
+
+    shoulders:
+      "Barki",
+
+    arms:
+      "Ramiona",
+
+    abs:
+      "Brzuch",
+
+    legs:
+      "Nogi",
+
+    glutes:
+      "Pośladki"
+  };
+
+  const result =
+    values
+      .map(
+        (item) =>
+          labels[item] ||
+          item
+      )
+      .filter(
+        Boolean
+      )
+      .join(
+        " • "
+      );
+
+  return (
+    result ||
+    "Brak danych o partiach"
+  );
+}
+
 
 /* =========================================
    WYKRYWANIE NIEDOKOŃCZONEJ SESJI
@@ -1833,15 +3000,22 @@ function initializeResumeSession() {
     (a, b) => {
       const aTime =
         Date.parse(
-          a.session.savedAt || ""
-        ) || 0;
+          a.session.savedAt ||
+          ""
+        ) ||
+        0;
 
       const bTime =
         Date.parse(
-          b.session.savedAt || ""
-        ) || 0;
+          b.session.savedAt ||
+          ""
+        ) ||
+        0;
 
-      return bTime - aTime;
+      return (
+        bTime -
+        aTime
+      );
     }
   );
 
@@ -1857,7 +3031,8 @@ function initializeResumeSession() {
   const appProfile =
     pendingResumeSession.profile ||
     (
-      pendingResumeProfile === "female"
+      pendingResumeProfile ===
+      "female"
         ? "woman"
         : "man"
     );
@@ -1873,6 +3048,7 @@ function initializeResumeSession() {
     resumeSessionScreen
   );
 }
+
 
 /* =========================================
    INFORMACJE O NIEDOKOŃCZONEJ SESJI
@@ -1905,13 +3081,15 @@ function renderResumeSessionDetails(
   const completed =
     statuses.filter(
       (status) =>
-        status === "completed"
+        status ===
+        "completed"
     ).length;
 
   const skipped =
     statuses.filter(
       (status) =>
-        status === "skipped"
+        status ===
+        "skipped"
     ).length;
 
   const currentIndex =
@@ -1939,7 +3117,8 @@ function renderResumeSessionDetails(
     ];
 
   const profileLabel =
-    session.profile === "woman"
+    session.profile ===
+      "woman"
       ? "Kobieta"
       : "Mężczyzna";
 
@@ -1952,6 +3131,7 @@ function renderResumeSessionDetails(
     `${profileLabel} • ${completed} wykonane • ${skipped} pominięte${exerciseLabel}`;
 }
 
+
 /* =========================================
    KONTYNUUJ
    ========================================= */
@@ -1962,6 +3142,7 @@ resumeSessionContinue?.addEventListener(
     restoreActiveWorkoutSession();
   }
 );
+
 
 /* =========================================
    ZACZNIJ OD NOWA
@@ -2001,6 +3182,7 @@ resumeSessionRestart?.addEventListener(
   }
 );
 
+
 /* =========================================
    PRZYWRACANIE SESJI
    ========================================= */
@@ -2014,7 +3196,8 @@ function restoreActiveWorkoutSession() {
     !Array.isArray(
       session.workout
     ) ||
-    session.workout.length === 0
+    session.workout.length ===
+      0
   ) {
     pendingResumeSession =
       null;
@@ -2037,13 +3220,15 @@ function restoreActiveWorkoutSession() {
     config.profile ||
     session.profile ||
     (
-      pendingResumeProfile === "female"
+      pendingResumeProfile ===
+      "female"
         ? "woman"
         : "man"
     );
 
   workoutConfig.time =
-    config.time ?? null;
+    config.time ??
+    null;
 
   workoutConfig.body =
     Array.isArray(
@@ -2055,10 +3240,12 @@ function restoreActiveWorkoutSession() {
       : [];
 
   workoutConfig.level =
-    config.level ?? null;
+    config.level ??
+    null;
 
   workoutConfig.intensity =
-    config.intensity ?? null;
+    config.intensity ??
+    null;
 
   workoutConfig.equipment =
     Array.isArray(
@@ -2104,7 +3291,10 @@ function restoreActiveWorkoutSession() {
       session.exerciseStatuses
     )
       ? currentWorkout.map(
-          (exercise, index) =>
+          (
+            exercise,
+            index
+          ) =>
             session.exerciseStatuses[
               index
             ] ||
@@ -2116,10 +3306,9 @@ function restoreActiveWorkoutSession() {
         );
 
   /*
-    Nie doliczamy czasu, kiedy aplikacja
-    była zamknięta albo odświeżona.
+    Nie doliczamy czasu, kiedy
+    aplikacja była zamknięta.
   */
-
   const savedAt =
     Date.parse(
       session.savedAt ||
@@ -2157,7 +3346,8 @@ function restoreActiveWorkoutSession() {
   finalWorkoutDuration =
     Number(
       session.finalWorkoutDuration
-    ) || 0;
+    ) ||
+    0;
 
   workoutRating =
     session.workoutRating ||
@@ -2181,7 +3371,8 @@ function restoreActiveWorkoutSession() {
   const savedCountdownInitial =
     Number(
       savedCountdown.initialSeconds
-    ) || 0;
+    ) ||
+    0;
 
   const savedCountdownRemaining =
     Number(
@@ -2191,13 +3382,12 @@ function restoreActiveWorkoutSession() {
   renderSessionExercise();
 
   /*
-    renderSessionExercise ustawia timer od nowa,
-    więc tutaj przywracamy zapisany stan.
-    Timer po wznowieniu pozostaje na pauzie.
+    renderSessionExercise ustawia timer
+    od nowa, więc przywracamy zapis.
   */
-
   if (
-    savedCountdownInitial > 0
+    savedCountdownInitial >
+    0
   ) {
     countdownInitialSeconds =
       savedCountdownInitial;
@@ -2221,7 +3411,8 @@ function restoreActiveWorkoutSession() {
   updateProgress();
 
   if (
-    activeSessionScreen === "summary"
+    activeSessionScreen ===
+    "summary"
   ) {
     clearInterval(
       sessionTimerInterval
@@ -2231,7 +3422,8 @@ function restoreActiveWorkoutSession() {
       null;
 
     if (
-      finalWorkoutDuration <= 0
+      finalWorkoutDuration <=
+      0
     ) {
       finalWorkoutDuration =
         Date.now() -
@@ -2258,7 +3450,8 @@ function restoreActiveWorkoutSession() {
       summaryScreen
     );
   } else if (
-    activeSessionScreen === "rest"
+    activeSessionScreen ===
+    "rest"
   ) {
     startSessionTimer();
 
@@ -2289,13 +3482,15 @@ function restoreActiveWorkoutSession() {
   saveActiveWorkoutSession();
 }
 
+
 /* =========================================
    PRZYWRACANIE ETAPU ĆWICZENIA
    ========================================= */
 
 function applyRestoredExercisePhase() {
   if (
-    activeExercisePhase === "reaction"
+    activeExercisePhase ===
+    "reaction"
   ) {
     sessionActions.classList.add(
       "is-hidden"
@@ -2317,6 +3512,7 @@ function applyRestoredExercisePhase() {
     );
   }
 }
+
 
 /* =========================================
    PRZYWRACANIE ODPOCZYNKU
@@ -2341,7 +3537,7 @@ function restoreRestScreen() {
   ) {
     restRecommendation.textContent =
       transitionRest.min ===
-        transitionRest.max
+      transitionRest.max
         ? `Odpocznij około ${transitionRest.min} sek.`
         : `Odpocznij około ${transitionRest.min}–${transitionRest.max} sek.`;
   } else {
@@ -2357,6 +3553,7 @@ function restoreRestScreen() {
   syncRestProgress();
 }
 
+
 /* =========================================
    ZAPIS PRZED F5 / ZAMKNIĘCIEM
    ========================================= */
@@ -2365,13 +3562,15 @@ window.addEventListener(
   "beforeunload",
   () => {
     if (
-      currentWorkout.length > 0 &&
+      currentWorkout.length >
+        0 &&
       workoutStartedAt
     ) {
       saveActiveWorkoutSession();
     }
   }
 );
+
 
 /* =========================================
    KOMUNIKATY
@@ -2384,10 +3583,12 @@ function showFormMessage(
     message;
 }
 
+
 function clearFormMessage() {
   formMessage.textContent =
     "";
 }
+
 
 function showPreviewMessage(
   message
@@ -2396,13 +3597,134 @@ function showPreviewMessage(
     message;
 }
 
+
 function clearPreviewMessage() {
   previewMessage.textContent =
     "";
 }
+
 
 /* =========================================
    START APLIKACJI
    ========================================= */
 
 initializeResumeSession();
+/* =========================================
+   v0.07.5 — USUWANIE SESJI Z HISTORII
+   ========================================= */
+
+const createHistoryWorkoutCardBase =
+  createHistoryWorkoutCard;
+
+
+createHistoryWorkoutCard =
+  function (
+    workout
+  ) {
+
+    const card =
+      createHistoryWorkoutCardBase(
+        workout
+      );
+
+
+    const main =
+      card.querySelector(
+        ".history-workout-main"
+      );
+
+
+    if (
+      !main ||
+      !workout?.id
+    ) {
+
+      return card;
+
+    }
+
+
+    const deleteButton =
+      document.createElement(
+        "button"
+      );
+
+
+    deleteButton.className =
+      "history-delete-button";
+
+
+    deleteButton.type =
+      "button";
+
+
+    deleteButton.textContent =
+      "Usuń sesję";
+
+
+    deleteButton.addEventListener(
+      "click",
+      () => {
+
+        if (
+          !currentHistoryProfile ||
+          !window.WorkoutStorage
+        ) {
+
+          return;
+
+        }
+
+
+        const confirmed =
+          window.confirm(
+            "Czy na pewno chcesz usunąć ten trening?\n\nTej operacji nie można cofnąć."
+          );
+
+
+        if (
+          !confirmed
+        ) {
+
+          return;
+
+        }
+
+
+        const removed =
+          window.WorkoutStorage
+            .removeWorkout(
+              currentHistoryProfile,
+              workout.id
+            );
+
+
+        if (
+          !removed
+        ) {
+
+          window.alert(
+            "Nie udało się usunąć treningu."
+          );
+
+          return;
+
+        }
+
+
+        renderWorkoutHistory(
+          currentHistoryProfile
+        );
+
+      }
+    );
+
+
+    main.appendChild(
+      deleteButton
+    );
+
+
+    return card;
+
+  };

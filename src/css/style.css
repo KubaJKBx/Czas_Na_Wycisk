@@ -1575,3 +1575,625 @@ body {
     font-size: 0.84rem;
   }
 }
+/* =========================================
+   v0.07.2 — HISTORIA TRENINGÓW
+   ========================================= */
+
+
+/* =========================================
+   PRZYCISK HISTORII NA EKRANIE STARTOWYM
+   ========================================= */
+
+.history-open-button {
+  width: 100%;
+
+  min-height: 50px;
+
+  margin-top: 16px;
+
+  padding:
+    12px 18px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  font-size: 0.84rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform var(--transition),
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.history-open-button:hover {
+  transform: translateY(-1px);
+
+  border-color: var(--accent);
+
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+.history-open-button:active {
+  transform:
+    translateY(0)
+    scale(0.99);
+}
+
+
+/* =========================================
+   EKRAN HISTORII
+   ========================================= */
+
+.history-screen {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 28px;
+}
+
+.history {
+  position: relative;
+
+  width: min(100%, 900px);
+
+  padding:
+    30px 32px 34px;
+
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  background: var(--surface);
+}
+
+
+/* =========================================
+   NAGŁÓWEK
+   ========================================= */
+
+.history-header {
+  max-width: 620px;
+
+  margin:
+    0 auto 28px;
+
+  padding:
+    4px 52px 0;
+
+  text-align: center;
+}
+
+.history-kicker {
+  margin-bottom: 9px;
+
+  color: var(--accent);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.history-header h1 {
+  margin-bottom: 10px;
+
+  font-size:
+    clamp(2rem, 5vw, 3rem);
+
+  font-weight: 650;
+
+  letter-spacing: -0.04em;
+}
+
+.history-description {
+  color: var(--text-secondary);
+
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   WYBÓR PROFILU
+   ========================================= */
+
+.history-profile-switch {
+  display: grid;
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 8px;
+
+  max-width: 520px;
+
+  margin:
+    0 auto 26px;
+
+  padding: 5px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: var(--background);
+}
+
+.history-profile-button {
+  min-height: 44px;
+
+  padding:
+    10px 14px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.history-profile-button:hover {
+  color: var(--text-primary);
+}
+
+.history-profile-button.is-selected {
+  border-color: var(--accent);
+
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+
+/* =========================================
+   PODSUMOWANIE HISTORII
+   ========================================= */
+
+.history-summary {
+  display: grid;
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+
+  margin-bottom: 22px;
+}
+
+.history-summary-item {
+  padding:
+    15px 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: var(--background);
+
+  text-align: center;
+}
+
+.history-summary-value {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--text-primary);
+
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.history-summary-label {
+  color: var(--text-secondary);
+
+  font-size: 0.68rem;
+}
+
+
+/* =========================================
+   LISTA TRENINGÓW
+   ========================================= */
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.history-workout-card {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  background: var(--background);
+}
+
+.history-workout-main {
+  padding:
+    17px 18px;
+}
+
+.history-workout-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-bottom: 14px;
+}
+
+.history-workout-date {
+  color: var(--text-primary);
+
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.history-workout-time {
+  margin-top: 4px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.7rem;
+}
+
+.history-workout-rating {
+  flex-shrink: 0;
+
+  padding:
+    6px 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  background: var(--surface);
+
+  color: var(--text-secondary);
+
+  font-size: 0.67rem;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   DANE TRENINGU
+   ========================================= */
+
+.history-workout-stats {
+  display: grid;
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+
+  margin-bottom: 14px;
+}
+
+.history-workout-stat {
+  padding:
+    10px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: var(--surface);
+}
+
+.history-workout-stat strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--text-primary);
+
+  font-size: 0.82rem;
+}
+
+.history-workout-stat span {
+  color: var(--text-secondary);
+
+  font-size: 0.66rem;
+}
+
+
+/* =========================================
+   PARTIE / SPRZĘT
+   ========================================= */
+
+.history-workout-meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-bottom: 15px;
+}
+
+.history-meta-chip {
+  padding:
+    6px 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  background: var(--surface);
+
+  color: var(--text-secondary);
+
+  font-size: 0.67rem;
+}
+
+
+/* =========================================
+   PRZYCISK SZCZEGÓŁÓW
+   ========================================= */
+
+.history-details-toggle {
+  width: 100%;
+
+  min-height: 42px;
+
+  padding:
+    9px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.history-details-toggle:hover {
+  border-color: var(--accent);
+
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+
+/* =========================================
+   ROZWINIĘTE ĆWICZENIA
+   ========================================= */
+
+.history-exercise-details {
+  border-top: 1px solid var(--border);
+}
+
+.history-exercise-row {
+  display: grid;
+  grid-template-columns:
+    1fr auto;
+
+  gap: 16px;
+
+  padding:
+    12px 18px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: var(--surface);
+
+  font-size: 0.78rem;
+}
+
+.history-exercise-row:last-child {
+  border-bottom: 0;
+}
+
+.history-exercise-info strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--text-primary);
+
+  font-size: 0.79rem;
+  font-weight: 600;
+}
+
+.history-exercise-info span {
+  color: var(--text-secondary);
+
+  font-size: 0.68rem;
+}
+
+.history-exercise-status {
+  align-self: center;
+
+  color: var(--text-secondary);
+
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.history-exercise-status.is-completed {
+  color: var(--accent-strong);
+}
+
+
+/* =========================================
+   BRAK HISTORII
+   ========================================= */
+
+.history-empty {
+  max-width: 520px;
+
+  margin:
+    12px auto 0;
+
+  padding:
+    34px 24px;
+
+  border: 1px dashed var(--border);
+  border-radius: 15px;
+
+  background: var(--background);
+
+  text-align: center;
+}
+
+.history-empty p {
+  margin-bottom: 7px;
+
+  color: var(--text-primary);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.history-empty span {
+  display: block;
+
+  color: var(--text-secondary);
+
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   RESPONSYWNOŚĆ HISTORII
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .history-screen {
+    padding: 20px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .history-screen {
+    padding: 12px;
+  }
+
+  .history {
+    padding:
+      26px 16px 22px;
+
+    border-radius: 18px;
+  }
+
+  .history-header {
+    padding:
+      4px 42px 0;
+
+    margin-bottom: 22px;
+  }
+
+  .history-description {
+    font-size: 0.8rem;
+  }
+
+  .history-profile-switch {
+    margin-bottom: 20px;
+  }
+
+  .history-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .history-workout-top {
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .history-workout-rating {
+    align-self: flex-start;
+  }
+
+  .history-workout-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .history-exercise-row {
+    grid-template-columns: 1fr;
+
+    gap: 7px;
+  }
+
+  .history-exercise-status {
+    justify-self: start;
+  }
+
+}
+/* =========================================
+   v0.07.5 — USUWANIE SESJI Z HISTORII
+   ========================================= */
+
+.history-delete-button {
+  width: 100%;
+
+  min-height: 42px;
+
+  margin-top: 8px;
+
+  padding:
+    9px 12px;
+
+  border: 1px solid rgba(220, 80, 80, 0.35);
+  border-radius: 10px;
+
+  background: transparent;
+  color: #d98a8a;
+
+  font-size: 0.74rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.history-delete-button:hover {
+  border-color: rgba(220, 80, 80, 0.7);
+
+  background: rgba(220, 80, 80, 0.08);
+  color: #f0a0a0;
+
+  transform: translateY(-1px);
+}
+
+.history-delete-button:active {
+  transform:
+    translateY(0)
+    scale(0.99);
+}

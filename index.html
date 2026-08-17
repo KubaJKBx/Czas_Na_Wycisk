@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -11,7 +9,9 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>K&K — Czas na Wycisk!</title><script type="text/javascript" nonce="1ad77da6a26b410392eb73a1256" src="//local.adguard.org?ts=1786986090171&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000987882469aa1970485d65e70%26fn%3Dindex_poprawiony_v0.06.4.html%26cd%3Dattachment%26ts%3D496385%26p%3Dfs%26cid%3D1%26sig%3D563c2b1c9cf8295f352380f29cc4f78b0f448bc4fc987510fdb23cef07566981%26v%3D0&amp;app=brave.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="1ad77da6a26b410392eb73a1256" src="//local.adguard.org?ts=1786986090171&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link
+  <title>K&K — Czas na Wycisk!</title>
+
+  <link
     rel="stylesheet"
     href="src/css/style.css"
   >
@@ -21,6 +21,7 @@
 
 <main class="app">
 
+
   <!-- =====================================
        START
        ===================================== -->
@@ -29,9 +30,12 @@
     class="screen welcome-screen"
     id="welcomeScreen"
   >
+
     <div class="welcome-content">
 
-      <h1>Kto dzisiaj ćwiczy?</h1>
+      <h1>
+        Kto dzisiaj ćwiczy?
+      </h1>
 
       <div class="profile-options">
 
@@ -40,37 +44,171 @@
           type="button"
           data-profile="woman"
         >
-          <span class="profile-icon" aria-hidden="true">
+
+          <span
+            class="profile-icon"
+            aria-hidden="true"
+          >
             <svg viewBox="0 0 64 64">
-              <circle cx="32" cy="16" r="8"></circle>
-              <path d="M24 28c0-4.4 3.6-8 8-8s8 3.6 8 8v7l7 14h-10v9h-10v-9h-10l7-14z"></path>
+              <circle
+                cx="32"
+                cy="16"
+                r="8"
+              ></circle>
+
+              <path
+                d="M24 28c0-4.4 3.6-8 8-8s8 3.6 8 8v7l7 14h-10v9h-10v-9h-10l7-14z"
+              ></path>
             </svg>
           </span>
 
           <span class="profile-label">
             Kobieta
           </span>
+
         </button>
+
 
         <button
           class="profile-card"
           type="button"
           data-profile="man"
         >
-          <span class="profile-icon" aria-hidden="true">
+
+          <span
+            class="profile-icon"
+            aria-hidden="true"
+          >
             <svg viewBox="0 0 64 64">
-              <circle cx="32" cy="16" r="8"></circle>
-              <path d="M22 29c0-5 4-9 10-9s10 4 10 9v12h-5v17h-10v-17h-5z"></path>
+              <circle
+                cx="32"
+                cy="16"
+                r="8"
+              ></circle>
+
+              <path
+                d="M22 29c0-5 4-9 10-9s10 4 10 9v12h-5v17h-10v-17h-5z"
+              ></path>
             </svg>
           </span>
 
           <span class="profile-label">
             Mężczyzna
           </span>
+
         </button>
 
       </div>
+
+
+      <button
+        class="history-open-button"
+        id="historyOpenButton"
+        type="button"
+      >
+        Historia treningów
+      </button>
+
     </div>
+
+  </section>
+
+
+
+  <!-- =====================================
+       HISTORIA TRENINGÓW
+       ===================================== -->
+
+  <section
+    class="screen history-screen is-hidden"
+    id="historyScreen"
+  >
+
+    <div class="history">
+
+      <button
+        class="back-button"
+        id="historyBackButton"
+        type="button"
+        aria-label="Wróć"
+      >
+        ←
+      </button>
+
+
+      <header class="history-header">
+
+        <p class="history-kicker">
+          Twoja aktywność
+        </p>
+
+        <h1>
+          Historia treningów
+        </h1>
+
+        <p class="history-description">
+          Wybierz profil, żeby zobaczyć zapisane sesje.
+        </p>
+
+      </header>
+
+
+      <div
+        class="history-profile-switch"
+        role="group"
+        aria-label="Wybierz profil historii"
+      >
+
+        <button
+          class="history-profile-button"
+          id="historyFemaleButton"
+          type="button"
+          data-history-profile="female"
+        >
+          Kobieta
+        </button>
+
+        <button
+          class="history-profile-button"
+          id="historyMaleButton"
+          type="button"
+          data-history-profile="male"
+        >
+          Mężczyzna
+        </button>
+
+      </div>
+
+
+      <div
+        class="history-summary is-hidden"
+        id="historySummary"
+      ></div>
+
+
+      <div
+        class="history-list"
+        id="historyList"
+      ></div>
+
+
+      <div
+        class="history-empty"
+        id="historyEmpty"
+      >
+
+        <p>
+          Nie masz jeszcze zapisanych treningów.
+        </p>
+
+        <span>
+          Ukończ trening i kliknij „Gotowe”, a pojawi się tutaj.
+        </span>
+
+      </div>
+
+    </div>
+
   </section>
 
 
@@ -83,6 +221,7 @@
     class="screen resume-session-screen is-hidden"
     id="resumeSessionScreen"
   >
+
     <div class="resume-session-card">
 
       <div
@@ -131,7 +270,9 @@
       </div>
 
     </div>
+
   </section>
+
 
 
   <!-- =====================================
@@ -142,6 +283,7 @@
     class="screen configurator-screen is-hidden"
     id="configuratorScreen"
   >
+
     <div class="configurator">
 
       <button
@@ -153,17 +295,28 @@
         ←
       </button>
 
+
       <header class="configurator-header">
-        <h1>Ułóżmy Twój trening.</h1>
-        <p>Zaznacz, na co masz dziś ochotę.</p>
+
+        <h1>
+          Ułóżmy Twój trening.
+        </h1>
+
+        <p>
+          Zaznacz, na co masz dziś ochotę.
+        </p>
+
       </header>
+
 
 
       <!-- CZAS -->
 
       <section class="config-section">
 
-        <h2>Ile masz dziś czasu?</h2>
+        <h2>
+          Ile masz dziś czasu?
+        </h2>
 
         <p class="section-description">
           Potraktujemy ten czas orientacyjnie.
@@ -226,14 +379,18 @@
           </button>
 
         </div>
+
       </section>
+
 
 
       <!-- PARTIE -->
 
       <section class="config-section">
 
-        <h2>Co dzisiaj ćwiczymy?</h2>
+        <h2>
+          Co dzisiaj ćwiczymy?
+        </h2>
 
         <p class="section-description">
           Możesz zaznaczyć kilka partii.
@@ -314,14 +471,18 @@
           </button>
 
         </div>
+
       </section>
+
 
 
       <!-- POZIOM -->
 
       <section class="config-section">
 
-        <h2>Twój poziom</h2>
+        <h2>
+          Twój poziom
+        </h2>
 
         <div class="option-grid option-grid--three">
 
@@ -353,14 +514,18 @@
           </button>
 
         </div>
+
       </section>
+
 
 
       <!-- DYSPOZYCJA -->
 
       <section class="config-section">
 
-        <h2>Jak się dziś czujesz?</h2>
+        <h2>
+          Jak się dziś czujesz?
+        </h2>
 
         <div class="option-grid option-grid--three">
 
@@ -392,14 +557,18 @@
           </button>
 
         </div>
+
       </section>
+
 
 
       <!-- SPRZĘT -->
 
       <section class="config-section">
 
-        <h2>Co masz pod ręką?</h2>
+        <h2>
+          Co masz pod ręką?
+        </h2>
 
         <p class="section-description">
           Możesz wybrać kilka opcji.
@@ -453,7 +622,9 @@
           </button>
 
         </div>
+
       </section>
+
 
 
       <div class="configurator-actions">
@@ -474,7 +645,9 @@
       </div>
 
     </div>
+
   </section>
+
 
 
   <!-- =====================================
@@ -485,6 +658,7 @@
     class="screen workout-preview-screen is-hidden"
     id="workoutPreviewScreen"
   >
+
     <div class="workout-preview">
 
       <button
@@ -495,6 +669,7 @@
       >
         ←
       </button>
+
 
       <header class="preview-header">
 
@@ -535,17 +710,20 @@
       </button>
 
     </div>
+
   </section>
 
 
+
   <!-- =====================================
-       SESJA — ĆWICZENIE
+       SESJA
        ===================================== -->
 
   <section
     class="screen workout-session-screen is-hidden"
     id="workoutSessionScreen"
   >
+
     <div class="workout-session">
 
       <div class="session-topbar">
@@ -567,6 +745,7 @@
         </div>
 
       </div>
+
 
 
       <!-- POSTĘP -->
@@ -593,11 +772,6 @@
             id="progressFill"
           ></div>
 
-          <!--
-            Tutaj później pojawi się
-            wybrany piesek albo kotek.
-          -->
-
           <div
             class="progress-mascot"
             id="progressMascot"
@@ -606,6 +780,7 @@
         </div>
 
       </div>
+
 
 
       <!-- ĆWICZENIE -->
@@ -617,18 +792,10 @@
           id="sessionCounter"
         ></p>
 
-
         <h1
           class="session-exercise-name"
           id="sessionExerciseName"
         ></h1>
-
-
-        <!--
-          NOWE:
-          Partie zaangażowane w ćwiczenie.
-          Np. "nogi • pośladki"
-        -->
 
         <p
           class="session-body-parts"
@@ -651,16 +818,18 @@
 
 
         <p
-  class="session-prescription"
-  id="sessionPrescription"
-></p>
+          class="session-prescription"
+          id="sessionPrescription"
+        ></p>
 
-<p
-  class="session-set-rest"
-  id="sessionSetRest"
-></p>
+        <p
+          class="session-set-rest"
+          id="sessionSetRest"
+        ></p>
 
-<!-- TECHNIKA -->
+
+
+        <!-- TECHNIKA -->
 
         <button
           class="how-button"
@@ -694,9 +863,8 @@
         </div>
 
 
-        <!-- =================================
-             TIMER ĆWICZENIA CZASOWEGO
-             ================================= -->
+
+        <!-- TIMER ĆWICZENIA CZASOWEGO -->
 
         <div
           class="timed-control is-hidden"
@@ -746,6 +914,7 @@
         </div>
 
 
+
         <!-- AKCJE -->
 
         <div
@@ -770,6 +939,7 @@
           </button>
 
         </div>
+
 
 
         <!-- REAKCJA -->
@@ -805,6 +975,7 @@
 
           </div>
 
+
           <button
             class="next-button"
             id="nextExercise"
@@ -818,23 +989,21 @@
       </div>
 
     </div>
+
   </section>
 
 
+
   <!-- =====================================
-       ODPOCZYNEK MIĘDZY ĆWICZENIAMI
+       ODPOCZYNEK
        ===================================== -->
 
   <section
     class="screen rest-screen is-hidden"
     id="restScreen"
   >
-    <div class="rest-card">
 
-      <!--
-        Licznik całej sesji nadal działa.
-        To NIE jest timer odpoczynku.
-      -->
+    <div class="rest-card">
 
       <div class="rest-topbar">
 
@@ -850,6 +1019,7 @@
         </div>
 
       </div>
+
 
 
       <!-- POSTĘP -->
@@ -868,6 +1038,7 @@
 
         </div>
 
+
         <div class="progress-track">
 
           <div
@@ -883,6 +1054,7 @@
         </div>
 
       </div>
+
 
 
       <!-- TREŚĆ -->
@@ -917,11 +1089,6 @@
         </p>
 
 
-        <!--
-          Podpowiadamy również,
-          co będzie następne.
-        -->
-
         <div class="rest-next-exercise">
 
           <span>
@@ -946,7 +1113,9 @@
       </div>
 
     </div>
+
   </section>
+
 
 
   <!-- =====================================
@@ -957,6 +1126,7 @@
     class="screen summary-screen is-hidden"
     id="summaryScreen"
   >
+
     <div class="summary-card">
 
       <div class="summary-finish">
@@ -984,6 +1154,9 @@
 
       </header>
 
+
+
+      <!-- STATYSTYKI -->
 
       <div class="summary-stats">
 
@@ -1037,6 +1210,7 @@
       </div>
 
 
+
       <button
         class="summary-list-toggle"
         id="summaryListToggle"
@@ -1051,6 +1225,9 @@
         id="summaryExerciseList"
       ></div>
 
+
+
+      <!-- OCENA -->
 
       <section class="summary-rating">
 
@@ -1103,13 +1280,16 @@
       </button>
 
     </div>
+
   </section>
+
 
 </main>
 
 
+
 <div class="version">
-  v0.06.4
+  v0.07.1
 </div>
 
 

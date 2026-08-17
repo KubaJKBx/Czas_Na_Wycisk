@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    PAMIĘĆ APLIKACJI
-   v0.06.3
+   v0.07.4
    ========================================= */
 
 
@@ -314,6 +314,77 @@
   }
 
 
+  function removeWorkout(
+    profileName,
+    workoutId
+  ) {
+
+    const data =
+      loadData();
+
+
+    if (
+      !data.profiles[
+        profileName
+      ]
+    ) {
+
+      return false;
+
+    }
+
+
+    if (
+      !workoutId
+    ) {
+
+      return false;
+
+    }
+
+
+    const currentHistory =
+      data.profiles[
+        profileName
+      ].workoutHistory;
+
+
+    const updatedHistory =
+      currentHistory.filter(
+        (workout) =>
+          workout.id !==
+          workoutId
+      );
+
+
+    /*
+      Jeśli nic nie usunięto,
+      zwracamy false.
+    */
+
+    if (
+      updatedHistory.length ===
+      currentHistory.length
+    ) {
+
+      return false;
+
+    }
+
+
+    data.profiles[
+      profileName
+    ].workoutHistory =
+      updatedHistory;
+
+
+    return saveData(
+      data
+    );
+
+  }
+
+
   /* =========================================
      PREFERENCJE ĆWICZEŃ
      ========================================= */
@@ -566,6 +637,8 @@
     addWorkout,
 
     getWorkoutHistory,
+
+    removeWorkout,
 
     setExercisePreference,
 
