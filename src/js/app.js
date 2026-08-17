@@ -170,65 +170,117 @@ function handleSingleSelection(selectedButton, group, value) {
 }
 
 function handleMultipleSelection(button, group, value) {
-  button.classList.toggle("is-selected");
+  button.classList.toggle(
+    "is-selected"
+  );
 
-  const selectedValues = workoutConfig[group];
-  const valueIndex = selectedValues.indexOf(value);
-
-  if (valueIndex === -1) {
-    selectedValues.push(value);
-  } else {
-    selectedValues.splice(valueIndex, 1);
-  }
+  workoutConfig[group] =
+    Array.from(
+      document.querySelectorAll(
+        `[data-group="${group}"].is-selected`
+      )
+    ).map(
+      (selectedButton) =>
+        selectedButton.dataset.value
+    );
 
   clearFormMessage();
 }
 
 function handleBodySelection(button, value) {
-  const bodyButtons = document.querySelectorAll('[data-group="body"]');
+  const bodyButtons =
+    document.querySelectorAll(
+      '[data-group="body"]'
+    );
 
   if (value === "full") {
-    bodyButtons.forEach((bodyButton) => {
-      bodyButton.classList.remove("is-selected");
-    });
+    bodyButtons.forEach(
+      (bodyButton) => {
+        bodyButton.classList.remove(
+          "is-selected"
+        );
+      }
+    );
 
-    button.classList.add("is-selected");
-    workoutConfig.body = ["full"];
+    button.classList.add(
+      "is-selected"
+    );
+
+    workoutConfig.body = [
+      "full"
+    ];
+
     clearFormMessage();
+
     return;
   }
 
-  const fullBodyButton = document.querySelector(
-    '[data-group="body"][data-value="full"]'
+  const fullBodyButton =
+    document.querySelector(
+      '[data-group="body"][data-value="full"]'
+    );
+
+  fullBodyButton?.classList.remove(
+    "is-selected"
   );
 
-  fullBodyButton?.classList.remove("is-selected");
+  workoutConfig.body =
+    workoutConfig.body.filter(
+      (item) =>
+        item !== "full"
+    );
 
-  workoutConfig.body = workoutConfig.body.filter(
-    (item) => item !== "full"
+  button.classList.toggle(
+    "is-selected"
   );
 
-  button.classList.toggle("is-selected");
-
-  if (button.classList.contains("is-selected")) {
-    if (!workoutConfig.body.includes(value)) {
-      workoutConfig.body.push(value);
+  if (
+    button.classList.contains(
+      "is-selected"
+    )
+  ) {
+    if (
+      !workoutConfig.body.includes(
+        value
+      )
+    ) {
+      workoutConfig.body.push(
+        value
+      );
     }
   } else {
-    workoutConfig.body = workoutConfig.body.filter(
-      (item) => item !== value
-    );
+    workoutConfig.body =
+      workoutConfig.body.filter(
+        (item) =>
+          item !== value
+      );
   }
 
   clearFormMessage();
 }
 
 function validateConfig() {
+  /*
+    Przed walidacją synchronizujemy sprzęt
+    bezpośrednio z zaznaczonymi przyciskami.
+  */
+  workoutConfig.equipment =
+    Array.from(
+      document.querySelectorAll(
+        '[data-group="equipment"].is-selected'
+      )
+    ).map(
+      (button) =>
+        button.dataset.value
+    );
+
   if (!workoutConfig.time) {
     return "Wybierz czas treningu.";
   }
 
-  if (workoutConfig.body.length === 0) {
+  if (
+    workoutConfig.body.length === 0
+  ) {
     return "Wybierz, co chcesz ćwiczyć.";
   }
 
@@ -240,7 +292,9 @@ function validateConfig() {
     return "Wybierz intensywność treningu.";
   }
 
-  if (workoutConfig.equipment.length === 0) {
+  if (
+    workoutConfig.equipment.length === 0
+  ) {
     return "Wybierz przynajmniej jedną opcję sprzętu.";
   }
 
