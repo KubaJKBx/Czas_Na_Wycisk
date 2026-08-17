@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    PAMIĘĆ APLIKACJI
-   v0.06.0
+   v0.06.3
    ========================================= */
 
 
@@ -12,7 +12,7 @@
 
 
   const STORAGE_VERSION =
-    1;
+    2;
 
 
   /* =========================================
@@ -28,9 +28,11 @@
 
       profiles: {
 
-        female: createDefaultProfile(),
+        female:
+          createDefaultProfile(),
 
-        male: createDefaultProfile()
+        male:
+          createDefaultProfile()
 
       }
 
@@ -45,7 +47,9 @@
 
       workoutHistory: [],
 
-      exercisePreferences: {}
+      exercisePreferences: {},
+
+      activeSession: null
 
     };
 
@@ -201,7 +205,16 @@
             "object"
         )
           ? profile.exercisePreferences
-          : {}
+          : {},
+
+      activeSession:
+        (
+          profile.activeSession &&
+          typeof profile.activeSession ===
+            "object"
+        )
+          ? profile.activeSession
+          : null
 
     };
 
@@ -212,14 +225,18 @@
      PROFIL
      ========================================= */
 
-  function getProfile(profileName) {
+  function getProfile(
+    profileName
+  ) {
 
     const data =
       loadData();
 
 
     return (
-      data.profiles[profileName] ||
+      data.profiles[
+        profileName
+      ] ||
       createDefaultProfile()
     );
 
@@ -240,7 +257,9 @@
 
 
     if (
-      !data.profiles[profileName]
+      !data.profiles[
+        profileName
+      ]
     ) {
 
       return false;
@@ -256,8 +275,8 @@
 
 
     /*
-      Na razie przechowujemy maksymalnie
-      50 ostatnich treningów na profil.
+      Maksymalnie 50 ostatnich
+      treningów na profil.
     */
 
     data.profiles[
@@ -310,7 +329,9 @@
 
 
     if (
-      !data.profiles[profileName]
+      !data.profiles[
+        profileName
+      ]
     ) {
 
       return false;
@@ -402,6 +423,124 @@
 
 
   /* =========================================
+     AKTYWNA SESJA
+     ========================================= */
+
+  function saveActiveSession(
+    profileName,
+    session
+  ) {
+
+    const data =
+      loadData();
+
+
+    if (
+      !data.profiles[
+        profileName
+      ]
+    ) {
+
+      return false;
+
+    }
+
+
+    if (
+      !session ||
+      typeof session !== "object"
+    ) {
+
+      return false;
+
+    }
+
+
+    data.profiles[
+      profileName
+    ].activeSession =
+      session;
+
+
+    return saveData(
+      data
+    );
+
+  }
+
+
+  function getActiveSession(
+    profileName
+  ) {
+
+    const profile =
+      getProfile(
+        profileName
+      );
+
+
+    if (
+      !profile.activeSession
+    ) {
+
+      return null;
+
+    }
+
+
+    return {
+      ...profile.activeSession
+    };
+
+  }
+
+
+  function clearActiveSession(
+    profileName
+  ) {
+
+    const data =
+      loadData();
+
+
+    if (
+      !data.profiles[
+        profileName
+      ]
+    ) {
+
+      return false;
+
+    }
+
+
+    data.profiles[
+      profileName
+    ].activeSession =
+      null;
+
+
+    return saveData(
+      data
+    );
+
+  }
+
+
+  function hasActiveSession(
+    profileName
+  ) {
+
+    return (
+      getActiveSession(
+        profileName
+      ) !== null
+    );
+
+  }
+
+
+  /* =========================================
      RESET — PRZYDA SIĘ W TESTACH
      ========================================= */
 
@@ -433,6 +572,14 @@
     getExercisePreference,
 
     getExercisePreferences,
+
+    saveActiveSession,
+
+    getActiveSession,
+
+    clearActiveSession,
+
+    hasActiveSession,
 
     clearAllData
 

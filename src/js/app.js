@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    APLIKACJA
-   v0.06.2
+   v0.06.4
    ========================================= */
 
 
@@ -247,6 +247,10 @@ let exercisePreferences = {};
 let workoutRating = null;
 
 let workoutHistorySaved = false;
+
+let activeSessionScreen = null;
+
+let activeExercisePhase = "actions";
 
 
 /* =========================================
@@ -1196,6 +1200,14 @@ function startWorkoutSession() {
     false;
 
 
+  activeSessionScreen =
+    "exercise";
+
+
+  activeExercisePhase =
+    "actions";
+
+
   exerciseStatuses =
     currentWorkout.map(
       () =>
@@ -1215,6 +1227,9 @@ function startWorkoutSession() {
   showScreen(
     workoutSessionScreen
   );
+
+
+  saveActiveWorkoutSession();
 
 }
 
@@ -1696,6 +1711,17 @@ completeExerciseButton.addEventListener(
       "is-hidden"
     );
 
+
+    activeSessionScreen =
+      "exercise";
+
+
+    activeExercisePhase =
+      "reaction";
+
+
+    saveActiveWorkoutSession();
+
   }
 );
 
@@ -1760,6 +1786,9 @@ likeExerciseButton.addEventListener(
       "is-selected"
     );
 
+
+    saveActiveWorkoutSession();
+
   }
 );
 
@@ -1794,6 +1823,9 @@ dislikeExerciseButton.addEventListener(
     likeExerciseButton.classList.remove(
       "is-selected"
     );
+
+
+    saveActiveWorkoutSession();
 
   }
 );
@@ -1863,12 +1895,23 @@ function advanceToNextExercise(
     1;
 
 
+  activeSessionScreen =
+    "exercise";
+
+
+  activeExercisePhase =
+    "actions";
+
+
   renderSessionExercise();
 
 
   showScreen(
     workoutSessionScreen
   );
+
+
+  saveActiveWorkoutSession();
 
 }
 
@@ -1902,9 +1945,20 @@ function showRestScreen(
   syncRestProgress();
 
 
+  activeSessionScreen =
+    "rest";
+
+
+  activeExercisePhase =
+    "actions";
+
+
   showScreen(
     restScreen
   );
+
+
+  saveActiveWorkoutSession();
 
 }
 
@@ -1926,12 +1980,23 @@ restNextButton.addEventListener(
         1;
 
 
+      activeSessionScreen =
+        "exercise";
+
+
+      activeExercisePhase =
+        "actions";
+
+
       renderSessionExercise();
 
 
       showScreen(
         workoutSessionScreen
       );
+
+
+      saveActiveWorkoutSession();
 
     }
 
@@ -1955,7 +2020,18 @@ sessionBackButton.addEventListener(
         1;
 
 
+      activeSessionScreen =
+        "exercise";
+
+
+      activeExercisePhase =
+        "actions";
+
+
       renderSessionExercise();
+
+
+      saveActiveWorkoutSession();
 
     }
 
@@ -2065,9 +2141,20 @@ function finishWorkout() {
   renderSummary();
 
 
+  activeSessionScreen =
+    "summary";
+
+
+  activeExercisePhase =
+    "actions";
+
+
   showScreen(
     summaryScreen
   );
+
+
+  saveActiveWorkoutSession();
 
 }
 
@@ -2238,6 +2325,9 @@ summaryRatingButtons.forEach(
         workoutRating =
           button.dataset.rating;
 
+
+        saveActiveWorkoutSession();
+
       }
     );
 
@@ -2256,6 +2346,9 @@ summaryDoneButton.addEventListener(
     saveCompletedWorkoutToHistory();
 
 
+    clearSavedActiveSession();
+
+
     resetSessionState();
 
 
@@ -2265,6 +2358,145 @@ summaryDoneButton.addEventListener(
 
   }
 );
+
+
+/* =========================================
+   ZAPIS AKTYWNEJ SESJI
+   ========================================= */
+
+function saveActiveWorkoutSession() {
+
+  if (
+    !window.WorkoutStorage ||
+    !workoutConfig.profile ||
+    currentWorkout.length === 0 ||
+    !workoutStartedAt
+  ) {
+
+    return false;
+
+  }
+
+
+  const storageProfile =
+    getStorageProfileName(
+      workoutConfig.profile
+    );
+
+
+  const sessionSnapshot = {
+
+    version:
+      1,
+
+    savedAt:
+      new Date().toISOString(),
+
+    profile:
+      workoutConfig.profile,
+
+    config: {
+
+      profile:
+        workoutConfig.profile,
+
+      time:
+        workoutConfig.time,
+
+      body:
+        [
+          ...workoutConfig.body
+        ],
+
+      level:
+        workoutConfig.level,
+
+      intensity:
+        workoutConfig.intensity,
+
+      equipment:
+        [
+          ...workoutConfig.equipment
+        ]
+
+    },
+
+    workout:
+      currentWorkout,
+
+    currentExerciseIndex:
+      currentExerciseIndex,
+
+    exerciseStatuses:
+      [
+        ...exerciseStatuses
+      ],
+
+    workoutStartedAt:
+      workoutStartedAt,
+
+    finalWorkoutDuration:
+      finalWorkoutDuration,
+
+    workoutRating:
+      workoutRating || null,
+
+    screen:
+      activeSessionScreen ||
+      "exercise",
+
+    exercisePhase:
+      activeExercisePhase,
+
+    countdown: {
+
+      initialSeconds:
+        countdownInitialSeconds,
+
+      remainingSeconds:
+        countdownRemainingSeconds,
+
+      running:
+        false
+
+    }
+
+  };
+
+
+  return window.WorkoutStorage
+    .saveActiveSession(
+      storageProfile,
+      sessionSnapshot
+    );
+
+}
+
+
+function clearSavedActiveSession() {
+
+  if (
+    !window.WorkoutStorage ||
+    !workoutConfig.profile
+  ) {
+
+    return false;
+
+  }
+
+
+  const storageProfile =
+    getStorageProfileName(
+      workoutConfig.profile
+    );
+
+
+  return window.WorkoutStorage
+    .clearActiveSession(
+      storageProfile
+    );
+
+}
 
 
 /* =========================================
@@ -2427,6 +2659,14 @@ function resetSessionState() {
 
   workoutHistorySaved =
     false;
+
+
+  activeSessionScreen =
+    null;
+
+
+  activeExercisePhase =
+    "actions";
 
 
   clearInterval(
