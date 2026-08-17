@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -10,9 +11,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>K&K — Czas na Wycisk!</title>
-
-  <script type="text/javascript" nonce="f27f9ca9c99c402d93acb0c83c9" src="//local.adguard.org?ts=1786921643484&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_000000009a08820a80d25da2ae3fdc0b%26fn%3Dindex_v0.05.3.html%26cd%3Dattachment%26ts%3D496368%26p%3Dfs%26cid%3D1%26sig%3Db16baa0c332f9b7fb2fc6d7be8b27ee3ace39d4268b568d3e9d78fef95ac1cbf%26v%3D0&amp;app=brave.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="f27f9ca9c99c402d93acb0c83c9" src="//local.adguard.org?ts=1786921643484&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link
+  <title>K&K — Czas na Wycisk!</title><script type="text/javascript" nonce="1ad77da6a26b410392eb73a1256" src="//local.adguard.org?ts=1786986090171&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000987882469aa1970485d65e70%26fn%3Dindex_poprawiony_v0.06.4.html%26cd%3Dattachment%26ts%3D496385%26p%3Dfs%26cid%3D1%26sig%3D563c2b1c9cf8295f352380f29cc4f78b0f448bc4fc987510fdb23cef07566981%26v%3D0&amp;app=brave.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="1ad77da6a26b410392eb73a1256" src="//local.adguard.org?ts=1786986090171&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link
     rel="stylesheet"
     href="src/css/style.css"
   >
@@ -71,6 +70,66 @@
         </button>
 
       </div>
+    </div>
+  </section>
+
+
+
+  <!-- =====================================
+       NIEDOKOŃCZONY TRENING
+       ===================================== -->
+
+  <section
+    class="screen resume-session-screen is-hidden"
+    id="resumeSessionScreen"
+  >
+    <div class="resume-session-card">
+
+      <div
+        class="resume-session-icon"
+        aria-hidden="true"
+      >
+        ↻
+      </div>
+
+      <p class="resume-session-kicker">
+        Niedokończona sesja
+      </p>
+
+      <h1>
+        Masz niedokończony trening.
+      </h1>
+
+      <p class="resume-session-description">
+        Możesz wrócić dokładnie do miejsca,
+        w którym ostatnio skończyłeś.
+      </p>
+
+      <div
+        class="resume-session-details"
+        id="resumeSessionDetails"
+      ></div>
+
+      <div class="resume-session-actions">
+
+        <button
+          class="resume-session-continue"
+          id="resumeSessionContinue"
+          type="button"
+        >
+          Kontynuuj trening
+        </button>
+
+        <button
+          class="resume-session-restart"
+          id="resumeSessionRestart"
+          type="button"
+        >
+          Zacznij od nowa
+        </button>
+
+      </div>
+
     </div>
   </section>
 
@@ -1050,7 +1109,7 @@
 
 
 <div class="version">
-  v0.05.3
+  v0.06.4
 </div>
 
 
