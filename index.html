@@ -1,0 +1,1063 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>K&K — Czas na Wycisk!</title>
+
+  <script type="text/javascript" nonce="f27f9ca9c99c402d93acb0c83c9" src="//local.adguard.org?ts=1786921643484&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_000000009a08820a80d25da2ae3fdc0b%26fn%3Dindex_v0.05.3.html%26cd%3Dattachment%26ts%3D496368%26p%3Dfs%26cid%3D1%26sig%3Db16baa0c332f9b7fb2fc6d7be8b27ee3ace39d4268b568d3e9d78fef95ac1cbf%26v%3D0&amp;app=brave.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="f27f9ca9c99c402d93acb0c83c9" src="//local.adguard.org?ts=1786921643484&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link
+    rel="stylesheet"
+    href="src/css/style.css"
+  >
+</head>
+
+<body>
+
+<main class="app">
+
+  <!-- =====================================
+       START
+       ===================================== -->
+
+  <section
+    class="screen welcome-screen"
+    id="welcomeScreen"
+  >
+    <div class="welcome-content">
+
+      <h1>Kto dzisiaj ćwiczy?</h1>
+
+      <div class="profile-options">
+
+        <button
+          class="profile-card"
+          type="button"
+          data-profile="woman"
+        >
+          <span class="profile-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <circle cx="32" cy="16" r="8"></circle>
+              <path d="M24 28c0-4.4 3.6-8 8-8s8 3.6 8 8v7l7 14h-10v9h-10v-9h-10l7-14z"></path>
+            </svg>
+          </span>
+
+          <span class="profile-label">
+            Kobieta
+          </span>
+        </button>
+
+        <button
+          class="profile-card"
+          type="button"
+          data-profile="man"
+        >
+          <span class="profile-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <circle cx="32" cy="16" r="8"></circle>
+              <path d="M22 29c0-5 4-9 10-9s10 4 10 9v12h-5v17h-10v-17h-5z"></path>
+            </svg>
+          </span>
+
+          <span class="profile-label">
+            Mężczyzna
+          </span>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================
+       KONFIGURATOR
+       ===================================== -->
+
+  <section
+    class="screen configurator-screen is-hidden"
+    id="configuratorScreen"
+  >
+    <div class="configurator">
+
+      <button
+        class="back-button"
+        id="backToWelcome"
+        type="button"
+        aria-label="Wróć"
+      >
+        ←
+      </button>
+
+      <header class="configurator-header">
+        <h1>Ułóżmy Twój trening.</h1>
+        <p>Zaznacz, na co masz dziś ochotę.</p>
+      </header>
+
+
+      <!-- CZAS -->
+
+      <section class="config-section">
+
+        <h2>Ile masz dziś czasu?</h2>
+
+        <p class="section-description">
+          Potraktujemy ten czas orientacyjnie.
+        </p>
+
+        <div class="option-grid option-grid--time">
+
+          <button
+            class="option"
+            type="button"
+            data-group="time"
+            data-value="15"
+          >
+            15 min
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="time"
+            data-value="25"
+          >
+            25 min
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="time"
+            data-value="35"
+          >
+            35 min
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="time"
+            data-value="45"
+          >
+            45 min
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="time"
+            data-value="55"
+          >
+            55 min
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="time"
+            data-value="60"
+          >
+            60 min
+          </button>
+
+        </div>
+      </section>
+
+
+      <!-- PARTIE -->
+
+      <section class="config-section">
+
+        <h2>Co dzisiaj ćwiczymy?</h2>
+
+        <p class="section-description">
+          Możesz zaznaczyć kilka partii.
+        </p>
+
+        <div class="option-grid">
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="full"
+          >
+            Całe ciało
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="chest"
+          >
+            Klatka
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="back"
+          >
+            Plecy
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="shoulders"
+          >
+            Barki
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="arms"
+          >
+            Ramiona
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="abs"
+          >
+            Brzuch
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="legs"
+          >
+            Nogi
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="body"
+            data-value="glutes"
+          >
+            Pośladki
+          </button>
+
+        </div>
+      </section>
+
+
+      <!-- POZIOM -->
+
+      <section class="config-section">
+
+        <h2>Twój poziom</h2>
+
+        <div class="option-grid option-grid--three">
+
+          <button
+            class="option"
+            type="button"
+            data-group="level"
+            data-value="beginner"
+          >
+            Dopiero zaczynam!
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="level"
+            data-value="intermediate"
+          >
+            Coś niecoś potrafię!
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="level"
+            data-value="advanced"
+          >
+            Wiem, co robię!
+          </button>
+
+        </div>
+      </section>
+
+
+      <!-- DYSPOZYCJA -->
+
+      <section class="config-section">
+
+        <h2>Jak się dziś czujesz?</h2>
+
+        <div class="option-grid option-grid--three">
+
+          <button
+            class="option"
+            type="button"
+            data-group="intensity"
+            data-value="light"
+          >
+            Na spokojnie
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="intensity"
+            data-value="normal"
+          >
+            Normalnie
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="intensity"
+            data-value="hard"
+          >
+            Daj mi wycisk
+          </button>
+
+        </div>
+      </section>
+
+
+      <!-- SPRZĘT -->
+
+      <section class="config-section">
+
+        <h2>Co masz pod ręką?</h2>
+
+        <p class="section-description">
+          Możesz wybrać kilka opcji.
+        </p>
+
+        <div class="option-grid">
+
+          <button
+            class="option"
+            type="button"
+            data-group="equipment"
+            data-value="bodyweight"
+          >
+            Masa własnego ciała
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="equipment"
+            data-value="dumbbells"
+          >
+            Hantle
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="equipment"
+            data-value="kettlebell"
+          >
+            Kettlebell
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="equipment"
+            data-value="bands"
+          >
+            Gumy
+          </button>
+
+          <button
+            class="option"
+            type="button"
+            data-group="equipment"
+            data-value="pullup-bar"
+          >
+            Drążek
+          </button>
+
+        </div>
+      </section>
+
+
+      <div class="configurator-actions">
+
+        <p
+          class="form-message"
+          id="formMessage"
+        ></p>
+
+        <button
+          class="generate-button"
+          id="generateWorkout"
+          type="button"
+        >
+          Ułóż trening
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================
+       PODGLĄD TRENINGU
+       ===================================== -->
+
+  <section
+    class="screen workout-preview-screen is-hidden"
+    id="workoutPreviewScreen"
+  >
+    <div class="workout-preview">
+
+      <button
+        class="back-button"
+        id="backToConfigurator"
+        type="button"
+        aria-label="Wróć"
+      >
+        ←
+      </button>
+
+      <header class="preview-header">
+
+        <p class="preview-kicker">
+          Twój trening
+        </p>
+
+        <h1>
+          Plan jest gotowy.
+        </h1>
+
+        <p
+          class="preview-summary"
+          id="previewSummary"
+        ></p>
+
+      </header>
+
+
+      <div
+        class="exercise-list"
+        id="exerciseList"
+      ></div>
+
+
+      <p
+        class="preview-message"
+        id="previewMessage"
+      ></p>
+
+
+      <button
+        class="start-workout-button"
+        id="startWorkout"
+        type="button"
+      >
+        Rozpocznij trening
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================
+       SESJA — ĆWICZENIE
+       ===================================== -->
+
+  <section
+    class="screen workout-session-screen is-hidden"
+    id="workoutSessionScreen"
+  >
+    <div class="workout-session">
+
+      <div class="session-topbar">
+
+        <button
+          class="session-back-button"
+          id="sessionBack"
+          type="button"
+          aria-label="Poprzednie ćwiczenie"
+        >
+          ←
+        </button>
+
+        <div
+          class="session-timer"
+          id="sessionTimer"
+        >
+          00:00
+        </div>
+
+      </div>
+
+
+      <!-- POSTĘP -->
+
+      <div class="progress-wrapper">
+
+        <div class="progress-labels">
+
+          <span>
+            Postęp
+          </span>
+
+          <span id="progressPercent">
+            0%
+          </span>
+
+        </div>
+
+
+        <div class="progress-track">
+
+          <div
+            class="progress-fill"
+            id="progressFill"
+          ></div>
+
+          <!--
+            Tutaj później pojawi się
+            wybrany piesek albo kotek.
+          -->
+
+          <div
+            class="progress-mascot"
+            id="progressMascot"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ĆWICZENIE -->
+
+      <div class="session-content">
+
+        <p
+          class="session-counter"
+          id="sessionCounter"
+        ></p>
+
+
+        <h1
+          class="session-exercise-name"
+          id="sessionExerciseName"
+        ></h1>
+
+
+        <!--
+          NOWE:
+          Partie zaangażowane w ćwiczenie.
+          Np. "nogi • pośladki"
+        -->
+
+        <p
+          class="session-body-parts"
+          id="sessionBodyParts"
+        ></p>
+
+
+        <div class="session-meta">
+
+          <span
+            id="sessionEquipment"
+          ></span>
+
+          <span
+            class="difficulty"
+            id="sessionDifficulty"
+          ></span>
+
+        </div>
+
+
+        <p
+  class="session-prescription"
+  id="sessionPrescription"
+></p>
+
+<p
+  class="session-set-rest"
+  id="sessionSetRest"
+></p>
+
+<!-- TECHNIKA -->
+
+        <button
+          class="how-button"
+          id="howButton"
+          type="button"
+        >
+          Jak ćwiczyć?
+        </button>
+
+
+        <div
+          class="how-panel is-hidden"
+          id="howPanel"
+        >
+
+          <p
+            class="exercise-instructions"
+            id="exerciseInstructions"
+          ></p>
+
+          <a
+            class="video-link"
+            id="videoLink"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Otwórz film
+          </a>
+
+        </div>
+
+
+        <!-- =================================
+             TIMER ĆWICZENIA CZASOWEGO
+             ================================= -->
+
+        <div
+          class="timed-control is-hidden"
+          id="timedControl"
+        >
+
+          <div
+            class="countdown-display"
+            id="countdownDisplay"
+          ></div>
+
+
+          <div class="countdown-controls">
+
+            <button
+              class="countdown-control-button"
+              id="countdownStart"
+              type="button"
+              aria-label="Uruchom odliczanie"
+              title="Start"
+            >
+              ▶
+            </button>
+
+            <button
+              class="countdown-control-button"
+              id="countdownPause"
+              type="button"
+              aria-label="Wstrzymaj odliczanie"
+              title="Pauza"
+            >
+              ⏸
+            </button>
+
+            <button
+              class="countdown-control-button"
+              id="countdownReset"
+              type="button"
+              aria-label="Zresetuj odliczanie"
+              title="Reset"
+            >
+              ↺
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- AKCJE -->
+
+        <div
+          class="session-actions"
+          id="sessionActions"
+        >
+
+          <button
+            class="skip-button"
+            id="skipExercise"
+            type="button"
+          >
+            ↷ Pomiń
+          </button>
+
+          <button
+            class="complete-button"
+            id="completeExercise"
+            type="button"
+          >
+            ✓ Wykonane
+          </button>
+
+        </div>
+
+
+        <!-- REAKCJA -->
+
+        <div
+          class="reaction-panel is-hidden"
+          id="reactionPanel"
+        >
+
+          <p>
+            Jak Ci się podobało?
+          </p>
+
+          <div class="reaction-buttons">
+
+            <button
+              class="reaction-button"
+              id="likeExercise"
+              type="button"
+              aria-label="Podobało mi się"
+            >
+              ❤️
+            </button>
+
+            <button
+              class="reaction-button"
+              id="dislikeExercise"
+              type="button"
+              aria-label="Nie podobało mi się"
+            >
+              👎
+            </button>
+
+          </div>
+
+          <button
+            class="next-button"
+            id="nextExercise"
+            type="button"
+          >
+            Dalej
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================
+       ODPOCZYNEK MIĘDZY ĆWICZENIAMI
+       ===================================== -->
+
+  <section
+    class="screen rest-screen is-hidden"
+    id="restScreen"
+  >
+    <div class="rest-card">
+
+      <!--
+        Licznik całej sesji nadal działa.
+        To NIE jest timer odpoczynku.
+      -->
+
+      <div class="rest-topbar">
+
+        <span class="rest-topbar-label">
+          Czas treningu
+        </span>
+
+        <div
+          class="rest-session-timer"
+          id="restSessionTimer"
+        >
+          00:00
+        </div>
+
+      </div>
+
+
+      <!-- POSTĘP -->
+
+      <div class="progress-wrapper rest-progress">
+
+        <div class="progress-labels">
+
+          <span>
+            Postęp
+          </span>
+
+          <span id="restProgressPercent">
+            0%
+          </span>
+
+        </div>
+
+        <div class="progress-track">
+
+          <div
+            class="progress-fill"
+            id="restProgressFill"
+          ></div>
+
+          <div
+            class="progress-mascot"
+            id="restProgressMascot"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- TREŚĆ -->
+
+      <div class="rest-content">
+
+        <div
+          class="rest-icon"
+          aria-hidden="true"
+        >
+          😌
+        </div>
+
+        <p class="rest-kicker">
+          Chwila odpoczynku
+        </p>
+
+        <h1>
+          Daj sobie moment.
+        </h1>
+
+        <p
+          class="rest-recommendation"
+          id="restRecommendation"
+        >
+          Odpocznij około 45–60 sek.
+        </p>
+
+        <p class="rest-description">
+          Nie musisz pilnować czasu co do sekundy.
+          Rusz dalej, kiedy będziesz gotowy.
+        </p>
+
+
+        <!--
+          Podpowiadamy również,
+          co będzie następne.
+        -->
+
+        <div class="rest-next-exercise">
+
+          <span>
+            Następne ćwiczenie
+          </span>
+
+          <strong
+            id="restNextExercise"
+          ></strong>
+
+        </div>
+
+
+        <button
+          class="rest-next-button"
+          id="restNextButton"
+          type="button"
+        >
+          Jestem gotowy →
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================
+       PODSUMOWANIE
+       ===================================== -->
+
+  <section
+    class="screen summary-screen is-hidden"
+    id="summaryScreen"
+  >
+    <div class="summary-card">
+
+      <div class="summary-finish">
+
+        <div
+          class="summary-finish-marker"
+        ></div>
+
+        <span>
+          100%
+        </span>
+
+      </div>
+
+
+      <header class="summary-header">
+
+        <h1>
+          Dobra robota.
+        </h1>
+
+        <p>
+          Trening zakończony.
+        </p>
+
+      </header>
+
+
+      <div class="summary-stats">
+
+        <div class="summary-stat">
+
+          <span
+            class="summary-stat-value"
+            id="summaryTime"
+          >
+            00:00
+          </span>
+
+          <span class="summary-stat-label">
+            czas treningu
+          </span>
+
+        </div>
+
+
+        <div class="summary-stat">
+
+          <span
+            class="summary-stat-value"
+            id="summaryCompleted"
+          >
+            0
+          </span>
+
+          <span class="summary-stat-label">
+            wykonane
+          </span>
+
+        </div>
+
+
+        <div class="summary-stat">
+
+          <span
+            class="summary-stat-value"
+            id="summarySkipped"
+          >
+            0
+          </span>
+
+          <span class="summary-stat-label">
+            pominięte
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="summary-list-toggle"
+        id="summaryListToggle"
+        type="button"
+      >
+        Zobacz ćwiczenia
+      </button>
+
+
+      <div
+        class="summary-exercise-list is-hidden"
+        id="summaryExerciseList"
+      ></div>
+
+
+      <section class="summary-rating">
+
+        <h2>
+          Jak było dzisiaj?
+        </h2>
+
+        <p>
+          Ocena jest opcjonalna.
+        </p>
+
+
+        <div class="summary-rating-options">
+
+          <button
+            class="summary-rating-button"
+            type="button"
+            data-rating="easy"
+          >
+            Za lekko
+          </button>
+
+          <button
+            class="summary-rating-button"
+            type="button"
+            data-rating="good"
+          >
+            W sam raz
+          </button>
+
+          <button
+            class="summary-rating-button"
+            type="button"
+            data-rating="hard"
+          >
+            Za ciężko
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <button
+        class="summary-done-button"
+        id="summaryDone"
+        type="button"
+      >
+        Gotowe
+      </button>
+
+    </div>
+  </section>
+
+</main>
+
+
+<div class="version">
+  v0.05.3
+</div>
+
+
+<script src="src/js/exercises.js"></script>
+<script src="src/js/generator.js"></script>
+<script src="src/js/app.js"></script>
+
+</body>
+
+</html>
