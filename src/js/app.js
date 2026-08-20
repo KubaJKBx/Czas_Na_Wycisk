@@ -5092,35 +5092,109 @@ function createExerciseLibraryCard(
 
 
   mainButton?.addEventListener(
-    "click",
-    () => {
-      const isOpen =
-        !details.classList.contains(
-          "is-hidden"
-        );
+  "click",
+  () => {
+    const isOpen =
+      card.classList.contains(
+        "is-open"
+      );
 
-      details.classList.toggle(
+
+    /* ZWIŃ INNE OTWARTE KARTY */
+
+    document
+      .querySelectorAll(
+        ".exercise-library-card.is-open"
+      )
+      .forEach(
+        (openCard) => {
+          if (
+            openCard === card
+          ) {
+            return;
+          }
+
+          const openDetails =
+            openCard.querySelector(
+              ".exercise-library-card-details"
+            );
+
+          const openButton =
+            openCard.querySelector(
+              ".exercise-library-card-main"
+            );
+
+          const openArrow =
+            openCard.querySelector(
+              ".exercise-library-card-arrow"
+            );
+
+
+          openDetails?.classList.add(
+            "is-hidden"
+          );
+
+          openButton?.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          openCard.classList.remove(
+            "is-open"
+          );
+
+          if (openArrow) {
+            openArrow.textContent =
+              "↓";
+          }
+        }
+      );
+
+
+    /* OTWÓRZ / ZAMKNIJ KLIKNIĘTĄ KARTĘ */
+
+    if (isOpen) {
+      details.classList.add(
         "is-hidden"
       );
 
       mainButton.setAttribute(
         "aria-expanded",
-        String(!isOpen)
+        "false"
       );
 
-      card.classList.toggle(
-        "is-open",
-        !isOpen
+      card.classList.remove(
+        "is-open"
       );
 
       if (arrow) {
         arrow.textContent =
-          isOpen
-            ? "↓"
-            : "↑";
+          "↓";
       }
+
+      return;
     }
-  );
+
+
+    details.classList.remove(
+      "is-hidden"
+    );
+
+    mainButton.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    card.classList.add(
+      "is-open"
+    );
+
+    if (arrow) {
+      arrow.textContent =
+        "↑";
+    }
+  }
+);
 
 
   return card;
