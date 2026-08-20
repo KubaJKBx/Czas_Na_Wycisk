@@ -1,13 +1,19 @@
 /* =========================================
    K&K — Czas na Wycisk!
    GENERATOR TRENINGU
-   v0.07.0
+   v0.08.1
 
    Nowości:
-   - ❤️ lekko zwiększa szansę ćwiczenia,
-   - 👎 zmniejsza szansę ćwiczenia,
-   - 5 ostatnich treningów lekko ogranicza powtórki,
-   - pamięć działa także przy „Zastąp”.
+   - modularna baza window.ExercisesDatabase,
+   - requiredEquipment / equipmentOptions,
+   - equipmentConditions,
+   - primaryBodyPart / strongSecondaryBodyParts,
+   - workoutRole / fatigue / movementPattern,
+   - repRange / timeRange / setRange / restRange,
+   - ❤️ / 👎 i historia ostatnich treningów,
+   - mocniejsza różnorodność ruchów,
+   - dopasowanie objętości do wybranego czasu,
+   - zgodność przejściowa z obecnym app.js.
    ========================================= */
 
 const GENERATOR_CONFIG = {
@@ -28,6 +34,23 @@ const GENERATOR_CONFIG = {
       preferred: [3, 4, 5],
       allowed: [1, 2, 3, 4, 5]
     }
+  },
+
+  selectableBodyParts: [
+    "chest",
+    "back",
+    "shoulders",
+    "arms",
+    "abs",
+    "legs",
+    "glutes"
+  ],
+
+  rolePriority: {
+    main: 4,
+    secondary: 3,
+    accessory: 2,
+    finisher: 1
   }
 };
 
@@ -74,6 +97,22 @@ function shuffle(array) {
   return copy;
 }
 
+function getExerciseDatabase() {
+  if (
+    Array.isArray(
+      window.ExercisesDatabase
+    )
+  ) {
+    return window.ExercisesDatabase;
+  }
+
+  console.error(
+    "[K&K Generator] Nie znaleziono window.ExercisesDatabase."
+  );
+
+  return [];
+}
+
 
 /* =========================================
    PAMIĘĆ GENERATORA
@@ -97,7 +136,8 @@ function getGeneratorMemory(config) {
   const emptyMemory = {
     preferences: {},
     recentExerciseCounts: {},
-    lastWorkoutExerciseIds: new Set(),
+    lastWorkoutExerciseIds:
+      new Set(),
     recentWorkouts: []
   };
 
@@ -130,21 +170,20 @@ function getGeneratorMemory(config) {
         storageProfile
       ) || [];
 
-  /*
-    Patrzymy tylko na 5 ostatnich treningów.
-    Nie blokujemy żadnego ćwiczenia na sztywno.
-  */
   const recentWorkouts =
     history.slice(0, 5);
 
   const recentExerciseCounts = {};
+
   const lastWorkoutExerciseIds =
     new Set();
 
   recentWorkouts.forEach(
     (workout, workoutIndex) => {
       const exercises =
-        Array.isArray(workout.exercises)
+        Array.isArray(
+          workout.exercises
+        )
           ? workout.exercises
           : [];
 
@@ -196,10 +235,6 @@ function applyMemoryInfluence(
     return adjustedScore;
   }
 
-  /*
-    Każde wystąpienie w ostatnich 5 treningach
-    daje małą karę.
-  */
   const recentCount =
     memory.recentExerciseCounts[
       exercise.id
@@ -208,10 +243,6 @@ function applyMemoryInfluence(
   adjustedScore -=
     recentCount * 6;
 
-  /*
-    Ćwiczenie z bezpośrednio poprzedniego
-    treningu dostaje dodatkową małą karę.
-  */
   if (
     memory.lastWorkoutExerciseIds.has(
       exercise.id
@@ -220,11 +251,6 @@ function applyMemoryInfluence(
     adjustedScore -= 8;
   }
 
-  /*
-    Ogólna opinia o ćwiczeniu:
-    ❤️ = 1.15
-    👎 = 0.80
-  */
   const preference =
     memory.preferences[
       exercise.id
@@ -243,25 +269,281 @@ function applyMemoryInfluence(
 
 
 /* =========================================
-   SPRZĘT
+   SPRZĘT — MOST DO OBECNEGO UI
    ========================================= */
 
-function isEquipmentAvailable(
-  exercise,
+function createEquipmentInventory(
   selectedEquipment
 ) {
+  const selected =
+    Array.isArray(selectedEquipment)
+      ? selectedEquipment
+      : [];
+
+  const inventory = {
+    bodyweight: 0,
+    dumbbells: 0,
+    kettlebell: 0,
+    "resistance-band": 0,
+    "mini-band": 0,
+    "pull-up-bar": 0,
+    barbell: 0,
+    bench: 0
+  };
+
   if (
-    !exercise.equipment ||
-    exercise.equipment.length === 0
+    selected.includes(
+      "bodyweight"
+    )
+  ) {
+    inventory.bodyweight = 1;
+  }
+
+  if (
+    selected.includes(
+      "dumbbells"
+    )
+  ) {
+    inventory.dumbbells = 2;
+  }
+
+  if (
+    selected.includes(
+      "kettlebell"
+    )
+  ) {
+    inventory.kettlebell = 2;
+  }
+
+  /*
+    Tymczasowo stary przycisk "Gumy"
+    oznacza dostęp zarówno do długiej gumy,
+    jak i mini bandu.
+
+    Zmienimy to po przebudowie konfiguratora.
+  */
+  if (
+    selected.includes(
+      "bands"
+    )
+  ) {
+    inventory[
+      "resistance-band"
+    ] = 1;
+
+    inventory[
+      "mini-band"
+    ] = 1;
+  }
+
+  if (
+    selected.includes(
+      "pullup-bar"
+    )
+  ) {
+    inventory[
+      "pull-up-bar"
+    ] = 1;
+  }
+
+  return inventory;
+}
+
+function isEquipmentItemAvailable(
+  item,
+  inventory
+) {
+  if (
+    !item ||
+    !item.type
+  ) {
+    return false;
+  }
+
+  const availableQuantity =
+    Number(
+      inventory[
+        item.type
+      ]
+    ) || 0;
+
+  const requiredQuantity =
+    Number(
+      item.quantity
+    ) || 1;
+
+  return (
+    availableQuantity >=
+    requiredQuantity
+  );
+}
+
+function isEquipmentSetAvailable(
+  equipmentSet,
+  inventory
+) {
+  if (
+    !Array.isArray(
+      equipmentSet
+    )
+  ) {
+    return false;
+  }
+
+  return equipmentSet.every(
+    (item) =>
+      isEquipmentItemAvailable(
+        item,
+        inventory
+      )
+  );
+}
+
+function resolveExerciseEquipment(
+  exercise,
+  inventory
+) {
+  const required =
+    Array.isArray(
+      exercise.requiredEquipment
+    )
+      ? exercise.requiredEquipment
+      : [];
+
+  if (required.length > 0) {
+    return isEquipmentSetAvailable(
+      required,
+      inventory
+    )
+      ? required
+      : null;
+  }
+
+  const options =
+    Array.isArray(
+      exercise.equipmentOptions
+    )
+      ? exercise.equipmentOptions
+      : [];
+
+  for (
+    const option of options
+  ) {
+    if (
+      isEquipmentSetAvailable(
+        option,
+        inventory
+      )
+    ) {
+      return option;
+    }
+  }
+
+  return null;
+}
+
+function isEquipmentConditionAvailable(
+  condition,
+  inventory
+) {
+  if (!condition) {
+    return true;
+  }
+
+  if (
+    condition === "anchor-low" ||
+    condition === "anchor-mid" ||
+    condition === "anchor-high" ||
+    condition === "anchor-any"
+  ) {
+    return (
+      inventory[
+        "resistance-band"
+      ] >= 1
+    );
+  }
+
+  if (
+    condition === "bar-high" ||
+    condition === "bar-low"
+  ) {
+    return (
+      inventory[
+        "pull-up-bar"
+      ] >= 1
+    );
+  }
+
+  if (
+    condition ===
+    "stable-dumbbell-base"
+  ) {
+    return (
+      inventory.dumbbells >= 2
+    );
+  }
+
+  /*
+    Na razie traktujemy rzeczy domowe
+    jako dostępne.
+
+    Docelowo dostaną swoje opcje
+    w konfiguratorze.
+  */
+  const temporaryHouseholdConditions = [
+    "stable-elevated-surface",
+    "stable-seated-surface",
+    "stable-support",
+    "sliding-surface",
+    "soft-object-between-knees",
+    "wall"
+  ];
+
+  if (
+    temporaryHouseholdConditions
+      .includes(
+        condition
+      )
   ) {
     return true;
   }
 
-  return exercise.equipment.every(
-    (equipmentItem) =>
-      selectedEquipment.includes(
-        equipmentItem
+  return false;
+}
+
+function areEquipmentConditionsAvailable(
+  exercise,
+  inventory
+) {
+  const conditions =
+    Array.isArray(
+      exercise.equipmentConditions
+    )
+      ? exercise.equipmentConditions
+      : [];
+
+  return conditions.every(
+    (condition) =>
+      isEquipmentConditionAvailable(
+        condition,
+        inventory
       )
+  );
+}
+
+function isExerciseEquipmentAvailable(
+  exercise,
+  inventory
+) {
+  return (
+    resolveExerciseEquipment(
+      exercise,
+      inventory
+    ) !== null &&
+    areEquipmentConditionsAvailable(
+      exercise,
+      inventory
+    )
   );
 }
 
@@ -270,12 +552,17 @@ function isEquipmentAvailable(
    TRUDNOŚĆ
    ========================================= */
 
-function getDifficultyProfile(level) {
+function getDifficultyProfile(
+  level
+) {
   return (
     GENERATOR_CONFIG
-      .difficultyProfiles[level] ||
+      .difficultyProfiles[
+        level
+      ] ||
     GENERATOR_CONFIG
-      .difficultyProfiles.intermediate
+      .difficultyProfiles
+      .intermediate
   );
 }
 
@@ -383,21 +670,114 @@ function getDifficultyScore(
    PARTIE CIAŁA
    ========================================= */
 
+function getExerciseSelectableBodyParts(
+  exercise
+) {
+  const parts =
+    new Set();
+
+  if (
+    GENERATOR_CONFIG
+      .selectableBodyParts
+      .includes(
+        exercise.primaryBodyPart
+      )
+  ) {
+    parts.add(
+      exercise.primaryBodyPart
+    );
+  }
+
+  const strongSecondary =
+    Array.isArray(
+      exercise
+        .strongSecondaryBodyParts
+    )
+      ? exercise
+          .strongSecondaryBodyParts
+      : [];
+
+  strongSecondary.forEach(
+    (bodyPart) => {
+      if (
+        GENERATOR_CONFIG
+          .selectableBodyParts
+          .includes(
+            bodyPart
+          )
+      ) {
+        parts.add(
+          bodyPart
+        );
+      }
+    }
+  );
+
+  return [...parts];
+}
+
 function exerciseMatchesBodyParts(
   exercise,
   config
 ) {
   if (
-    config.body.includes("full")
+    config.body.includes(
+      "full"
+    )
   ) {
     return true;
   }
 
-  return exercise.bodyParts.some(
+  const selectableBodyParts =
+    getExerciseSelectableBodyParts(
+      exercise
+    );
+
+  return selectableBodyParts.some(
     (bodyPart) =>
       config.body.includes(
         bodyPart
       )
+  );
+}
+
+function getSelectionBodyPart(
+  exercise,
+  config
+) {
+  if (
+    config.body.includes(
+      "full"
+    )
+  ) {
+    return exercise.primaryBodyPart;
+  }
+
+  if (
+    config.body.includes(
+      exercise.primaryBodyPart
+    )
+  ) {
+    return exercise.primaryBodyPart;
+  }
+
+  const strongSecondary =
+    Array.isArray(
+      exercise
+        .strongSecondaryBodyParts
+    )
+      ? exercise
+          .strongSecondaryBodyParts
+      : [];
+
+  return (
+    strongSecondary.find(
+      (bodyPart) =>
+        config.body.includes(
+          bodyPart
+        )
+    ) ||
+    exercise.primaryBodyPart
   );
 }
 
@@ -406,7 +786,9 @@ function exerciseMatchesBodyParts(
    LICZBA ĆWICZEŃ
    ========================================= */
 
-function getTargetExerciseCount(time) {
+function getTargetExerciseCount(
+  time
+) {
   const minutes =
     Number(time);
 
@@ -439,39 +821,37 @@ function getTargetExerciseCount(time) {
    ========================================= */
 
 function getExerciseRole(
-  exercise,
-  index,
-  workoutLength
+  exercise
 ) {
-  if (
-    exercise.exerciseType === "compound" &&
-    exercise.sessionPriority >= 4 &&
-    index <= 2
-  ) {
-    return "main";
-  }
+  const role =
+    exercise.workoutRole;
 
   if (
-    exercise.exerciseType === "compound" ||
-    exercise.exerciseType === "accessory"
+    GENERATOR_CONFIG
+      .rolePriority[
+        role
+      ]
   ) {
-    return "secondary";
-  }
-
-  if (
-    exercise.exerciseType === "isolation" ||
-    exercise.exerciseType === "core"
-  ) {
-    return "accessory";
-  }
-
-  if (
-    index === workoutLength - 1
-  ) {
-    return "accessory";
+    return role;
   }
 
   return "secondary";
+}
+
+function getRoleScore(
+  exercise
+) {
+  const role =
+    getExerciseRole(
+      exercise
+    );
+
+  return (
+    GENERATOR_CONFIG
+      .rolePriority[
+        role
+      ] || 2
+  ) * 5;
 }
 
 
@@ -479,15 +859,21 @@ function getExerciseRole(
    SERIE
    ========================================= */
 
-function getSetRangeByLevel(level) {
-  if (level === "beginner") {
+function getSetRangeByLevel(
+  level
+) {
+  if (
+    level === "beginner"
+  ) {
     return {
       min: 1,
       max: 3
     };
   }
 
-  if (level === "advanced") {
+  if (
+    level === "advanced"
+  ) {
     return {
       min: 2,
       max: 5
@@ -500,41 +886,84 @@ function getSetRangeByLevel(level) {
   };
 }
 
+function getExerciseSetLimits(
+  exercise,
+  config
+) {
+  const levelRange =
+    getSetRangeByLevel(
+      config.level
+    );
+
+  const exerciseRange =
+    exercise.setRange || {
+      min: 1,
+      max: 5
+    };
+
+  const minimum =
+    Math.max(
+      levelRange.min,
+      exerciseRange.min
+    );
+
+  const maximum =
+    Math.min(
+      levelRange.max,
+      exerciseRange.max
+    );
+
+  return {
+    min:
+      Math.min(
+        minimum,
+        maximum
+      ),
+
+    max:
+      Math.max(
+        minimum,
+        maximum
+      )
+  };
+}
+
 function chooseSets(
   exercise,
   config,
   role
 ) {
-  const range =
-    getSetRangeByLevel(
-      config.level
+  const limits =
+    getExerciseSetLimits(
+      exercise,
+      config
     );
 
   let sets;
 
   if (role === "main") {
     sets =
-      config.level === "beginner"
+      config.level ===
+        "beginner"
         ? 2
-        : config.level === "advanced"
+        : config.level ===
+            "advanced"
           ? 4
           : 3;
   } else if (
     role === "secondary"
   ) {
     sets =
-      config.level === "beginner"
+      config.level ===
+        "beginner"
         ? 2
-        : config.level === "advanced"
-          ? 3
-          : 3;
+        : 3;
   } else {
     sets =
-      config.level === "beginner"
+      config.level ===
+        "beginner"
         ? 1
-        : config.level === "advanced"
-          ? 2
-          : 2;
+        : 2;
   }
 
   if (
@@ -546,7 +975,9 @@ function chooseSets(
   if (
     config.intensity === "hard"
   ) {
-    if (role === "main") {
+    if (
+      role === "main"
+    ) {
       sets += 1;
     }
 
@@ -565,9 +996,19 @@ function chooseSets(
     }
   }
 
+  /*
+    Przy dłuższych treningach
+    zwiększamy przede wszystkim objętość,
+    a nie bez końca liczbę ćwiczeń.
+  */
   if (
-    Number(config.time) >= 45 &&
-    role === "main" &&
+    Number(
+      config.time
+    ) >= 45 &&
+    (
+      role === "main" ||
+      role === "secondary"
+    ) &&
     Math.random() < 0.45
   ) {
     sets += 1;
@@ -586,8 +1027,8 @@ function chooseSets(
 
   return clamp(
     sets,
-    range.min,
-    range.max
+    limits.min,
+    limits.max
   );
 }
 
@@ -599,18 +1040,21 @@ function chooseSets(
 function createPrescription(
   exercise,
   config,
-  role
+  role,
+  forcedSets = null
 ) {
   const sets =
-    chooseSets(
-      exercise,
-      config,
-      role
-    );
+    forcedSets === null
+      ? chooseSets(
+          exercise,
+          config,
+          role
+        )
+      : forcedSets;
 
   if (exercise.timed) {
     const range =
-      exercise.timeRangeSeconds || {
+      exercise.timeRange || {
         min: 20,
         max: 45
       };
@@ -646,13 +1090,14 @@ function createPrescription(
     return {
       sets,
       seconds,
+
       display:
         `${sets} serie × ${seconds} sek.`
     };
   }
 
   const range =
-    exercise.repetitionRange || {
+    exercise.repRange || {
       min: 8,
       max: 12
     };
@@ -692,6 +1137,7 @@ function createPrescription(
     sets,
     minReps,
     maxReps,
+
     display:
       minReps === maxReps
         ? `${sets} serie × ${minReps}`
@@ -708,7 +1154,7 @@ function getRestRecommendation(
   exercise
 ) {
   const rest =
-    exercise.restSeconds || {
+    exercise.restRange || {
       min: 45,
       max: 75
     };
@@ -729,6 +1175,301 @@ function getRestRecommendation(
 
 
 /* =========================================
+   SZACOWANIE CZASU ĆWICZENIA
+   ========================================= */
+
+function estimateExerciseSeconds(
+  exercise,
+  prescription
+) {
+  const rest =
+    exercise.restRange || {
+      min: 45,
+      max: 75
+    };
+
+  const averageRest =
+    (
+      rest.min +
+      rest.max
+    ) / 2;
+
+  let workPerSet;
+
+  if (exercise.timed) {
+    workPerSet =
+      prescription.seconds ||
+      30;
+  } else {
+    const averageRepetitions =
+      (
+        prescription.minReps +
+        prescription.maxReps
+      ) / 2;
+
+    /*
+      Około 3 sekundy na jedno
+      kontrolowane powtórzenie.
+    */
+    workPerSet =
+      averageRepetitions * 3;
+  }
+
+  const workTime =
+    prescription.sets *
+    workPerSet;
+
+  const restTime =
+    Math.max(
+      0,
+      prescription.sets - 1
+    ) *
+    averageRest;
+
+  /*
+    Kilkanaście sekund na ustawienie
+    ciężaru / pozycji przed ćwiczeniem.
+  */
+  const setupTime = 20;
+
+  return Math.round(
+    workTime +
+    restTime +
+    setupTime
+  );
+}
+
+
+/* =========================================
+   DOPASOWANIE OBJĘTOŚCI DO CZASU
+   ========================================= */
+
+function calculateWorkoutCoreSeconds(
+  workout
+) {
+  return workout.reduce(
+    (
+      total,
+      exercise
+    ) =>
+      total +
+      (
+        exercise
+          .estimatedSeconds ||
+        0
+      ),
+    0
+  );
+}
+
+function getEstimatedTransitionSeconds(
+  workout
+) {
+  if (
+    workout.length <= 1
+  ) {
+    return 0;
+  }
+
+  /*
+    Naturalne przejście:
+    odłożenie ciężaru,
+    przeczytanie następnego ćwiczenia itd.
+  */
+  return (
+    workout.length - 1
+  ) * 20;
+}
+
+function getWorkoutEstimatedSeconds(
+  workout
+) {
+  return (
+    calculateWorkoutCoreSeconds(
+      workout
+    ) +
+    getEstimatedTransitionSeconds(
+      workout
+    )
+  );
+}
+
+function updateExercisePrescriptionSets(
+  workoutExercise,
+  newSets,
+  config
+) {
+  const role =
+    workoutExercise.role ||
+    getExerciseRole(
+      workoutExercise
+    );
+
+  const prescription =
+    createPrescription(
+      workoutExercise,
+      config,
+      role,
+      newSets
+    );
+
+  workoutExercise.sets =
+    prescription.sets;
+
+  workoutExercise.prescription =
+    prescription.display;
+
+  workoutExercise.prescriptionData =
+    prescription;
+
+  workoutExercise.estimatedSeconds =
+    estimateExerciseSeconds(
+      workoutExercise,
+      prescription
+    );
+}
+
+function getVolumeIncreasePriority(
+  workout
+) {
+  const roleWeight = {
+    main: 4,
+    secondary: 3,
+    accessory: 2,
+    finisher: 1
+  };
+
+  return [...workout].sort(
+    (a, b) => {
+      const roleDifference =
+        (
+          roleWeight[
+            b.role
+          ] || 0
+        ) -
+        (
+          roleWeight[
+            a.role
+          ] || 0
+        );
+
+      if (
+        roleDifference !== 0
+      ) {
+        return roleDifference;
+      }
+
+      return (
+        Number(
+          b.fatigue || 0
+        ) -
+        Number(
+          a.fatigue || 0
+        )
+      );
+    }
+  );
+}
+
+function fitWorkoutVolumeToTime(
+  workout,
+  config
+) {
+  if (
+    !Array.isArray(workout) ||
+    workout.length === 0
+  ) {
+    return workout;
+  }
+
+  const targetSeconds =
+    Number(
+      config.time
+    ) * 60;
+
+  /*
+    Trening może być ok. 5 minut
+    krótszy od deklarowanego czasu.
+  */
+  const minimumDesiredSeconds =
+    Math.max(
+      1,
+      targetSeconds - 300
+    );
+
+  /*
+    Nie chcemy na siłę dobijać
+    idealnie do jednej sekundy.
+  */
+  const candidates =
+    getVolumeIncreasePriority(
+      workout
+    );
+
+  let safetyCounter = 0;
+
+  while (
+    getWorkoutEstimatedSeconds(
+      workout
+    ) <
+      minimumDesiredSeconds &&
+    safetyCounter < 30
+  ) {
+    let increasedSomething =
+      false;
+
+    for (
+      const exercise of candidates
+    ) {
+      const limits =
+        getExerciseSetLimits(
+          exercise,
+          config
+        );
+
+      const currentSets =
+        Number(
+          exercise.sets
+        ) || limits.min;
+
+      if (
+        currentSets >=
+        limits.max
+      ) {
+        continue;
+      }
+
+      updateExercisePrescriptionSets(
+        exercise,
+        currentSets + 1,
+        config
+      );
+
+      increasedSomething =
+        true;
+
+      if (
+        getWorkoutEstimatedSeconds(
+          workout
+        ) >=
+          minimumDesiredSeconds
+      ) {
+        break;
+      }
+    }
+
+    if (!increasedSomething) {
+      break;
+    }
+
+    safetyCounter += 1;
+  }
+
+  return workout;
+}
+
+
+/* =========================================
    PRZERWA MIĘDZY ĆWICZENIAMI
    ========================================= */
 
@@ -745,22 +1486,16 @@ function createTransitionRest(
     };
   }
 
-  let fatigueScore = 0;
-
-  fatigueScore +=
-    exercise.difficulty;
+  let fatigueScore =
+    Number(
+      exercise.fatigue
+    ) || 1;
 
   if (
-    exercise.exerciseType ===
-    "compound"
+    exercise.workoutRole ===
+      "main"
   ) {
     fatigueScore += 2;
-  }
-
-  if (
-    exercise.sessionPriority >= 4
-  ) {
-    fatigueScore += 1;
   }
 
   if (
@@ -768,6 +1503,15 @@ function createTransitionRest(
     nextExercise.primaryBodyPart
   ) {
     fatigueScore += 2;
+  }
+
+  if (
+    exercise.selectionBodyPart &&
+    nextExercise.selectionBodyPart &&
+    exercise.selectionBodyPart ===
+      nextExercise.selectionBodyPart
+  ) {
+    fatigueScore += 1;
   }
 
   if (index >= 2) {
@@ -813,50 +1557,152 @@ function createTransitionRest(
 
 
 /* =========================================
-   SZACOWANIE CZASU
+   ZGODNOŚĆ Z OBECNYM app.js
    ========================================= */
 
-function estimateExerciseSeconds(
-  exercise,
-  prescription
+function getCompatibilityEquipment(
+  resolvedEquipment
 ) {
-  const setDuration =
-    exercise.estimatedSetSeconds ||
-    40;
+  const equipment = [];
 
-  const rest =
-    exercise.restSeconds || {
-      min: 45,
-      max: 75
-    };
+  resolvedEquipment.forEach(
+    (item) => {
+      let type =
+        item.type;
 
-  const averageRest =
-    (
-      rest.min +
-      rest.max
-    ) / 2;
+      if (
+        type ===
+          "resistance-band" ||
+        type ===
+          "mini-band"
+      ) {
+        type =
+          "bands";
+      }
 
-  const workTime =
-    prescription.sets *
-    setDuration;
+      if (
+        type ===
+        "pull-up-bar"
+      ) {
+        type =
+          "pullup-bar";
+      }
 
-  const restTime =
-    Math.max(
-      0,
-      prescription.sets - 1
-    ) *
-    averageRest;
-
-  return (
-    workTime +
-    restTime
+      if (
+        !equipment.includes(
+          type
+        )
+      ) {
+        equipment.push(
+          type
+        );
+      }
+    }
   );
+
+  return equipment;
+}
+
+function getCompatibilityBodyParts(
+  exercise
+) {
+  return (
+    getExerciseSelectableBodyParts(
+      exercise
+    )
+  );
+}
+
+function createCompatibleExercise(
+  exercise,
+  config,
+  inventory
+) {
+  const resolvedEquipment =
+    resolveExerciseEquipment(
+      exercise,
+      inventory
+    ) || [];
+
+  return {
+    ...exercise,
+
+    selectionBodyPart:
+      getSelectionBodyPart(
+        exercise,
+        config
+      ),
+
+    resolvedEquipment:
+      resolvedEquipment.map(
+        (item) => ({
+          ...item
+        })
+      ),
+
+    equipment:
+      getCompatibilityEquipment(
+        resolvedEquipment
+      ),
+
+    bodyParts:
+      getCompatibilityBodyParts(
+        exercise
+      )
+  };
 }
 
 
 /* =========================================
    PUNKTACJA ĆWICZENIA
    ========================================= */
+
+function getSharedMovementTagCount(
+  exercise,
+  selectedExercises
+) {
+  const tags =
+    Array.isArray(
+      exercise.movementTags
+    )
+      ? exercise.movementTags
+      : [];
+
+  if (
+    tags.length === 0
+  ) {
+    return 0;
+  }
+
+  let sharedCount = 0;
+
+  selectedExercises.forEach(
+    (selectedExercise) => {
+      const selectedTags =
+        Array.isArray(
+          selectedExercise
+            .movementTags
+        )
+          ? selectedExercise
+              .movementTags
+          : [];
+
+      const hasSharedTag =
+        tags.some(
+          (tag) =>
+            selectedTags.includes(
+              tag
+            )
+        );
+
+      if (hasSharedTag) {
+        sharedCount += 1;
+      }
+    }
+  );
+
+  return sharedCount;
+}
 
 function scoreExercise(
   exercise,
@@ -875,27 +1721,74 @@ function scoreExercise(
     );
 
   score +=
-    exercise.sessionPriority * 3;
+    getRoleScore(
+      exercise
+    );
+
+  const selectionBodyPart =
+    exercise.selectionBodyPart ||
+    exercise.primaryBodyPart;
 
   const bodyCount =
     bodyPartCounts[
-      exercise.primaryBodyPart
+      selectionBodyPart
     ] || 0;
 
   score -=
     bodyCount * 18;
 
+  /*
+    Bardzo mocna kara za dokładnie
+    ten sam wzorzec ruchu.
+  */
   const sameMovementCount =
     selectedExercises.filter(
       (selectedExercise) =>
-        selectedExercise.movementType ===
-        exercise.movementType
+        selectedExercise
+          .movementPattern ===
+        exercise.movementPattern
     ).length;
 
   score -=
-    sameMovementCount * 25;
+    sameMovementCount * 55;
 
-  exercise.equipment.forEach(
+  /*
+    Jeśli już mamy dwa ćwiczenia
+    o identycznym wzorcu ruchu,
+    trzecie jest mocno niepożądane.
+  */
+  if (
+    sameMovementCount >= 2
+  ) {
+    score -= 80;
+  }
+
+  /*
+    Dodatkowo ograniczamy bardzo podobne
+    warianty opisane tymi samymi tagami.
+  */
+  const sharedMovementTags =
+    getSharedMovementTagCount(
+      exercise,
+      selectedExercises
+    );
+
+  score -=
+    sharedMovementTags * 12;
+
+  const equipmentTypes =
+    Array.isArray(
+      exercise.resolvedEquipment
+    )
+      ? exercise
+          .resolvedEquipment
+          .map(
+            (item) =>
+              item.type
+          )
+      : [];
+
+  equipmentTypes.forEach(
     (equipmentItem) => {
       const equipmentCount =
         equipmentCounts[
@@ -907,10 +1800,26 @@ function scoreExercise(
     }
   );
 
-  /*
-    Dopiero po podstawowej ocenie dokładamy
-    historię i preferencje użytkownika.
-  */
+  if (
+    config.intensity === "light"
+  ) {
+    score -=
+      Math.max(
+        0,
+        exercise.fatigue - 2
+      ) * 5;
+  }
+
+  if (
+    config.intensity === "hard"
+  ) {
+    score +=
+      Math.max(
+        0,
+        exercise.fatigue - 2
+      ) * 3;
+  }
+
   score =
     applyMemoryInfluence(
       score,
@@ -944,7 +1853,9 @@ function chooseCandidate(
     pool.filter(
       (exercise) =>
         !selectedExercises.some(
-          (selectedExercise) =>
+          (
+            selectedExercise
+          ) =>
             selectedExercise.id ===
             exercise.id
         )
@@ -1008,17 +1919,18 @@ function getFullBodyPriorityPool(
 ) {
   const majorGroups = [
     "legs",
-    "back",
-    "chest",
     "glutes",
+    "chest",
+    "back",
     "shoulders",
-    "abs",
-    "arms"
+    "arms",
+    "abs"
   ];
 
   const usedGroups =
     selectedExercises.map(
       (exercise) =>
+        exercise.selectionBodyPart ||
         exercise.primaryBodyPart
     );
 
@@ -1056,35 +1968,40 @@ function getFullBodyPriorityPool(
    KOLEJNOŚĆ TRENINGU
    ========================================= */
 
-function orderWorkout(workout) {
+function orderWorkout(
+  workout
+) {
   const remaining =
     [...workout].sort(
       (a, b) => {
-        if (
-          b.sessionPriority !==
-          a.sessionPriority
-        ) {
-          return (
-            b.sessionPriority -
-            a.sessionPriority
+        const roleDifference =
+          (
+            GENERATOR_CONFIG
+              .rolePriority[
+                b.workoutRole
+              ] || 0
+          ) -
+          (
+            GENERATOR_CONFIG
+              .rolePriority[
+                a.workoutRole
+              ] || 0
           );
-        }
 
         if (
-          a.exerciseType === "compound" &&
-          b.exerciseType !== "compound"
+          roleDifference !== 0
         ) {
-          return -1;
+          return roleDifference;
         }
 
-        if (
-          b.exerciseType === "compound" &&
-          a.exerciseType !== "compound"
-        ) {
-          return 1;
-        }
-
-        return 0;
+        return (
+          Number(
+            b.fatigue || 0
+          ) -
+          Number(
+            a.fatigue || 0
+          )
+        );
       }
     );
 
@@ -1104,10 +2021,16 @@ function orderWorkout(workout) {
       let betterIndex =
         remaining.findIndex(
           (exercise) =>
-            exercise.primaryBodyPart !==
-              previous.primaryBodyPart &&
-            exercise.movementType !==
-              previous.movementType
+            (
+              exercise.selectionBodyPart ||
+              exercise.primaryBodyPart
+            ) !==
+              (
+                previous.selectionBodyPart ||
+                previous.primaryBodyPart
+              ) &&
+            exercise.movementPattern !==
+              previous.movementPattern
         );
 
       if (
@@ -1116,8 +2039,27 @@ function orderWorkout(workout) {
         betterIndex =
           remaining.findIndex(
             (exercise) =>
-              exercise.primaryBodyPart !==
-              previous.primaryBodyPart
+              exercise
+                .movementPattern !==
+              previous
+                .movementPattern
+          );
+      }
+
+      if (
+        betterIndex === -1
+      ) {
+        betterIndex =
+          remaining.findIndex(
+            (exercise) =>
+              (
+                exercise.selectionBodyPart ||
+                exercise.primaryBodyPart
+              ) !==
+                (
+                  previous.selectionBodyPart ||
+                  previous.primaryBodyPart
+                )
           );
       }
 
@@ -1148,10 +2090,26 @@ function orderWorkout(workout) {
    GENEROWANIE
    ========================================= */
 
-function generateWorkout(config) {
+function generateWorkout(
+  config
+) {
+  const database =
+    getExerciseDatabase();
+
+  if (
+    database.length === 0
+  ) {
+    return [];
+  }
+
   const memory =
     getGeneratorMemory(
       config
+    );
+
+  const inventory =
+    createEquipmentInventory(
+      config.equipment
     );
 
   const targetExerciseCount =
@@ -1159,31 +2117,45 @@ function generateWorkout(config) {
       getTargetExerciseCount(
         config.time
       ),
-      GENERATOR_CONFIG.maxExercises
+      GENERATOR_CONFIG
+        .maxExercises
     );
 
   let pool =
-    window.EXERCISES.filter(
-      (exercise) =>
-        isEquipmentAvailable(
-          exercise,
-          config.equipment
-        ) &&
-        isDifficultyAllowed(
-          exercise,
-          config
-        ) &&
-        exerciseMatchesBodyParts(
-          exercise,
-          config
-        )
-    );
+    database
+      .filter(
+        (exercise) =>
+          isExerciseEquipmentAvailable(
+            exercise,
+            inventory
+          ) &&
+          isDifficultyAllowed(
+            exercise,
+            config
+          ) &&
+          exerciseMatchesBodyParts(
+            exercise,
+            config
+          )
+      )
+      .map(
+        (exercise) =>
+          createCompatibleExercise(
+            exercise,
+            config,
+            inventory
+          )
+      );
 
   pool =
-    shuffle(pool);
+    shuffle(
+      pool
+    );
 
   const selected = [];
+
   const bodyPartCounts = {};
+
   const equipmentCounts = {};
 
   while (
@@ -1225,27 +2197,33 @@ function generateWorkout(config) {
       candidate
     );
 
+    const selectionBodyPart =
+      candidate.selectionBodyPart ||
+      candidate.primaryBodyPart;
+
     bodyPartCounts[
-      candidate.primaryBodyPart
+      selectionBodyPart
     ] =
       (
         bodyPartCounts[
-          candidate.primaryBodyPart
+          selectionBodyPart
         ] || 0
       ) + 1;
 
-    candidate.equipment.forEach(
-      (equipmentItem) => {
-        equipmentCounts[
-          equipmentItem
-        ] =
-          (
-            equipmentCounts[
-              equipmentItem
-            ] || 0
-          ) + 1;
-      }
-    );
+    candidate
+      .resolvedEquipment
+      .forEach(
+        (equipmentItem) => {
+          equipmentCounts[
+            equipmentItem.type
+          ] =
+            (
+              equipmentCounts[
+                equipmentItem.type
+              ] || 0
+            ) + 1;
+        }
+      );
   }
 
   const ordered =
@@ -1253,14 +2231,12 @@ function generateWorkout(config) {
       selected
     );
 
-  const workout =
+  let workout =
     ordered.map(
-      (exercise, index) => {
+      (exercise) => {
         const role =
           getExerciseRole(
-            exercise,
-            index,
-            ordered.length
+            exercise
           );
 
         const prescription =
@@ -1283,6 +2259,9 @@ function generateWorkout(config) {
           prescription:
             prescription.display,
 
+          prescriptionData:
+            prescription,
+
           sets:
             prescription.sets,
 
@@ -1295,6 +2274,18 @@ function generateWorkout(config) {
             )
         };
       }
+    );
+
+  /*
+    Jeżeli trening wychodzi wyraźnie
+    krótszy niż czas wybrany przez użytkownika,
+    najpierw zwiększamy liczbę serii
+    w rozsądnych granicach.
+  */
+  workout =
+    fitWorkoutVolumeToTime(
+      workout,
+      config
     );
 
   return workout.map(
@@ -1328,9 +2319,17 @@ function findReplacement(
   currentWorkout,
   config
 ) {
+  const database =
+    getExerciseDatabase();
+
   const memory =
     getGeneratorMemory(
       config
+    );
+
+  const inventory =
+    createEquipmentInventory(
+      config.equipment
     );
 
   const usedIds =
@@ -1339,54 +2338,79 @@ function findReplacement(
         exercise.id
     );
 
+  const targetBodyPart =
+    currentExercise
+      .selectionBodyPart ||
+    currentExercise
+      .primaryBodyPart;
+
   const candidates =
-    window.EXERCISES.filter(
-      (exercise) => {
-        if (
-          usedIds.includes(
-            exercise.id
-          )
-        ) {
-          return false;
-        }
+    database
+      .filter(
+        (exercise) => {
+          if (
+            usedIds.includes(
+              exercise.id
+            )
+          ) {
+            return false;
+          }
 
-        if (
-          exercise.primaryBodyPart !==
-          currentExercise.primaryBodyPart
-        ) {
-          return false;
-        }
+          if (
+            !getExerciseSelectableBodyParts(
+              exercise
+            ).includes(
+              targetBodyPart
+            )
+          ) {
+            return false;
+          }
 
-        if (
-          Math.abs(
-            exercise.difficulty -
-            currentExercise.difficulty
-          ) > 1
-        ) {
-          return false;
-        }
+          if (
+            Math.abs(
+              exercise.difficulty -
+              currentExercise.difficulty
+            ) > 1
+          ) {
+            return false;
+          }
 
-        if (
-          !isDifficultyAllowed(
-            exercise,
-            config
-          )
-        ) {
-          return false;
-        }
+          if (
+            !isDifficultyAllowed(
+              exercise,
+              config
+            )
+          ) {
+            return false;
+          }
 
-        if (
-          !isEquipmentAvailable(
-            exercise,
-            config.equipment
-          )
-        ) {
-          return false;
-        }
+          if (
+            !isExerciseEquipmentAvailable(
+              exercise,
+              inventory
+            )
+          ) {
+            return false;
+          }
 
-        return true;
-      }
-    );
+          return true;
+        }
+      )
+      .map(
+        (exercise) => {
+          const compatible =
+            createCompatibleExercise(
+              exercise,
+              config,
+              inventory
+            );
+
+          compatible.selectionBodyPart =
+            targetBodyPart;
+
+          return compatible;
+        }
+      );
 
   if (
     candidates.length === 0
@@ -1397,8 +2421,9 @@ function findReplacement(
   const differentMovement =
     candidates.filter(
       (exercise) =>
-        exercise.movementType !==
-        currentExercise.movementType
+        exercise.movementPattern !==
+        currentExercise
+          .movementPattern
     );
 
   const finalPool =
@@ -1415,13 +2440,16 @@ function findReplacement(
             exercise,
             config
           ) +
-          exercise.sessionPriority * 3;
+          getRoleScore(
+            exercise
+          );
 
         if (
-          exercise.movementType !==
-          currentExercise.movementType
+          exercise.movementPattern !==
+          currentExercise
+            .movementPattern
         ) {
-          score += 12;
+          score += 18;
         }
 
         score =
@@ -1468,13 +2496,37 @@ function findReplacement(
 
   const role =
     currentExercise.role ||
-    "secondary";
+    getExerciseRole(
+      replacement
+    );
+
+  /*
+    Przy zastąpieniu zachowujemy
+    mniej więcej objętość starego ćwiczenia,
+    o ile nowy rekord na to pozwala.
+  */
+  const replacementLimits =
+    getExerciseSetLimits(
+      replacement,
+      config
+    );
+
+  const preferredSets =
+    clamp(
+      Number(
+        currentExercise.sets
+      ) ||
+        replacementLimits.min,
+      replacementLimits.min,
+      replacementLimits.max
+    );
 
   const prescription =
     createPrescription(
       replacement,
       config,
-      role
+      role,
+      preferredSets
     );
 
   const rest =
@@ -1490,6 +2542,9 @@ function findReplacement(
     prescription:
       prescription.display,
 
+    prescriptionData:
+      prescription,
+
     sets:
       prescription.sets,
 
@@ -1502,11 +2557,12 @@ function findReplacement(
       ),
 
     transitionRest:
-      currentExercise.transitionRest || {
-        show: false,
-        min: 0,
-        max: 0
-      }
+      currentExercise
+        .transitionRest || {
+          show: false,
+          min: 0,
+          max: 0
+        }
   };
 }
 
