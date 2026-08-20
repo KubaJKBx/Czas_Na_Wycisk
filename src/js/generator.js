@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    GENERATOR TRENINGU
-   v0.08.1
+   v0.10.3
 
    Nowości:
    - modularna baza window.ExercisesDatabase,
@@ -13,7 +13,7 @@
    - ❤️ / 👎 i historia ostatnich treningów,
    - mocniejsza różnorodność ruchów,
    - dopasowanie objętości do wybranego czasu,
-   - zgodność przejściowa z obecnym app.js.
+   - dokładna obsługa ilości i możliwości sprzętu.
    ========================================= */
 
 const GENERATOR_CONFIG = {
@@ -269,16 +269,30 @@ function applyMemoryInfluence(
 
 
 /* =========================================
-   SPRZĘT — MOST DO OBECNEGO UI
+   SPRZĘT — DOKŁADNY PROFIL UŻYTKOWNIKA
    ========================================= */
 
 function createEquipmentInventory(
-  selectedEquipment
+  config
 ) {
   const selected =
-    Array.isArray(selectedEquipment)
-      ? selectedEquipment
+    Array.isArray(
+      config?.equipment
+    )
+      ? config.equipment
       : [];
+
+  const details =
+    config?.equipmentDetails &&
+    typeof config.equipmentDetails ===
+      "object"
+      ? config.equipmentDetails
+      : {};
+
+  const hasDetailedEquipmentConfig =
+    Boolean(
+      config?.equipmentDetails
+    );
 
   const inventory = {
     bodyweight: 0,
@@ -288,7 +302,25 @@ function createEquipmentInventory(
     "mini-band": 0,
     "pull-up-bar": 0,
     barbell: 0,
-    bench: 0
+    bench: 0,
+
+    bandAnchors:
+      Array.isArray(
+        details.bandAnchors
+      )
+        ? [
+            ...details.bandAnchors
+          ]
+        : [],
+
+    pullUpBarTypes:
+      Array.isArray(
+        details.pullUpBarTypes
+      )
+        ? [
+            ...details.pullUpBarTypes
+          ]
+        : []
   };
 
   if (
@@ -304,7 +336,18 @@ function createEquipmentInventory(
       "dumbbells"
     )
   ) {
-    inventory.dumbbells = 2;
+    const quantity =
+      Number(
+        details.dumbbellsQuantity
+      );
+
+    inventory.dumbbells =
+      Number.isFinite(quantity) &&
+      quantity > 0
+        ? quantity
+        : hasDetailedEquipmentConfig
+          ? 1
+          : 2;
   }
 
   if (
@@ -312,17 +355,31 @@ function createEquipmentInventory(
       "kettlebell"
     )
   ) {
-    inventory.kettlebell = 2;
+    const quantity =
+      Number(
+        details.kettlebellQuantity
+      );
+
+    inventory.kettlebell =
+      Number.isFinite(quantity) &&
+      quantity > 0
+        ? quantity
+        : hasDetailedEquipmentConfig
+          ? 1
+          : 2;
   }
 
   /*
-    Tymczasowo stary przycisk "Gumy"
-    oznacza dostęp zarówno do długiej gumy,
-    jak i mini bandu.
+    Nowy konfigurator używa osobnych
+    wartości resistance-band i mini-band.
 
-    Zmienimy to po przebudowie konfiguratora.
+    "bands" zostawiamy wyłącznie jako
+    zgodność wsteczną ze starszą wersją.
   */
   if (
+    selected.includes(
+      "resistance-band"
+    ) ||
     selected.includes(
       "bands"
     )
@@ -330,13 +387,25 @@ function createEquipmentInventory(
     inventory[
       "resistance-band"
     ] = 1;
+  }
 
+  if (
+    selected.includes(
+      "mini-band"
+    ) ||
+    selected.includes(
+      "bands"
+    )
+  ) {
     inventory[
       "mini-band"
     ] = 1;
   }
 
   if (
+    selected.includes(
+      "pull-up-bar"
+    ) ||
     selected.includes(
       "pullup-bar"
     )
@@ -346,8 +415,25 @@ function createEquipmentInventory(
     ] = 1;
   }
 
+  if (
+    selected.includes(
+      "barbell"
+    )
+  ) {
+    inventory.barbell = 1;
+  }
+
+  if (
+    selected.includes(
+      "bench"
+    )
+  ) {
+    inventory.bench = 1;
+  }
+
   return inventory;
 }
+
 
 function isEquipmentItemAvailable(
   item,
@@ -378,6 +464,7 @@ function isEquipmentItemAvailable(
   );
 }
 
+
 function isEquipmentSetAvailable(
   equipmentSet,
   inventory
@@ -398,6 +485,7 @@ function isEquipmentSetAvailable(
       )
   );
 }
+
 
 function resolveExerciseEquipment(
   exercise,
@@ -442,6 +530,7 @@ function resolveExerciseEquipment(
   return null;
 }
 
+
 function isEquipmentConditionAvailable(
   condition,
   inventory
@@ -451,26 +540,49 @@ function isEquipmentConditionAvailable(
   }
 
   if (
-    condition === "anchor-low" ||
-    condition === "anchor-mid" ||
-    condition === "anchor-high" ||
-    condition === "anchor-any"
+    condition ===
+    "anchor-any"
   ) {
     return (
       inventory[
         "resistance-band"
-      ] >= 1
+      ] >= 1 &&
+      inventory.bandAnchors.length >
+        0
     );
   }
 
   if (
-    condition === "bar-high" ||
-    condition === "bar-low"
+    condition ===
+      "anchor-low" ||
+    condition ===
+      "anchor-mid" ||
+    condition ===
+      "anchor-high"
+  ) {
+    return (
+      inventory[
+        "resistance-band"
+      ] >= 1 &&
+      inventory.bandAnchors.includes(
+        condition
+      )
+    );
+  }
+
+  if (
+    condition ===
+      "bar-high" ||
+    condition ===
+      "bar-low"
   ) {
     return (
       inventory[
         "pull-up-bar"
-      ] >= 1
+      ] >= 1 &&
+      inventory.pullUpBarTypes.includes(
+        condition
+      )
     );
   }
 
@@ -484,11 +596,8 @@ function isEquipmentConditionAvailable(
   }
 
   /*
-    Na razie traktujemy rzeczy domowe
-    jako dostępne.
-
-    Docelowo dostaną swoje opcje
-    w konfiguratorze.
+    To nie są osobne elementy wyposażenia
+    w obecnym konfiguratorze.
   */
   const temporaryHouseholdConditions = [
     "stable-elevated-surface",
@@ -511,6 +620,7 @@ function isEquipmentConditionAvailable(
   return false;
 }
 
+
 function areEquipmentConditionsAvailable(
   exercise,
   inventory
@@ -531,6 +641,7 @@ function areEquipmentConditionsAvailable(
   );
 }
 
+
 function isExerciseEquipmentAvailable(
   exercise,
   inventory
@@ -546,8 +657,6 @@ function isExerciseEquipmentAvailable(
     )
   );
 }
-
-
 /* =========================================
    TRUDNOŚĆ
    ========================================= */
@@ -566,6 +675,7 @@ function getDifficultyProfile(
   );
 }
 
+
 function isDifficultyAllowed(
   exercise,
   config
@@ -579,6 +689,7 @@ function isDifficultyAllowed(
     exercise.difficulty
   );
 }
+
 
 function getDifficultyScore(
   exercise,
@@ -716,6 +827,7 @@ function getExerciseSelectableBodyParts(
   return [...parts];
 }
 
+
 function exerciseMatchesBodyParts(
   exercise,
   config
@@ -740,6 +852,7 @@ function exerciseMatchesBodyParts(
       )
   );
 }
+
 
 function getSelectionBodyPart(
   exercise,
@@ -838,6 +951,7 @@ function getExerciseRole(
   return "secondary";
 }
 
+
 function getRoleScore(
   exercise
 ) {
@@ -886,6 +1000,7 @@ function getSetRangeByLevel(
   };
 }
 
+
 function getExerciseSetLimits(
   exercise,
   config
@@ -927,6 +1042,7 @@ function getExerciseSetLimits(
       )
   };
 }
+
 
 function chooseSets(
   exercise,
@@ -1262,6 +1378,7 @@ function calculateWorkoutCoreSeconds(
   );
 }
 
+
 function getEstimatedTransitionSeconds(
   workout
 ) {
@@ -1281,6 +1398,7 @@ function getEstimatedTransitionSeconds(
   ) * 20;
 }
 
+
 function getWorkoutEstimatedSeconds(
   workout
 ) {
@@ -1293,6 +1411,7 @@ function getWorkoutEstimatedSeconds(
     )
   );
 }
+
 
 function updateExercisePrescriptionSets(
   workoutExercise,
@@ -1328,6 +1447,7 @@ function updateExercisePrescriptionSets(
       prescription
     );
 }
+
 
 function getVolumeIncreasePriority(
   workout
@@ -1371,6 +1491,7 @@ function getVolumeIncreasePriority(
   );
 }
 
+
 function fitWorkoutVolumeToTime(
   workout,
   config
@@ -1397,10 +1518,6 @@ function fitWorkoutVolumeToTime(
       targetSeconds - 300
     );
 
-  /*
-    Nie chcemy na siłę dobijać
-    idealnie do jednej sekundy.
-  */
   const candidates =
     getVolumeIncreasePriority(
       workout
@@ -1467,8 +1584,6 @@ function fitWorkoutVolumeToTime(
 
   return workout;
 }
-
-
 /* =========================================
    PRZERWA MIĘDZY ĆWICZENIAMI
    ========================================= */
@@ -1557,7 +1672,7 @@ function createTransitionRest(
 
 
 /* =========================================
-   ZGODNOŚĆ Z OBECNYM app.js
+   SPRZĘT DO WYŚWIETLENIA W app.js
    ========================================= */
 
 function getCompatibilityEquipment(
@@ -1567,28 +1682,11 @@ function getCompatibilityEquipment(
 
   resolvedEquipment.forEach(
     (item) => {
-      let type =
+      const type =
         item.type;
 
       if (
-        type ===
-          "resistance-band" ||
-        type ===
-          "mini-band"
-      ) {
-        type =
-          "bands";
-      }
-
-      if (
-        type ===
-        "pull-up-bar"
-      ) {
-        type =
-          "pullup-bar";
-      }
-
-      if (
+        type &&
         !equipment.includes(
           type
         )
@@ -1603,6 +1701,7 @@ function getCompatibilityEquipment(
   return equipment;
 }
 
+
 function getCompatibilityBodyParts(
   exercise
 ) {
@@ -1612,6 +1711,7 @@ function getCompatibilityBodyParts(
     )
   );
 }
+
 
 function createCompatibleExercise(
   exercise,
@@ -1703,6 +1803,7 @@ function getSharedMovementTagCount(
 
   return sharedCount;
 }
+
 
 function scoreExercise(
   exercise,
@@ -2084,8 +2185,6 @@ function orderWorkout(
 
   return ordered;
 }
-
-
 /* =========================================
    GENEROWANIE
    ========================================= */
@@ -2109,7 +2208,7 @@ function generateWorkout(
 
   const inventory =
     createEquipmentInventory(
-      config.equipment
+      config
     );
 
   const targetExerciseCount =
@@ -2329,7 +2428,7 @@ function findReplacement(
 
   const inventory =
     createEquipmentInventory(
-      config.equipment
+      config
     );
 
   const usedIds =

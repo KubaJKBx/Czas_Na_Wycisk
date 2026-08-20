@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -11,7 +12,7 @@
 
   <title>K&K — Czas na Wycisk!</title>
 
-  <link
+  <script type="text/javascript" nonce="fe6a92668fc447c0a1817017173" src="//local.adguard.org?ts=1787237616865&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_0000000056f881f4bbdf53eda95da1af%26ts%3D496455%26p%3Dfs%26cid%3D1%26sig%3D48c731ff2bd09b26a4de41a8de14629bd056d3fc62e0d9df0b6e0d914fb5926d%26v%3D0&amp;app=brave.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="fe6a92668fc447c0a1817017173" src="//local.adguard.org?ts=1787237616865&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link
     rel="stylesheet"
     href="src/css/style.css"
   >
@@ -571,60 +572,239 @@
         </h2>
 
         <p class="section-description">
-          Możesz wybrać kilka opcji.
+          Wybierz sprzęt. Dodatkowe opcje pokażą się tylko tam, gdzie są potrzebne.
         </p>
 
-        <div class="option-grid">
+        <div class="equipment-grid">
 
-          <button
-            class="option"
-            type="button"
-            data-group="equipment"
-            data-value="bodyweight"
-          >
-            Masa własnego ciała
-          </button>
+          <div class="equipment-item" data-equipment-item="bodyweight">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="bodyweight"
+            >
+              Masa własnego ciała
+            </button>
+          </div>
 
-          <button
-            class="option"
-            type="button"
-            data-group="equipment"
-            data-value="dumbbells"
-          >
-            Hantle
-          </button>
+          <div class="equipment-item" data-equipment-item="dumbbells">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="dumbbells"
+              aria-expanded="false"
+              aria-controls="equipmentDetailsDumbbells"
+            >
+              Hantle
+            </button>
 
-          <button
-            class="option"
-            type="button"
-            data-group="equipment"
-            data-value="kettlebell"
-          >
-            Kettlebell
-          </button>
+            <div
+              class="equipment-details is-hidden"
+              id="equipmentDetailsDumbbells"
+              data-equipment-details="dumbbells"
+            >
+              <p class="equipment-details-label">
+                Ile hantli masz do dyspozycji?
+              </p>
 
-          <button
-            class="option"
-            type="button"
-            data-group="equipment"
-            data-value="bands"
-          >
-            Gumy
-          </button>
+              <div class="equipment-detail-options">
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="dumbbells-quantity"
+                  data-value="1"
+                >
+                  1 hantel
+                </button>
 
-          <button
-            class="option"
-            type="button"
-            data-group="equipment"
-            data-value="pullup-bar"
-          >
-            Drążek
-          </button>
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="dumbbells-quantity"
+                  data-value="2"
+                >
+                  2 hantle
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="equipment-item" data-equipment-item="kettlebell">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="kettlebell"
+              aria-expanded="false"
+              aria-controls="equipmentDetailsKettlebell"
+            >
+              Kettlebell
+            </button>
+
+            <div
+              class="equipment-details is-hidden"
+              id="equipmentDetailsKettlebell"
+              data-equipment-details="kettlebell"
+            >
+              <p class="equipment-details-label">
+                Ile kettlebelli masz do dyspozycji?
+              </p>
+
+              <div class="equipment-detail-options">
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="kettlebell-quantity"
+                  data-value="1"
+                >
+                  1 kettlebell
+                </button>
+
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="kettlebell-quantity"
+                  data-value="2"
+                >
+                  2 kettlebelle
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="equipment-item" data-equipment-item="resistance-band">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="resistance-band"
+              aria-expanded="false"
+              aria-controls="equipmentDetailsResistanceBand"
+            >
+              Długa guma
+            </button>
+
+            <div
+              class="equipment-details is-hidden"
+              id="equipmentDetailsResistanceBand"
+              data-equipment-details="resistance-band"
+            >
+              <p class="equipment-details-label">
+                Gdzie możesz bezpiecznie zamocować gumę?
+              </p>
+
+              <div class="equipment-detail-options">
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="band-anchor"
+                  data-value="anchor-low"
+                >
+                  Nisko
+                </button>
+
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="band-anchor"
+                  data-value="anchor-mid"
+                >
+                  Na środku
+                </button>
+
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="band-anchor"
+                  data-value="anchor-high"
+                >
+                  Wysoko
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="equipment-item" data-equipment-item="mini-band">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="mini-band"
+            >
+              Mini band
+            </button>
+          </div>
+
+          <div class="equipment-item" data-equipment-item="pull-up-bar">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="pull-up-bar"
+              aria-expanded="false"
+              aria-controls="equipmentDetailsPullUpBar"
+            >
+              Drążek
+            </button>
+
+            <div
+              class="equipment-details is-hidden"
+              id="equipmentDetailsPullUpBar"
+              data-equipment-details="pull-up-bar"
+            >
+              <p class="equipment-details-label">
+                Jak możesz korzystać z drążka?
+              </p>
+
+              <div class="equipment-detail-options">
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="pull-up-bar-type"
+                  data-value="bar-high"
+                >
+                  Wysoki
+                </button>
+
+                <button
+                  class="equipment-detail-option"
+                  type="button"
+                  data-equipment-setting="pull-up-bar-type"
+                  data-value="bar-low"
+                >
+                  Niski
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="equipment-item" data-equipment-item="barbell">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="barbell"
+            >
+              Sztanga
+            </button>
+          </div>
+
+          <div class="equipment-item" data-equipment-item="bench">
+            <button
+              class="option equipment-main-option"
+              type="button"
+              data-group="equipment"
+              data-value="bench"
+            >
+              Ławka
+            </button>
+          </div>
 
         </div>
 
       </section>
-
 
 
       <div class="configurator-actions">

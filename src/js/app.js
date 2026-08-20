@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    APLIKACJA
-   v0.07.3
+   v0.10.1
    ========================================= */
 
 /* EKRANY */
@@ -32,6 +32,7 @@ const historyEmpty = document.querySelector("#historyEmpty");
 /* START / KONFIGURATOR */
 const profileButtons = document.querySelectorAll(".profile-card");
 const optionButtons = document.querySelectorAll(".option");
+const equipmentDetailButtons = document.querySelectorAll(".equipment-detail-option");
 const backToWelcomeButton = document.querySelector("#backToWelcome");
 const backToConfiguratorButton = document.querySelector("#backToConfigurator");
 const generateWorkoutButton = document.querySelector("#generateWorkout");
@@ -98,7 +99,14 @@ const workoutConfig = {
   body: [],
   level: null,
   intensity: null,
-  equipment: []
+  equipment: [],
+
+  equipmentDetails: {
+    dumbbellsQuantity: null,
+    kettlebellQuantity: null,
+    bandAnchors: [],
+    pullUpBarTypes: []
+  }
 };
 
 let currentWorkout = [];
@@ -197,9 +205,8 @@ optionButtons.forEach((button) => {
       }
 
       if (group === "equipment") {
-        handleMultipleSelection(
+        handleEquipmentSelection(
           button,
-          group,
           value
         );
 
@@ -263,6 +270,344 @@ function handleMultipleSelection(
     );
 
   clearFormMessage();
+}
+
+
+/* =========================================
+   SPRZĘT — GŁÓWNY WYBÓR
+   ========================================= */
+
+function handleEquipmentSelection(
+  button,
+  value
+) {
+  button.classList.toggle(
+    "is-selected"
+  );
+
+  const isSelected =
+    button.classList.contains(
+      "is-selected"
+    );
+
+  const detailsPanel =
+    document.querySelector(
+      `[data-equipment-details="${value}"]`
+    );
+
+  if (detailsPanel) {
+    detailsPanel.classList.toggle(
+      "is-hidden",
+      !isSelected
+    );
+
+    button.setAttribute(
+      "aria-expanded",
+      String(isSelected)
+    );
+  }
+
+  if (!isSelected) {
+    clearEquipmentDetailsFor(
+      value
+    );
+  }
+
+  syncEquipmentSelectionFromDom();
+
+  clearFormMessage();
+}
+
+
+/* =========================================
+   SPRZĘT — OPCJE SZCZEGÓŁOWE
+   ========================================= */
+
+equipmentDetailButtons.forEach(
+  (button) => {
+    button.addEventListener(
+      "click",
+      () => {
+        const setting =
+          button.dataset
+            .equipmentSetting;
+
+        const value =
+          button.dataset.value;
+
+        if (
+          !setting ||
+          !value
+        ) {
+          return;
+        }
+
+        if (
+          setting ===
+            "dumbbells-quantity" ||
+          setting ===
+            "kettlebell-quantity"
+        ) {
+          document
+            .querySelectorAll(
+              `[data-equipment-setting="${setting}"]`
+            )
+            .forEach(
+              (detailButton) => {
+                detailButton
+                  .classList
+                  .remove(
+                    "is-selected"
+                  );
+              }
+            );
+
+          button.classList.add(
+            "is-selected"
+          );
+
+          const quantity =
+            Number(value);
+
+          if (
+            setting ===
+            "dumbbells-quantity"
+          ) {
+            workoutConfig
+              .equipmentDetails
+              .dumbbellsQuantity =
+                quantity;
+          } else {
+            workoutConfig
+              .equipmentDetails
+              .kettlebellQuantity =
+                quantity;
+          }
+        }
+
+        if (
+          setting ===
+          "band-anchor"
+        ) {
+          button.classList.toggle(
+            "is-selected"
+          );
+
+          workoutConfig
+            .equipmentDetails
+            .bandAnchors =
+              getSelectedEquipmentDetailValues(
+                "band-anchor"
+              );
+        }
+
+        if (
+          setting ===
+          "pull-up-bar-type"
+        ) {
+          button.classList.toggle(
+            "is-selected"
+          );
+
+          workoutConfig
+            .equipmentDetails
+            .pullUpBarTypes =
+              getSelectedEquipmentDetailValues(
+                "pull-up-bar-type"
+              );
+        }
+
+        clearFormMessage();
+      }
+    );
+  }
+);
+
+
+function getSelectedEquipmentDetailValues(
+  setting
+) {
+  return Array.from(
+    document.querySelectorAll(
+      `[data-equipment-setting="${setting}"].is-selected`
+    )
+  ).map(
+    (button) =>
+      button.dataset.value
+  );
+}
+
+
+function syncEquipmentSelectionFromDom() {
+  workoutConfig.equipment =
+    Array.from(
+      document.querySelectorAll(
+        '[data-group="equipment"].is-selected'
+      )
+    ).map(
+      (button) =>
+        button.dataset.value
+    );
+}
+
+
+function clearEquipmentDetailsFor(
+  equipmentType
+) {
+  const item =
+    document.querySelector(
+      `[data-equipment-item="${equipmentType}"]`
+    );
+
+  item
+    ?.querySelectorAll(
+      ".equipment-detail-option"
+    )
+    .forEach(
+      (button) => {
+        button.classList.remove(
+          "is-selected"
+        );
+      }
+    );
+
+  if (
+    equipmentType ===
+    "dumbbells"
+  ) {
+    workoutConfig
+      .equipmentDetails
+      .dumbbellsQuantity =
+        null;
+  }
+
+  if (
+    equipmentType ===
+    "kettlebell"
+  ) {
+    workoutConfig
+      .equipmentDetails
+      .kettlebellQuantity =
+        null;
+  }
+
+  if (
+    equipmentType ===
+    "resistance-band"
+  ) {
+    workoutConfig
+      .equipmentDetails
+      .bandAnchors =
+        [];
+  }
+
+  if (
+    equipmentType ===
+    "pull-up-bar"
+  ) {
+    workoutConfig
+      .equipmentDetails
+      .pullUpBarTypes =
+        [];
+  }
+}
+
+
+function cloneEquipmentDetails(
+  source =
+    workoutConfig
+      .equipmentDetails
+) {
+  return {
+    dumbbellsQuantity:
+      Number(
+        source
+          ?.dumbbellsQuantity
+      ) || null,
+
+    kettlebellQuantity:
+      Number(
+        source
+          ?.kettlebellQuantity
+      ) || null,
+
+    bandAnchors:
+      Array.isArray(
+        source
+          ?.bandAnchors
+      )
+        ? [
+            ...source.bandAnchors
+          ]
+        : [],
+
+    pullUpBarTypes:
+      Array.isArray(
+        source
+          ?.pullUpBarTypes
+      )
+        ? [
+            ...source.pullUpBarTypes
+          ]
+        : []
+  };
+}
+
+
+/* =========================================
+   MOST DO GENERATORA
+   ========================================= */
+
+function getGeneratorCompatibleEquipment() {
+  const compatible = [];
+
+  workoutConfig.equipment.forEach(
+    (item) => {
+      let value = item;
+
+      if (
+        item ===
+          "resistance-band" ||
+        item ===
+          "mini-band"
+      ) {
+        value = "bands";
+      }
+
+      if (
+        item ===
+        "pull-up-bar"
+      ) {
+        value =
+          "pullup-bar";
+      }
+
+      if (
+        !compatible.includes(
+          value
+        )
+      ) {
+        compatible.push(
+          value
+        );
+      }
+    }
+  );
+
+  return compatible;
+}
+
+
+function getGeneratorConfig() {
+  return {
+    ...workoutConfig,
+
+    equipment:
+      getGeneratorCompatibleEquipment(),
+
+    equipmentDetails:
+      cloneEquipmentDetails()
+  };
 }
 
 
@@ -382,10 +727,42 @@ function validateConfig() {
     return "Wybierz przynajmniej jedną opcję sprzętu.";
   }
 
+  if (
+    workoutConfig.equipment.includes(
+      "dumbbells"
+    ) &&
+    !workoutConfig
+      .equipmentDetails
+      .dumbbellsQuantity
+  ) {
+    return "Wybierz, czy masz 1 czy 2 hantle.";
+  }
+
+  if (
+    workoutConfig.equipment.includes(
+      "kettlebell"
+    ) &&
+    !workoutConfig
+      .equipmentDetails
+      .kettlebellQuantity
+  ) {
+    return "Wybierz, czy masz 1 czy 2 kettlebelle.";
+  }
+
+  if (
+    workoutConfig.equipment.includes(
+      "pull-up-bar"
+    ) &&
+    workoutConfig
+      .equipmentDetails
+      .pullUpBarTypes
+      .length === 0
+  ) {
+    return "Wybierz, czy masz dostęp do wysokiego, niskiego albo obu typów drążka.";
+  }
+
   return null;
 }
-
-
 /* =========================================
    GENEROWANIE
    ========================================= */
@@ -407,7 +784,7 @@ generateWorkoutButton.addEventListener(
     currentWorkout =
       window.WorkoutGenerator
         .generateWorkout(
-          workoutConfig
+          getGeneratorConfig()
         );
 
     if (
@@ -641,7 +1018,7 @@ function replaceExercise(
       .findReplacement(
         currentExercise,
         currentWorkout,
-        workoutConfig
+        getGeneratorConfig()
       );
 
   if (!replacement) {
@@ -690,8 +1067,23 @@ function getEquipmentLabel(
     bands:
       "Gumy",
 
+    "resistance-band":
+      "Długa guma",
+
+    "mini-band":
+      "Mini band",
+
     "pullup-bar":
-      "Drążek"
+      "Drążek",
+
+    "pull-up-bar":
+      "Drążek",
+
+    barbell:
+      "Sztanga",
+
+    bench:
+      "Ławka"
   };
 
   return equipment
@@ -1353,8 +1745,6 @@ dislikeExerciseButton.addEventListener(
     saveActiveWorkoutSession();
   }
 );
-
-
 /* =========================================
    DALEJ
    ========================================= */
@@ -1821,7 +2211,10 @@ function saveActiveWorkoutSession() {
 
       equipment: [
         ...workoutConfig.equipment
-      ]
+      ],
+
+      equipmentDetails:
+        cloneEquipmentDetails()
     },
 
     workout:
@@ -1942,6 +2335,9 @@ function saveCompletedWorkoutToHistory() {
     equipment: [
       ...workoutConfig.equipment
     ],
+
+    equipmentDetails:
+      cloneEquipmentDetails(),
 
     actualDurationMs:
       finalWorkoutDuration,
@@ -2344,8 +2740,6 @@ function setHistoryEmptyMessage(
     "is-hidden"
   );
 }
-
-
 /* =========================================
    PODSUMOWANIE HISTORII
    ========================================= */
@@ -2830,7 +3224,7 @@ function formatHistoryWorkoutDuration(
 
   const seconds =
     totalSeconds %
-    60;
+      60;
 
   return (
     `${String(minutes).padStart(2, "0")}:` +
@@ -2856,7 +3250,7 @@ function formatHistoryTotalDuration(
 
   const minutes =
     totalMinutes %
-    60;
+      60;
 
   if (
     hours > 0
@@ -2949,8 +3343,6 @@ function getHistoryBodyLabel(
     "Brak danych o partiach"
   );
 }
-
-
 /* =========================================
    WYKRYWANIE NIEDOKOŃCZONEJ SESJI
    ========================================= */
@@ -3255,6 +3647,11 @@ function restoreActiveWorkoutSession() {
           ...config.equipment
         ]
       : [];
+
+  workoutConfig.equipmentDetails =
+    cloneEquipmentDetails(
+      config.equipmentDetails
+    );
 
   document.body.dataset.theme =
     workoutConfig.profile;
@@ -3728,7 +4125,9 @@ createHistoryWorkoutCard =
     return card;
 
   };
-  /* =========================================
+
+
+/* =========================================
    v0.07.6 — ROZSZERZONE STATYSTYKI HISTORII
    ========================================= */
 
@@ -4211,3 +4610,60 @@ function getHistoryStatisticBodyLabel(
   );
 
 }
+/* =========================================
+   v0.10.4 — DOKŁADNE PRZEKAZYWANIE SPRZĘTU
+   ========================================= */
+
+getGeneratorCompatibleEquipment =
+  function () {
+    return [
+      ...workoutConfig.equipment
+    ];
+  };
+
+
+getGeneratorConfig =
+  function () {
+    return {
+      ...workoutConfig,
+
+      equipment: [
+        ...workoutConfig.equipment
+      ],
+
+      equipmentDetails:
+        cloneEquipmentDetails()
+    };
+  };
+  /* =========================================
+   v0.10.6 — DOMYŚLNA MASA WŁASNEGO CIAŁA
+   ========================================= */
+
+function selectBodyweightByDefault() {
+  const bodyweightButton =
+    document.querySelector(
+      '[data-group="equipment"][data-value="bodyweight"]'
+    );
+
+  if (!bodyweightButton) {
+    return;
+  }
+
+  bodyweightButton.classList.add(
+    "is-selected"
+  );
+
+  syncEquipmentSelectionFromDom();
+}
+
+
+profileButtons.forEach(
+  (button) => {
+    button.addEventListener(
+      "click",
+      () => {
+        selectBodyweightByDefault();
+      }
+    );
+  }
+);

@@ -2211,3 +2211,443 @@ body {
 
   font-size: 1.25rem;
 }
+/* =========================================
+   v0.10.1 — ROZWIJANY KONFIGURATOR SPRZĘTU
+   ========================================= */
+
+
+/* =========================================
+   GŁÓWNA SIATKA SPRZĘTU
+   ========================================= */
+
+.equipment-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 8px;
+}
+
+.equipment-item {
+  min-width: 0;
+}
+
+.equipment-main-option {
+  width: 100%;
+}
+
+
+/* =========================================
+   ROZWINIĘTE SZCZEGÓŁY SPRZĘTU
+   ========================================= */
+
+.equipment-details {
+  grid-column: 1 / -1;
+
+  margin-top: 8px;
+
+  padding:
+    14px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: var(--background);
+}
+
+.equipment-details-label {
+  margin-bottom: 10px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.76rem;
+  font-weight: 500;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================
+   OPCJE SZCZEGÓŁOWE
+   ========================================= */
+
+.equipment-detail-options {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.equipment-detail-option {
+  position: relative;
+
+  min-height: 38px;
+
+  padding:
+    8px 28px 8px 11px;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: var(--surface);
+  color: var(--text-secondary);
+
+  font-size: 0.74rem;
+  font-weight: 550;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.equipment-detail-option:hover {
+  border-color: var(--accent);
+
+  background: var(--surface-hover);
+  color: var(--text-primary);
+
+  transform:
+    translateY(-1px);
+}
+
+.equipment-detail-option:active {
+  transform:
+    translateY(0)
+    scale(0.98);
+}
+
+
+/* =========================================
+   ZAZNACZONA OPCJA SZCZEGÓŁOWA
+   ========================================= */
+
+.equipment-detail-option.is-selected {
+  border-color: var(--accent);
+
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+.equipment-detail-option.is-selected::after {
+  content: "✓";
+
+  position: absolute;
+
+  top: 50%;
+  right: 10px;
+
+  transform:
+    translateY(-50%);
+
+  color: var(--accent-strong);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   KARTA SPRZĘTU Z ROZWINIĘCIEM
+   ========================================= */
+
+.equipment-item:has(
+  .equipment-details:not(.is-hidden)
+) {
+  grid-column: span 2;
+
+  padding: 8px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: var(--accent-soft);
+}
+
+.equipment-item:has(
+  .equipment-details:not(.is-hidden)
+)
+.equipment-main-option {
+  border-color: var(--accent);
+}
+
+
+/* =========================================
+   RESPONSYWNOŚĆ
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .equipment-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .equipment-item:has(
+    .equipment-details:not(.is-hidden)
+  ) {
+    grid-column: 1 / -1;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .equipment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .equipment-item:has(
+    .equipment-details:not(.is-hidden)
+  ) {
+    grid-column: 1;
+  }
+
+  .equipment-detail-options {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .equipment-detail-option {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 420px) {
+
+  .equipment-detail-options {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================
+   v0.10.2 — WYGŁADZENIE KONFIGURATORA SPRZĘTU
+   ========================================= */
+
+
+/* Główna siatka */
+
+.equipment-grid {
+  align-items: start;
+}
+
+
+/* Rozwijany element nie zmienia szerokości kafelka */
+
+.equipment-item:has(
+  .equipment-details:not(.is-hidden)
+) {
+  grid-column: auto;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+}
+
+
+/* Główny przycisk zostaje taki jak pozostałe */
+
+.equipment-item:has(
+  .equipment-details:not(.is-hidden)
+)
+.equipment-main-option {
+  border-color: var(--accent);
+
+  background: var(--accent-soft);
+}
+
+
+/* Panel szczegółów */
+
+.equipment-details {
+  margin-top: 7px;
+
+  padding:
+    12px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--surface) 72%,
+      var(--background)
+    );
+
+  box-shadow:
+    0 8px 22px
+    rgba(0, 0, 0, 0.12);
+}
+
+
+/* Tekst pytania */
+
+.equipment-details-label {
+  margin-bottom: 9px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.72rem;
+  font-weight: 550;
+
+  line-height: 1.4;
+}
+
+
+/* Przyciski w środku */
+
+.equipment-detail-options {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(90px, 1fr)
+    );
+
+  gap: 6px;
+}
+
+
+.equipment-detail-option {
+  width: 100%;
+
+  min-height: 36px;
+
+  padding:
+    8px 24px 8px 10px;
+
+  border-radius: 8px;
+
+  background: var(--background);
+
+  font-size: 0.72rem;
+
+  text-align: center;
+}
+
+
+/* Hover */
+
+.equipment-detail-option:hover {
+  transform: none;
+
+  background: var(--surface-hover);
+}
+
+
+/* Wybrana opcja */
+
+.equipment-detail-option.is-selected {
+  background: var(--accent-soft);
+
+  border-color: var(--accent);
+
+  color: var(--text-primary);
+}
+
+
+/* Trochę subtelniejszy ptaszek */
+
+.equipment-detail-option.is-selected::after {
+  right: 8px;
+
+  font-size: 0.68rem;
+}
+
+
+/* Długa guma może mieć 3 opcje obok siebie */
+
+[data-equipment-details="resistance-band"]
+.equipment-detail-options {
+  grid-template-columns:
+    repeat(3, 1fr);
+}
+
+
+/* Telefon */
+
+@media (max-width: 700px) {
+
+  .equipment-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .equipment-item:has(
+    .equipment-details:not(.is-hidden)
+  ) {
+    grid-column: auto;
+  }
+
+  .equipment-details {
+    padding: 10px;
+  }
+
+  .equipment-detail-options {
+    grid-template-columns: 1fr;
+  }
+
+  [data-equipment-details="resistance-band"]
+  .equipment-detail-options {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* Bardzo mały ekran */
+
+@media (max-width: 460px) {
+
+  .equipment-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================
+   v0.10.5 — WSKAZÓWKA O MASIE WŁASNEGO CIAŁA
+   ========================================= */
+
+.equipment-grid::after {
+  content:
+    "💡 Wskazówka: niektóre ćwiczenia ze sprzętem wymagają również zaznaczenia „Masa własnego ciała”.";
+
+  grid-column: 1 / -1;
+
+  display: block;
+
+  margin-top: 6px;
+
+  padding: 11px 13px;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--surface) 76%,
+      transparent
+    );
+
+  color: var(--text-secondary);
+
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+
+  text-align: left;
+}
