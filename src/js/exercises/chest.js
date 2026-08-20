@@ -2,7 +2,7 @@
    K&K — Czas na Wycisk!
    BAZA ĆWICZEŃ — KLATKA PIERSIOWA
    chest.js
-   v1.0
+   v1.1
    ========================================= */
 
 const chestExercises = [
@@ -17,6 +17,8 @@ const chestExercises = [
       "triceps",
       "shoulders"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -35,7 +37,10 @@ const chestExercises = [
 
     movementPattern: "horizontal-push",
 
-    movementTags: [],
+    movementTags: [
+      "bench-press",
+      "compound"
+    ],
 
     workoutRole: "main",
 
@@ -63,7 +68,7 @@ const chestExercises = [
     estimatedSeconds: 300,
 
     instructions:
-      "Połóż się stabilnie, ściągnij łopatki i oprzyj stopy o podłoże. Opuść sztangę kontrolowanie do klatki i wypchnij ją w górę, zachowując stabilną pozycję.",
+      "Połóż się stabilnie na ławce, ściągnij łopatki i oprzyj stopy o podłoże. Opuść sztangę kontrolowanie do klatki i wypchnij ją w górę, zachowując stabilną pozycję.",
 
     videoUrl:
       "https://www.youtube.com/shorts/PTzUJkPrrDw"
@@ -81,6 +86,8 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -94,7 +101,10 @@ const chestExercises = [
 
     movementPattern: "horizontal-push",
 
-    movementTags: [],
+    movementTags: [
+      "floor-press",
+      "compound"
+    ],
 
     workoutRole: "main",
 
@@ -141,6 +151,8 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -155,7 +167,10 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
-      "stability"
+      "push-up",
+      "bodyweight",
+      "stability",
+      "compound"
     ],
 
     workoutRole: "secondary",
@@ -203,6 +218,8 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -217,6 +234,8 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "push-up",
+      "bodyweight",
       "stability",
       "assisted-variation"
     ],
@@ -265,6 +284,8 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -279,6 +300,7 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "floor-press",
       "squeeze"
     ],
 
@@ -327,6 +349,8 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -341,6 +365,9 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "push-up",
+      "bodyweight",
+      "wide-grip",
       "stability"
     ],
 
@@ -379,7 +406,7 @@ const chestExercises = [
 
   {
     id: "resistance-band-chest-press",
-    name: "Wyciskanie gumy na klatkę",
+    name: "Wyciskanie długiej gumy na klatkę",
 
     primaryBodyPart: "chest",
 
@@ -389,15 +416,17 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
 
     equipmentConditions: [
-      "anchor-any"
+      "anchor-mid"
     ],
 
     difficulty: 1,
@@ -405,6 +434,8 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "band",
+      "chest-press",
       "stability"
     ],
 
@@ -434,7 +465,7 @@ const chestExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zaczep gumę za sobą na wysokości klatki. Napnij brzuch, wypchnij ręce przed siebie i kontrolowanie wróć do pozycji wyjściowej.",
+      "Zaczep długą gumę oporową za sobą mniej więcej na wysokości klatki piersiowej. Napnij brzuch, wypchnij ręce przed siebie i kontrolowanie wróć do pozycji wyjściowej.",
 
     videoUrl:
       "https://www.youtube.com/shorts/cd5MqVorBH0"
@@ -443,7 +474,7 @@ const chestExercises = [
 
   {
     id: "resistance-band-chest-fly",
-    name: "Rozpiętki z gumą",
+    name: "Rozpiętki z długą gumą",
 
     primaryBodyPart: "chest",
 
@@ -451,22 +482,27 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
 
     equipmentConditions: [
-      "anchor-any"
+      "anchor-mid"
     ],
 
     difficulty: 1,
 
     movementPattern: "horizontal-adduction",
 
-    movementTags: [],
+    movementTags: [
+      "fly",
+      "band"
+    ],
 
     workoutRole: "accessory",
 
@@ -494,7 +530,7 @@ const chestExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zaczep gumę za sobą i prowadź lekko ugięte ramiona szerokim łukiem przed klatkę. Powoli wróć, utrzymując napięcie gumy.",
+      "Zaczep długą gumę oporową za sobą mniej więcej na wysokości klatki piersiowej. Prowadź lekko ugięte ramiona szerokim łukiem przed klatkę. Powoli wróć, utrzymując napięcie gumy.",
 
     videoUrl:
       "https://www.youtube.com/shorts/PqoL7FOD_Aw"
@@ -511,6 +547,8 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -524,7 +562,10 @@ const chestExercises = [
 
     movementPattern: "horizontal-adduction",
 
-    movementTags: [],
+    movementTags: [
+      "fly",
+      "floor"
+    ],
 
     workoutRole: "accessory",
 
@@ -570,6 +611,8 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "kettlebell",
@@ -583,7 +626,11 @@ const chestExercises = [
 
     movementPattern: "horizontal-push",
 
-    movementTags: [],
+    movementTags: [
+      "floor-press",
+      "compound",
+      "bilateral"
+    ],
 
     workoutRole: "main",
 
@@ -613,11 +660,6 @@ const chestExercises = [
     instructions:
       "Leżąc na podłodze, trzymaj dwa kettlebelle po bokach klatki. Wypchnij je w górę, utrzymując stabilne nadgarstki, a następnie kontrolowanie opuść ramiona do podłoża.",
 
-    /*
-      Link uzupełnimy później.
-      Oryginalny materiał był przypisany
-      do wariantu jednorącz.
-    */
     videoUrl: ""
   },
 
@@ -631,6 +673,10 @@ const chestExercises = [
     secondaryBodyParts: [
       "triceps",
       "shoulders",
+      "abs"
+    ],
+
+    strongSecondaryBodyParts: [
       "abs"
     ],
 
@@ -648,8 +694,10 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "floor-press",
       "unilateral",
-      "stability"
+      "stability",
+      "anti-rotation"
     ],
 
     workoutRole: "secondary",
@@ -678,7 +726,7 @@ const chestExercises = [
     estimatedSeconds: 300,
 
     instructions:
-      "Trzymaj kettlebell w jednej dłoni przy klatce. Wypchnij ciężar w górę, stabilizując tułów, a następnie kontrolowanie opuść ramię i po serii zmień stronę.",
+      "Trzymaj kettlebell w jednej dłoni przy klatce. Wypchnij ciężar w górę, stabilizując tułów i ograniczając jego rotację, a następnie kontrolowanie opuść ramię. Po serii zmień stronę.",
 
     videoUrl:
       "https://www.youtube.com/watch?v=GEY6kc26kZY"
@@ -687,7 +735,7 @@ const chestExercises = [
 
   {
     id: "resistance-band-low-to-high-fly",
-    name: "Rozpiętki z gumą od dołu do góry",
+    name: "Rozpiętki z długą gumą od dołu do góry",
 
     primaryBodyPart: "chest",
 
@@ -695,9 +743,11 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -711,6 +761,8 @@ const chestExercises = [
     movementPattern: "horizontal-adduction",
 
     movementTags: [
+      "fly",
+      "band",
       "low-to-high"
     ],
 
@@ -740,7 +792,7 @@ const chestExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zaczep gumę nisko za sobą. Prowadź lekko ugięte ramiona łukiem do przodu i ku górze, a następnie kontrolowanie wróć.",
+      "Zaczep długą gumę oporową nisko za sobą. Prowadź lekko ugięte ramiona łukiem do przodu i ku górze, a następnie kontrolowanie wróć.",
 
     videoUrl:
       "https://www.youtube.com/watch?v=POOzv5VF6sI"
@@ -749,7 +801,7 @@ const chestExercises = [
 
   {
     id: "resistance-band-high-to-low-fly",
-    name: "Rozpiętki z gumą z góry do dołu",
+    name: "Rozpiętki z długą gumą z góry do dołu",
 
     primaryBodyPart: "chest",
 
@@ -757,9 +809,11 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -773,6 +827,8 @@ const chestExercises = [
     movementPattern: "horizontal-adduction",
 
     movementTags: [
+      "fly",
+      "band",
       "high-to-low"
     ],
 
@@ -802,7 +858,7 @@ const chestExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zaczep gumę wysoko za sobą. Prowadź lekko ugięte ramiona łukiem do przodu i w dół, a następnie spokojnie wróć.",
+      "Zaczep długą gumę oporową wysoko za sobą. Prowadź lekko ugięte ramiona łukiem do przodu i w dół, a następnie spokojnie wróć.",
 
     videoUrl:
       "https://www.youtube.com/watch?v=LHcvAuDLqvg"
@@ -820,6 +876,8 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "kettlebell",
@@ -834,6 +892,7 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "floor-press",
       "squeeze"
     ],
 
@@ -882,6 +941,10 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [
+      "back"
+    ],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -896,7 +959,9 @@ const chestExercises = [
     movementPattern: "shoulder-extension",
 
     movementTags: [
-      "multi-muscle"
+      "pullover",
+      "multi-muscle",
+      "back-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -944,6 +1009,10 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [
+      "back"
+    ],
+
     requiredEquipment: [
       {
         type: "kettlebell",
@@ -958,7 +1027,9 @@ const chestExercises = [
     movementPattern: "shoulder-extension",
 
     movementTags: [
-      "multi-muscle"
+      "pullover",
+      "multi-muscle",
+      "back-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1005,6 +1076,8 @@ const chestExercises = [
       "triceps"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -1019,7 +1092,8 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
-      "squeeze"
+      "squeeze",
+      "svend-press"
     ],
 
     workoutRole: "accessory",
@@ -1048,7 +1122,7 @@ const chestExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Trzymaj jeden hantel oburącz przed klatką i mocno go dociskaj. Wypchnij ciężar przed siebie, a następnie kontrolowanie przyciągnij do klatki.",
+      "Trzymaj jeden hantel oburącz przed klatką i mocno go dociskaj. Wypchnij ciężar przed siebie, a następnie kontrolowanie przyciągnij go z powrotem do klatki.",
 
     videoUrl:
       "https://www.youtube.com/shorts/OZ1thS_rrpg"
@@ -1057,7 +1131,7 @@ const chestExercises = [
 
   {
     id: "push-up-with-resistance-band",
-    name: "Pompki z gumą oporową",
+    name: "Pompki z długą gumą oporową",
 
     primaryBodyPart: "chest",
 
@@ -1067,13 +1141,15 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "bodyweight",
         quantity: 1
       },
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -1085,6 +1161,9 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "push-up",
+      "bodyweight",
+      "band",
       "progressive-resistance",
       "stability"
     ],
@@ -1115,7 +1194,7 @@ const chestExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Przełóż gumę przez górną część pleców i przytrzymaj końce pod dłońmi. Wykonuj pompki, pokonując rosnący opór gumy podczas wypychania.",
+      "Przełóż długą gumę oporową przez górną część pleców i przytrzymaj jej końce pod dłońmi. Wykonuj pompki, pokonując rosnący opór gumy podczas wypychania.",
 
     videoUrl:
       "https://www.youtube.com/shorts/RYV6D14cI0s"
@@ -1132,6 +1211,11 @@ const chestExercises = [
       "back",
       "triceps",
       "shoulders",
+      "abs"
+    ],
+
+    strongSecondaryBodyParts: [
+      "back",
       "abs"
     ],
 
@@ -1155,10 +1239,13 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "push-up",
       "horizontal-pull",
+      "compound-combination",
       "stability",
       "anti-rotation",
-      "unilateral"
+      "unilateral",
+      "core-emphasis"
     ],
 
     workoutRole: "secondary",
@@ -1206,6 +1293,8 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -1220,6 +1309,8 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "push-up",
+      "bodyweight",
       "explosive",
       "power"
     ],
@@ -1269,6 +1360,8 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -1283,6 +1376,7 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "floor-press",
       "alternating",
       "stability"
     ],
@@ -1332,6 +1426,10 @@ const chestExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [
+      "abs"
+    ],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -1346,8 +1444,11 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "push-up",
+      "bodyweight",
       "stability",
-      "anti-rotation"
+      "anti-rotation",
+      "core-emphasis"
     ],
 
     workoutRole: "secondary",
@@ -1394,6 +1495,8 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -1408,6 +1511,8 @@ const chestExercises = [
     movementPattern: "horizontal-adduction",
 
     movementTags: [
+      "fly",
+      "floor-press",
       "horizontal-push",
       "compound-combination"
     ],
@@ -1456,6 +1561,8 @@ const chestExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -1470,6 +1577,7 @@ const chestExercises = [
     movementPattern: "horizontal-push",
 
     movementTags: [
+      "floor-press",
       "neutral-grip"
     ],
 

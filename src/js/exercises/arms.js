@@ -2,10 +2,14 @@
    K&K — Czas na Wycisk!
    BAZA ĆWICZEŃ — RAMIONA
    arms.js
-   v1.0
+   v1.1
    ========================================= */
 
 const armExercises = [
+
+  /* =========================================
+     BICEPS
+     ========================================= */
 
   {
     id: "dumbbell-biceps-curl",
@@ -14,15 +18,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -67,7 +67,6 @@ const armExercises = [
       "https://www.youtube.com/shorts/PuaJzTatIJM"
   },
 
-
   {
     id: "hammer-curl",
     name: "Uginanie ramion chwytem młotkowym",
@@ -75,15 +74,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -93,7 +88,8 @@ const armExercises = [
     movementPattern: "elbow-flexion",
 
     movementTags: [
-      "hammer-grip"
+      "hammer-grip",
+      "forearm-emphasis"
     ],
 
     workoutRole: "secondary",
@@ -128,7 +124,6 @@ const armExercises = [
       "https://www.youtube.com/shorts/6qmFOofPmP0"
   },
 
-
   {
     id: "alternating-dumbbell-curl",
     name: "Naprzemienne uginanie ramion z hantlami",
@@ -136,15 +131,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -190,23 +181,18 @@ const armExercises = [
       "https://www.youtube.com/shorts/FHY_2t7R714"
   },
 
-
   {
     id: "resistance-band-biceps-curl",
-    name: "Uginanie ramion z gumą",
+    name: "Uginanie ramion z długą gumą",
 
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -216,7 +202,8 @@ const armExercises = [
     movementPattern: "elbow-flexion",
 
     movementTags: [
-      "supinated-grip"
+      "supinated-grip",
+      "band"
     ],
 
     workoutRole: "main",
@@ -245,12 +232,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na środku gumy i chwyć jej końce dłońmi skierowanymi do przodu. Utrzymuj łokcie blisko tułowia i przyciągnij dłonie w kierunku barków. Następnie kontrolowanie wyprostuj ramiona.",
+      "Stań na środku długiej gumy oporowej i chwyć jej końce dłońmi skierowanymi do przodu. Utrzymuj łokcie blisko tułowia i przyciągnij dłonie w kierunku barków. Następnie kontrolowanie wyprostuj ramiona.",
 
     videoUrl:
       "https://www.youtube.com/shorts/20xtfGZ37nw"
   },
-
 
   {
     id: "kettlebell-biceps-curl",
@@ -259,15 +245,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "kettlebell",
-        quantity: 1
-      }
+      { type: "kettlebell", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -312,7 +294,6 @@ const armExercises = [
       "https://www.youtube.com/shorts/So4iApZfoDI"
   },
 
-
   {
     id: "concentration-curl",
     name: "Uginanie ramienia w podporze o udo",
@@ -320,18 +301,14 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 1
-      }
+      { type: "dumbbells", quantity: 1 }
     ],
 
-    equipmentConditions: [],
+    equipmentConditions: ["stable-seated-surface"],
 
     difficulty: 1,
 
@@ -374,7 +351,6 @@ const armExercises = [
       "https://www.youtube.com/shorts/EjUnEEfTSEY"
   },
 
-
   {
     id: "reverse-dumbbell-curl",
     name: "Uginanie ramion nachwytem z hantlami",
@@ -382,15 +358,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -436,23 +408,18 @@ const armExercises = [
       "https://www.youtube.com/watch?v=EoYWMB856cA"
   },
 
-
   {
     id: "resistance-band-hammer-curl",
-    name: "Uginanie ramion chwytem młotkowym z gumą",
+    name: "Uginanie ramion chwytem młotkowym z długą gumą",
 
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -462,7 +429,9 @@ const armExercises = [
     movementPattern: "elbow-flexion",
 
     movementTags: [
-      "hammer-grip"
+      "hammer-grip",
+      "forearm-emphasis",
+      "band"
     ],
 
     workoutRole: "secondary",
@@ -491,12 +460,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na środku gumy i chwyć jej końce z dłońmi skierowanymi do siebie. Ugnij ramiona, utrzymując łokcie blisko tułowia i nie obracając nadgarstków.",
+      "Stań na środku długiej gumy oporowej i chwyć jej końce dłońmi skierowanymi do siebie. Ugnij ramiona, utrzymując łokcie blisko tułowia i nie obracając nadgarstków.",
 
     videoUrl:
       "https://www.youtube.com/watch?v=bcond2tqWg0"
   },
-
 
   {
     id: "cross-body-hammer-curl",
@@ -505,15 +473,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -525,7 +489,8 @@ const armExercises = [
     movementTags: [
       "hammer-grip",
       "alternating",
-      "cross-body"
+      "cross-body",
+      "forearm-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -560,7 +525,6 @@ const armExercises = [
       "https://www.youtube.com/shorts/qmQkt1Y-FX8"
   },
 
-
   {
     id: "zottman-curl",
     name: "Uginanie Zottmana z hantlami",
@@ -568,15 +532,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -588,7 +548,8 @@ const armExercises = [
     movementTags: [
       "forearm-rotation",
       "supinated-grip",
-      "reverse-grip"
+      "reverse-grip",
+      "forearm-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -623,23 +584,18 @@ const armExercises = [
       "https://www.youtube.com/shorts/5Go_uOTnFl0"
   },
 
-
   {
     id: "resistance-band-reverse-curl",
-    name: "Uginanie ramion nachwytem z gumą",
+    name: "Uginanie ramion nachwytem z długą gumą",
 
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -650,7 +606,8 @@ const armExercises = [
 
     movementTags: [
       "reverse-grip",
-      "forearm-emphasis"
+      "forearm-emphasis",
+      "band"
     ],
 
     workoutRole: "accessory",
@@ -679,12 +636,10 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na środku gumy i chwyć jej końce nachwytem. Uginaj łokcie, utrzymując ramiona blisko tułowia. Kontrolowanie wróć do pozycji wyjściowej.",
+      "Stań na środku długiej gumy oporowej i chwyć jej końce nachwytem. Uginaj łokcie, utrzymując ramiona blisko tułowia. Kontrolowanie wróć do pozycji wyjściowej.",
 
-    videoUrl:
-      "https://www.youtube.com/shorts/20xtfGZ37nw"
+    videoUrl: ""
   },
-
 
   {
     id: "kettlebell-hammer-curl",
@@ -693,15 +648,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
-      {
-        type: "kettlebell",
-        quantity: 1
-      }
+      { type: "kettlebell", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -712,7 +663,8 @@ const armExercises = [
 
     movementTags: [
       "hammer-grip",
-      "bilateral"
+      "bilateral",
+      "forearm-emphasis"
     ],
 
     workoutRole: "secondary",
@@ -747,26 +699,21 @@ const armExercises = [
       "https://www.youtube.com/shorts/Yftd5p5Fc3A"
   },
 
-
   {
     id: "resistance-band-concentration-curl",
-    name: "Uginanie ramienia z gumą w podporze",
+    name: "Uginanie ramienia z długą gumą w podporze",
 
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
-    equipmentConditions: [],
+    equipmentConditions: ["stable-seated-surface"],
 
     difficulty: 1,
 
@@ -774,7 +721,8 @@ const armExercises = [
 
     movementTags: [
       "unilateral",
-      "supported"
+      "supported",
+      "band"
     ],
 
     workoutRole: "accessory",
@@ -803,12 +751,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Usiądź stabilnie i zamocuj gumę pod stopą. Oprzyj ramię o wewnętrzną stronę uda i ugnij łokieć, przyciągając dłoń w kierunku barku. Po serii zmień stronę.",
+      "Usiądź stabilnie i zamocuj długą gumę pod stopą. Oprzyj ramię o wewnętrzną stronę uda i ugnij łokieć, przyciągając dłoń w kierunku barku. Po serii zmień stronę.",
 
     videoUrl:
       "https://www.youtube.com/shorts/7EQSPIrN2-w"
   },
-
 
   {
     id: "drag-curl-dumbbells",
@@ -817,15 +764,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -870,23 +813,18 @@ const armExercises = [
       "https://www.youtube.com/shorts/MfnKlwR7RT4"
   },
 
-
   {
     id: "resistance-band-drag-curl",
-    name: "Drag curl z gumą",
+    name: "Drag curl z długą gumą",
 
     primaryBodyPart: "arms",
     armTarget: "biceps",
 
-    secondaryBodyParts: [
-      "forearms"
-    ],
+    secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -896,7 +834,8 @@ const armExercises = [
     movementPattern: "elbow-flexion",
 
     movementTags: [
-      "drag-curl"
+      "drag-curl",
+      "band"
     ],
 
     workoutRole: "accessory",
@@ -925,12 +864,16 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na środku gumy. Uginaj łokcie, prowadząc dłonie blisko tułowia i lekko cofając łokcie. Kontrolowanie wróć do pozycji wyjściowej.",
+      "Stań na środku długiej gumy oporowej. Uginaj łokcie, prowadząc dłonie blisko tułowia i lekko cofając łokcie. Kontrolowanie wróć do pozycji wyjściowej.",
 
     videoUrl:
       "https://www.youtube.com/shorts/ovV4V7V-UWU"
   },
 
+
+  /* =========================================
+     TRICEPS
+     ========================================= */
 
   {
     id: "dumbbell-overhead-triceps-extension",
@@ -939,16 +882,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 1
-      }
+      { type: "dumbbells", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -993,7 +931,6 @@ const armExercises = [
       "https://www.youtube.com/shorts/b_r_LW4HEcM"
   },
 
-
   {
     id: "triceps-kickback-dumbbell",
     name: "Prostowanie ramienia z hantlem w opadzie",
@@ -1001,16 +938,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 1
-      }
+      { type: "dumbbells", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -1056,24 +988,18 @@ const armExercises = [
       "https://www.youtube.com/shorts/3Bv1n7-DN7c"
   },
 
-
   {
     id: "resistance-band-triceps-pushdown",
-    name: "Prostowanie ramion z gumą w dół",
+    name: "Prostowanie ramion z długą gumą w dół",
 
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [
@@ -1085,7 +1011,8 @@ const armExercises = [
     movementPattern: "elbow-extension",
 
     movementTags: [
-      "pushdown"
+      "pushdown",
+      "band"
     ],
 
     workoutRole: "main",
@@ -1114,30 +1041,24 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zamocuj gumę wysoko. Ustaw łokcie blisko tułowia i wyprostuj przedramiona w dół. Nie pozwalaj łokciom odsuwać się od ciała i kontrolowanie wróć.",
+      "Zamocuj długą gumę oporową wysoko. Ustaw łokcie blisko tułowia i wyprostuj przedramiona w dół. Nie pozwalaj łokciom odsuwać się od ciała i kontrolowanie wróć.",
 
     videoUrl:
       "https://www.youtube.com/shorts/PkGesjlH7RQ"
   },
 
-
   {
     id: "resistance-band-overhead-triceps-extension",
-    name: "Prostowanie ramion z gumą nad głową",
+    name: "Prostowanie ramion z długą gumą nad głową",
 
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -1147,7 +1068,8 @@ const armExercises = [
     movementPattern: "elbow-extension",
 
     movementTags: [
-      "overhead"
+      "overhead",
+      "band"
     ],
 
     workoutRole: "secondary",
@@ -1176,12 +1098,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na gumie lub zamocuj ją nisko za sobą i poprowadź za głowę. Utrzymuj łokcie blisko głowy i wyprostuj ramiona nad głowę. Kontrolowanie wróć.",
+      "Stań na długiej gumie oporowej albo zamocuj ją nisko za sobą i poprowadź za głowę. Utrzymuj łokcie blisko głowy i wyprostuj ramiona nad głowę. Kontrolowanie wróć.",
 
     videoUrl:
       "https://www.youtube.com/watch?v=Yi_zNoIsNcc"
   },
-
 
   {
     id: "diamond-push-up",
@@ -1190,17 +1111,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "chest",
-      "shoulders",
-      "abs"
-    ],
+    secondaryBodyParts: ["chest", "shoulders", "abs"],
+    strongSecondaryBodyParts: ["chest"],
 
     requiredEquipment: [
-      {
-        type: "bodyweight",
-        quantity: 1
-      }
+      { type: "bodyweight", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -1212,7 +1127,8 @@ const armExercises = [
     movementTags: [
       "elbow-extension",
       "bodyweight",
-      "stability"
+      "close-grip",
+      "compound"
     ],
 
     workoutRole: "main",
@@ -1241,30 +1157,24 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Ustaw dłonie blisko siebie pod klatką. Prowadź łokcie blisko tułowia, opuść ciało w kontrolowany sposób i odepchnij się, skupiając się na pracy tricepsów.",
+      "Ustaw dłonie blisko siebie pod klatką piersiową. Prowadź łokcie blisko tułowia, opuść ciało w kontrolowany sposób, a następnie odepchnij się od podłoża. Utrzymuj napięty brzuch i stabilną pozycję ciała.",
 
     videoUrl:
       "https://www.youtube.com/shorts/PPTj-MW2tcs"
   },
 
-
   {
-    id: "bench-dip-floor-supported",
-    name: "Dipy tricepsowe z podparciem na podwyższeniu",
+    id: "bench-dip",
+    name: "Dipy tricepsowe na podwyższeniu",
 
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "chest"
-    ],
+    secondaryBodyParts: ["shoulders", "chest"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bodyweight",
-        quantity: 1
-      }
+      { type: "bodyweight", quantity: 1 }
     ],
 
     equipmentConditions: [
@@ -1277,7 +1187,8 @@ const armExercises = [
 
     movementTags: [
       "bodyweight",
-      "supported"
+      "supported",
+      "dip"
     ],
 
     workoutRole: "secondary",
@@ -1306,12 +1217,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Oprzyj dłonie na stabilnym podwyższeniu za plecami i utrzymuj biodra blisko podparcia. Ugnij łokcie w komfortowym zakresie, a następnie wyprostuj ramiona.",
+      "Oprzyj dłonie na stabilnym podwyższeniu za plecami i utrzymuj biodra blisko podparcia. Ugnij łokcie w komfortowym zakresie, a następnie wyprostuj ramiona. Nie opuszczaj barków głębiej, niż pozwala komfortowy zakres ruchu.",
 
     videoUrl:
       "https://www.youtube.com/shorts/dmVqZMnGins"
   },
-
 
   {
     id: "kettlebell-overhead-triceps-extension",
@@ -1320,16 +1230,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "kettlebell",
-        quantity: 1
-      }
+      { type: "kettlebell", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -1375,24 +1280,18 @@ const armExercises = [
       "https://www.youtube.com/shorts/3s_dRicgY5U"
   },
 
-
   {
     id: "resistance-band-triceps-kickback",
-    name: "Prostowanie ramienia z gumą w opadzie",
+    name: "Prostowanie ramienia z długą gumą w opadzie",
 
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -1403,7 +1302,8 @@ const armExercises = [
 
     movementTags: [
       "unilateral",
-      "kickback"
+      "kickback",
+      "band"
     ],
 
     workoutRole: "accessory",
@@ -1432,12 +1332,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na gumie lub zamocuj ją nisko. Pochyl tułów, ustaw ramię blisko ciała i wyprostuj przedramię do tyłu. Kontrolowanie wróć i po serii zmień stronę.",
+      "Stań na długiej gumie oporowej albo zamocuj ją nisko. Pochyl tułów, ustaw ramię blisko ciała i wyprostuj przedramię do tyłu. Kontrolowanie wróć i po serii zmień stronę.",
 
     videoUrl:
       "https://www.youtube.com/shorts/pivEbYg9uCY"
   },
-
 
   {
     id: "single-arm-dumbbell-triceps-extension",
@@ -1446,16 +1345,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 1
-      }
+      { type: "dumbbells", quantity: 1 }
     ],
 
     equipmentConditions: [],
@@ -1495,30 +1389,24 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Trzymaj jeden hantel nad głową i utrzymuj łokieć blisko głowy. Opuść ciężar za głowę poprzez ugięcie łokcia, następnie wyprostuj ramię. Po serii zmień stronę.",
+      "Trzymaj jeden hantel nad głową i utrzymuj łokieć blisko głowy. Opuść ciężar za głowę poprzez ugięcie łokcia, a następnie wyprostuj ramię. Po serii zmień stronę.",
 
     videoUrl:
       "https://www.youtube.com/shorts/_w3ggqafzqU"
   },
 
-
   {
     id: "resistance-band-close-grip-press",
-    name: "Wyciskanie gumy wąskim chwytem na triceps",
+    name: "Wyciskanie długiej gumy wąskim chwytem na triceps",
 
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "chest",
-      "shoulders"
-    ],
+    secondaryBodyParts: ["chest", "shoulders"],
+    strongSecondaryBodyParts: ["chest"],
 
     requiredEquipment: [
-      {
-        type: "bands",
-        quantity: 1
-      }
+      { type: "resistance-band", quantity: 1 }
     ],
 
     equipmentConditions: [
@@ -1531,7 +1419,9 @@ const armExercises = [
 
     movementTags: [
       "elbow-extension",
-      "close-grip"
+      "close-grip",
+      "band",
+      "compound"
     ],
 
     workoutRole: "secondary",
@@ -1560,12 +1450,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zamocuj gumę za sobą mniej więcej na wysokości klatki. Trzymaj dłonie blisko siebie i łokcie przy tułowiu. Wypchnij dłonie przed siebie i kontrolowanie wróć.",
+      "Zamocuj długą gumę oporową za sobą mniej więcej na wysokości klatki piersiowej. Trzymaj dłonie blisko siebie i łokcie przy tułowiu. Wypchnij dłonie przed siebie, a następnie kontrolowanie wróć.",
 
     videoUrl:
       "https://www.youtube.com/shorts/T0UJ0W-_yIE"
   },
-
 
   {
     id: "skull-crusher-floor-dumbbells",
@@ -1574,16 +1463,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "forearms"
-    ],
+    secondaryBodyParts: ["shoulders", "forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -1593,7 +1477,8 @@ const armExercises = [
     movementPattern: "elbow-extension",
 
     movementTags: [
-      "lying"
+      "lying",
+      "skull-crusher"
     ],
 
     workoutRole: "secondary",
@@ -1622,12 +1507,11 @@ const armExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Połóż się na plecach i trzymaj hantle nad klatką. Utrzymując ramiona możliwie nieruchomo, ugnij łokcie i opuść hantle w kierunku boków głowy. Następnie wyprostuj łokcie.",
+      "Połóż się na plecach i trzymaj hantle nad klatką piersiową. Utrzymując ramiona możliwie nieruchomo, ugnij łokcie i opuść hantle w kierunku boków głowy. Następnie wyprostuj łokcie.",
 
     videoUrl:
       "https://www.youtube.com/shorts/YRKjhLPLXho"
   },
-
 
   {
     id: "close-grip-dumbbell-floor-press",
@@ -1636,16 +1520,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "chest",
-      "shoulders"
-    ],
+    secondaryBodyParts: ["chest", "shoulders"],
+    strongSecondaryBodyParts: ["chest"],
 
     requiredEquipment: [
-      {
-        type: "dumbbells",
-        quantity: 2
-      }
+      { type: "dumbbells", quantity: 2 }
     ],
 
     equipmentConditions: [],
@@ -1656,7 +1535,9 @@ const armExercises = [
 
     movementTags: [
       "elbow-extension",
-      "close-grip"
+      "close-grip",
+      "compound",
+      "floor-press"
     ],
 
     workoutRole: "main",
@@ -1685,12 +1566,11 @@ const armExercises = [
     estimatedSeconds: 240,
 
     instructions:
-      "Połóż się na plecach i trzymaj hantle blisko siebie. Utrzymuj łokcie przy tułowiu, kontrolowanie opuść ciężary, a następnie wypchnij je do góry, skupiając się na tricepsach.",
+      "Połóż się na plecach i trzymaj hantle blisko siebie. Utrzymuj łokcie przy tułowiu, kontrolowanie opuść ciężary, a następnie wypchnij je do góry, skupiając się na pracy tricepsów.",
 
     videoUrl:
       "https://www.youtube.com/shorts/VkukgxNaUpQ"
   },
-
 
   {
     id: "bodyweight-triceps-extension",
@@ -1699,17 +1579,11 @@ const armExercises = [
     primaryBodyPart: "arms",
     armTarget: "triceps",
 
-    secondaryBodyParts: [
-      "shoulders",
-      "chest",
-      "abs"
-    ],
+    secondaryBodyParts: ["shoulders", "chest", "abs"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
-      {
-        type: "bodyweight",
-        quantity: 1
-      }
+      { type: "bodyweight", quantity: 1 }
     ],
 
     equipmentConditions: [
@@ -1764,5 +1638,4 @@ const armExercises = [
    UDOSTĘPNIENIE MODUŁU
    ========================================= */
 
-window.ArmExercises =
-  armExercises;
+window.ArmExercises = armExercises;

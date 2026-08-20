@@ -2,7 +2,7 @@
    K&K — Czas na Wycisk!
    BAZA ĆWICZEŃ — PLECY
    back.js
-   v1.0
+   v1.1
    ========================================= */
 
 const backExercises = [
@@ -19,6 +19,8 @@ const backExercises = [
       "shoulders",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -87,6 +89,8 @@ const backExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: ["biceps"],
+
     requiredEquipment: [
       {
         type: "pull-up-bar",
@@ -107,7 +111,8 @@ const backExercises = [
     movementPattern: "vertical-pull",
 
     movementTags: [
-      "supinated-grip"
+      "supinated-grip",
+      "biceps-emphasis"
     ],
 
     workoutRole: "main",
@@ -145,7 +150,7 @@ const backExercises = [
 
   {
     id: "assisted-pull-up-band",
-    name: "Podciąganie z pomocą gumy",
+    name: "Podciąganie z pomocą długiej gumy",
 
     primaryBodyPart: "back",
 
@@ -156,13 +161,15 @@ const backExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "pull-up-bar",
         quantity: 1
       },
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       },
       {
@@ -180,7 +187,8 @@ const backExercises = [
     movementPattern: "vertical-pull",
 
     movementTags: [
-      "assisted-variation"
+      "assisted-variation",
+      "band"
     ],
 
     workoutRole: "main",
@@ -209,7 +217,7 @@ const backExercises = [
     estimatedSeconds: 240,
 
     instructions:
-      "Zamocuj gumę do drążka i oprzyj na niej stopę lub kolano. Napnij brzuch, ściągnij łopatki i podciągnij ciało w kierunku drążka. Opuszczaj się kontrolowanie, pozwalając gumie jedynie pomagać w ruchu.",
+      "Zamocuj długą gumę oporową do drążka i oprzyj na niej stopę lub kolano. Napnij brzuch, ściągnij łopatki i podciągnij ciało w kierunku drążka. Opuszczaj się kontrolowanie, pozwalając gumie jedynie pomagać w ruchu.",
 
     videoUrl:
       "https://www.youtube.com/shorts/H2YH7zMIJm8"
@@ -228,6 +236,8 @@ const backExercises = [
       "shoulders",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -298,6 +308,8 @@ const backExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "pull-up-bar",
@@ -318,7 +330,8 @@ const backExercises = [
     movementPattern: "vertical-pull",
 
     movementTags: [
-      "wide-grip"
+      "wide-grip",
+      "pronated-grip"
     ],
 
     workoutRole: "main",
@@ -367,6 +380,8 @@ const backExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: ["biceps"],
+
     requiredEquipment: [
       {
         type: "pull-up-bar",
@@ -387,7 +402,8 @@ const backExercises = [
     movementPattern: "vertical-pull",
 
     movementTags: [
-      "close-grip"
+      "close-grip",
+      "pronated-grip"
     ],
 
     workoutRole: "main",
@@ -425,7 +441,7 @@ const backExercises = [
 
   {
     id: "resistance-band-lat-pulldown",
-    name: "Ściąganie gumy z góry do klatki",
+    name: "Ściąganie długiej gumy z góry do klatki",
 
     primaryBodyPart: "back",
 
@@ -435,9 +451,11 @@ const backExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -478,7 +496,7 @@ const backExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zamocuj gumę wysoko nad sobą. Usiądź lub uklęknij stabilnie i ściągnij dłonie w kierunku górnej części klatki, prowadząc łokcie w dół. Następnie powoli wyprostuj ramiona.",
+      "Zamocuj długą gumę oporową wysoko nad sobą. Usiądź lub uklęknij stabilnie i ściągnij dłonie w kierunku górnej części klatki, prowadząc łokcie w dół. Następnie powoli wyprostuj ramiona.",
 
     videoUrl:
       "https://www.youtube.com/shorts/YiMOntCKE8I"
@@ -487,7 +505,7 @@ const backExercises = [
 
   {
     id: "straight-arm-band-pulldown",
-    name: "Ściąganie gumy prostymi ramionami",
+    name: "Ściąganie długiej gumy prostymi ramionami",
 
     primaryBodyPart: "back",
 
@@ -497,9 +515,11 @@ const backExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -513,7 +533,8 @@ const backExercises = [
     movementPattern: "shoulder-extension",
 
     movementTags: [
-      "straight-arm"
+      "straight-arm",
+      "band"
     ],
 
     workoutRole: "accessory",
@@ -542,7 +563,7 @@ const backExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zamocuj gumę wysoko przed sobą. Utrzymując ramiona prawie wyprostowane, ściągnij dłonie w dół w kierunku bioder. Kontrolowanie wróć do pozycji wyjściowej.",
+      "Zamocuj długą gumę oporową wysoko przed sobą. Utrzymując ramiona prawie wyprostowane, ściągnij dłonie w dół w kierunku bioder. Kontrolowanie wróć do pozycji wyjściowej.",
 
     videoUrl:
       "https://www.youtube.com/watch?v=OzYLIIPrndQ"
@@ -560,6 +581,8 @@ const backExercises = [
       "forearms",
       "shoulders"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -624,6 +647,8 @@ const backExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -676,7 +701,7 @@ const backExercises = [
 
   {
     id: "resistance-band-row",
-    name: "Wiosłowanie gumą",
+    name: "Wiosłowanie długą gumą",
 
     primaryBodyPart: "back",
 
@@ -686,15 +711,17 @@ const backExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
 
     equipmentConditions: [
-      "anchor-any"
+      "anchor-mid"
     ],
 
     difficulty: 1,
@@ -729,7 +756,7 @@ const backExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zamocuj gumę stabilnie przed sobą. Przyciągnij dłonie w kierunku żeber, prowadząc łokcie blisko tułowia i ściągając łopatki. Następnie powoli wyprostuj ramiona.",
+      "Zamocuj długą gumę oporową stabilnie przed sobą. Przyciągnij dłonie w kierunku żeber, prowadząc łokcie blisko tułowia i ściągając łopatki. Następnie powoli wyprostuj ramiona.",
 
     videoUrl:
       "https://www.youtube.com/shorts/DWl-WW3ScEM"
@@ -748,6 +775,8 @@ const backExercises = [
       "shoulders",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -812,6 +841,8 @@ const backExercises = [
       "shoulders",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -883,6 +914,8 @@ const backExercises = [
       "triceps"
     ],
 
+    strongSecondaryBodyParts: ["abs"],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -905,7 +938,8 @@ const backExercises = [
     movementTags: [
       "unilateral",
       "stability",
-      "anti-rotation"
+      "anti-rotation",
+      "core-emphasis"
     ],
 
     workoutRole: "secondary",
@@ -943,7 +977,7 @@ const backExercises = [
 
   {
     id: "seated-resistance-band-row",
-    name: "Wiosłowanie gumą siedząc",
+    name: "Wiosłowanie długą gumą siedząc",
 
     primaryBodyPart: "back",
 
@@ -953,9 +987,11 @@ const backExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -967,7 +1003,8 @@ const backExercises = [
     movementPattern: "horizontal-pull",
 
     movementTags: [
-      "seated"
+      "seated",
+      "band"
     ],
 
     workoutRole: "secondary",
@@ -996,7 +1033,7 @@ const backExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Usiądź stabilnie i przełóż gumę wokół stóp. Wyprostuj plecy i przyciągnij dłonie w kierunku dolnych żeber, prowadząc łokcie blisko tułowia. Powoli wyprostuj ramiona.",
+      "Usiądź stabilnie i przełóż długą gumę oporową wokół stóp. Wyprostuj plecy i przyciągnij dłonie w kierunku dolnych żeber, prowadząc łokcie blisko tułowia. Powoli wyprostuj ramiona.",
 
     videoUrl:
       "https://www.youtube.com/shorts/bBpK36TAQww"
@@ -1005,7 +1042,7 @@ const backExercises = [
 
   {
     id: "single-arm-band-row",
-    name: "Wiosłowanie gumą jednorącz",
+    name: "Wiosłowanie długą gumą jednorącz",
 
     primaryBodyPart: "back",
 
@@ -1016,15 +1053,17 @@ const backExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
 
     equipmentConditions: [
-      "anchor-any"
+      "anchor-mid"
     ],
 
     difficulty: 1,
@@ -1032,7 +1071,8 @@ const backExercises = [
     movementPattern: "horizontal-pull",
 
     movementTags: [
-      "unilateral"
+      "unilateral",
+      "band"
     ],
 
     workoutRole: "secondary",
@@ -1061,7 +1101,7 @@ const backExercises = [
     estimatedSeconds: 210,
 
     instructions:
-      "Zamocuj gumę przed sobą. Przyciągnij ją jedną ręką w kierunku żeber lub biodra, prowadząc łokieć blisko ciała. Ściągnij łopatkę, powoli wyprostuj ramię i po serii zmień stronę.",
+      "Zamocuj długą gumę oporową przed sobą. Przyciągnij ją jedną ręką w kierunku żeber lub biodra, prowadząc łokieć blisko ciała. Ściągnij łopatkę, powoli wyprostuj ramię i po serii zmień stronę.",
 
     videoUrl:
       "https://www.youtube.com/watch?v=u_86gl58qBM"
@@ -1080,6 +1120,8 @@ const backExercises = [
       "shoulders",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -1143,6 +1185,8 @@ const backExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: ["shoulders"],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -1157,7 +1201,8 @@ const backExercises = [
     movementPattern: "horizontal-abduction",
 
     movementTags: [
-      "scapular-retraction"
+      "scapular-retraction",
+      "rear-delt-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1195,7 +1240,7 @@ const backExercises = [
 
   {
     id: "resistance-band-face-pull",
-    name: "Face pull z gumą",
+    name: "Face pull z długą gumą",
 
     primaryBodyPart: "back",
 
@@ -1204,15 +1249,17 @@ const backExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: ["shoulders"],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
 
     equipmentConditions: [
-      "anchor-any"
+      "anchor-mid"
     ],
 
     difficulty: 1,
@@ -1221,7 +1268,9 @@ const backExercises = [
 
     movementTags: [
       "scapular-retraction",
-      "external-rotation"
+      "external-rotation",
+      "band",
+      "rear-delt-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1250,7 +1299,7 @@ const backExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Zamocuj gumę mniej więcej na wysokości twarzy. Przyciągnij dłonie w kierunku twarzy, prowadząc łokcie szeroko i ściągając łopatki. Następnie powoli wyprostuj ramiona.",
+      "Zamocuj długą gumę oporową mniej więcej na wysokości twarzy. Przyciągnij dłonie w kierunku twarzy, prowadząc łokcie szeroko i ściągając łopatki. Następnie powoli wyprostuj ramiona.",
 
     videoUrl:
       "https://www.youtube.com/shorts/1s-0WtJMsu8"
@@ -1267,6 +1316,8 @@ const backExercises = [
       "forearms",
       "shoulders"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -1318,7 +1369,7 @@ const backExercises = [
 
   {
     id: "resistance-band-reverse-fly",
-    name: "Odwrotne rozpiętki z gumą",
+    name: "Odwrotne rozpiętki z długą gumą",
 
     primaryBodyPart: "back",
 
@@ -1327,9 +1378,11 @@ const backExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: ["shoulders"],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -1341,7 +1394,9 @@ const backExercises = [
     movementPattern: "horizontal-abduction",
 
     movementTags: [
-      "scapular-retraction"
+      "scapular-retraction",
+      "band",
+      "rear-delt-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1370,7 +1425,7 @@ const backExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Trzymaj gumę przed sobą na wysokości klatki. Rozciągnij ją na boki, prowadząc dłonie szeroko i ściągając łopatki. Następnie powoli wróć do pozycji wyjściowej.",
+      "Trzymaj długą gumę oporową przed sobą na wysokości klatki. Rozciągnij ją na boki, prowadząc dłonie szeroko i ściągając łopatki. Następnie powoli wróć do pozycji wyjściowej.",
 
     videoUrl:
       "https://www.youtube.com/shorts/hrXMJIxzGlM"
@@ -1379,7 +1434,7 @@ const backExercises = [
 
   {
     id: "resistance-band-pull-apart",
-    name: "Rozciąganie gumy przed klatką",
+    name: "Rozciąganie długiej gumy przed klatką",
 
     primaryBodyPart: "back",
 
@@ -1388,9 +1443,11 @@ const backExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: ["shoulders"],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -1403,7 +1460,9 @@ const backExercises = [
 
     movementTags: [
       "scapular-retraction",
-      "activation"
+      "activation",
+      "band",
+      "rear-delt-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1432,7 +1491,7 @@ const backExercises = [
     estimatedSeconds: 150,
 
     instructions:
-      "Trzymaj gumę przed sobą z ramionami prawie wyprostowanymi. Rozciągnij ją na boki i ściągnij łopatki do siebie. Powoli wróć, nie unosząc barków.",
+      "Trzymaj długą gumę oporową przed sobą z ramionami prawie wyprostowanymi. Rozciągnij ją na boki i ściągnij łopatki do siebie. Powoli wróć, nie unosząc barków.",
 
     videoUrl:
       "https://www.youtube.com/shorts/SuvO4TBwSu4"
@@ -1441,7 +1500,7 @@ const backExercises = [
 
   {
     id: "resistance-band-shrug",
-    name: "Szrugsy z gumą",
+    name: "Szrugsy z długą gumą",
 
     primaryBodyPart: "back",
 
@@ -1450,9 +1509,11 @@ const backExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -1491,7 +1552,7 @@ const backExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na gumie i chwyć jej końce po bokach ciała. Unieś barki pionowo w kierunku uszu, zatrzymaj ruch na moment, a następnie kontrolowanie opuść barki.",
+      "Stań na długiej gumie oporowej i chwyć jej końce po bokach ciała. Unieś barki pionowo w kierunku uszu, zatrzymaj ruch na moment, a następnie kontrolowanie opuść barki.",
 
     videoUrl:
       "https://www.youtube.com/shorts/OjHqkDWGXlw"
@@ -1509,6 +1570,8 @@ const backExercises = [
       "shoulders",
       "abs"
     ],
+
+    strongSecondaryBodyParts: ["forearms"],
 
     requiredEquipment: [
       {
@@ -1531,7 +1594,8 @@ const backExercises = [
 
     movementTags: [
       "grip",
-      "shoulder-stability"
+      "shoulder-stability",
+      "forearm-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1578,6 +1642,8 @@ const backExercises = [
       "forearms",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -1648,6 +1714,11 @@ const backExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: [
+      "glutes",
+      "hamstrings"
+    ],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -1662,7 +1733,8 @@ const backExercises = [
     movementPattern: "trunk-extension",
 
     movementTags: [
-      "stability"
+      "stability",
+      "posterior-chain"
     ],
 
     workoutRole: "accessory",
@@ -1708,6 +1780,8 @@ const backExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: ["shoulders"],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -1723,7 +1797,8 @@ const backExercises = [
 
     movementTags: [
       "y-raise",
-      "activation"
+      "activation",
+      "shoulder-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1769,6 +1844,8 @@ const backExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: ["shoulders"],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -1785,7 +1862,8 @@ const backExercises = [
     movementTags: [
       "scapular-retraction",
       "t-raise",
-      "activation"
+      "activation",
+      "shoulder-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1831,6 +1909,8 @@ const backExercises = [
       "shoulders"
     ],
 
+    strongSecondaryBodyParts: ["shoulders"],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -1848,7 +1928,8 @@ const backExercises = [
       "scapular-retraction",
       "external-rotation",
       "w-raise",
-      "activation"
+      "activation",
+      "shoulder-emphasis"
     ],
 
     workoutRole: "accessory",
@@ -1894,6 +1975,8 @@ const backExercises = [
       "shoulders",
       "glutes"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {

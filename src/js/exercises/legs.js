@@ -2,7 +2,7 @@
    K&K — Czas na Wycisk!
    BAZA ĆWICZEŃ — NOGI
    legs.js
-   v1.0
+   v1.1
    ========================================= */
 
 const legExercises = [
@@ -13,6 +13,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -38,6 +39,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "back"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [],
     equipmentOptions: [
       [
@@ -69,6 +71,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "back"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -94,6 +97,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -119,6 +123,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -144,6 +149,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -169,6 +175,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -194,6 +201,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -219,6 +227,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -244,6 +253,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -269,6 +279,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -294,6 +305,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -319,6 +331,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -344,6 +357,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -369,6 +383,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -394,6 +409,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "adductors", "abs"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -419,6 +435,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "adductors", "abs"],
     legTarget: "adductors",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [],
     equipmentOptions: [
       [
@@ -450,6 +467,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -475,6 +493,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -500,6 +519,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs", "forearms"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -525,6 +545,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "hamstrings", "back", "forearms", "abs"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -550,6 +571,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "hamstrings", "back", "forearms", "abs"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -575,6 +597,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "hamstrings", "back", "abs"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -600,6 +623,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "hamstrings", "back", "abs", "forearms"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -625,6 +649,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "hamstrings", "back", "abs", "forearms"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -650,6 +675,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["calves", "abs"],
     legTarget: "calves",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -675,6 +701,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["calves", "forearms", "abs"],
     legTarget: "calves",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -700,6 +727,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["calves", "forearms", "abs"],
     legTarget: "calves",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -725,6 +753,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -750,6 +779,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "calves", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -775,6 +805,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "adductors", "abs"],
     legTarget: "adductors",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -800,6 +831,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "adductors", "abs", "forearms"],
     legTarget: "adductors",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
     ],
@@ -825,6 +857,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "adductors", "abs", "forearms"],
     legTarget: "adductors",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -846,10 +879,11 @@ const legExercises = [
 
   {
     id: "resistance-band-leg-curl",
-    name: "Uginanie nóg z gumą",
+    name: "Uginanie nóg z długą gumą",
     primaryBodyPart: "legs",
     secondaryBodyParts: ["hamstrings", "glutes"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "resistance-band", quantity: 1 }
     ],
@@ -865,7 +899,7 @@ const legExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions: "Zamocuj gumę nisko za sobą i załóż jej drugi koniec na kostkę. Stań stabilnie lub połóż się na brzuchu, zależnie od rodzaju gumy i sposobu mocowania. Ugnij kolano, przyciągając piętę w kierunku pośladka, bez unoszenia biodra i bez wykonywania ruchu z zamachu. Następnie kontrolowanie wyprostuj nogę i po wykonaniu serii zmień stronę.",
+    instructions: "Zamocuj długą gumę oporową nisko za sobą i załóż jej drugi koniec na kostkę. Stań stabilnie lub połóż się na brzuchu, zależnie od rodzaju gumy i sposobu mocowania. Ugnij kolano, przyciągając piętę w kierunku pośladka, bez unoszenia biodra i bez wykonywania ruchu z zamachu. Następnie kontrolowanie wyprostuj nogę i po wykonaniu serii zmień stronę.",
     videoUrl: "https://www.youtube.com/shorts/gTVC0qZJLzk"
   },
 
@@ -875,6 +909,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["hamstrings", "glutes", "abs"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -900,6 +935,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["hamstrings", "glutes", "abs"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -925,6 +961,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["abs", "calves"],
     legTarget: "quads",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -950,6 +987,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "adductors", "abs"],
     legTarget: "adductors",
+    strongSecondaryBodyParts: [],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -975,6 +1013,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "calves", "abs"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -1000,6 +1039,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "calves", "abs"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -1025,6 +1065,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "calves", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -1050,6 +1091,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "calves", "abs"],
     legTarget: "quads",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -1075,6 +1117,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "hamstrings", "back", "abs", "forearms"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }
     ],
@@ -1100,6 +1143,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["glutes", "adductors", "abs"],
     legTarget: "mixed",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -1125,6 +1169,7 @@ const legExercises = [
     primaryBodyPart: "legs",
     secondaryBodyParts: ["hamstrings", "glutes", "back", "abs"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "bodyweight", quantity: 1 }
     ],
@@ -1146,10 +1191,11 @@ const legExercises = [
 
   {
     id: "resistance-band-good-morning",
-    name: "Good morning z gumą",
+    name: "Good morning z długą gumą",
     primaryBodyPart: "legs",
     secondaryBodyParts: ["hamstrings", "glutes", "back", "abs"],
     legTarget: "hamstrings",
+    strongSecondaryBodyParts: ["glutes"],
     requiredEquipment: [
       { type: "resistance-band", quantity: 1 }
     ],
@@ -1165,7 +1211,7 @@ const legExercises = [
     setRange: { min: 3, max: 4 },
     restRange: { min: 45, max: 75 },
     estimatedSeconds: 180,
-    instructions: "Stań na środku gumy i przełóż jej drugi koniec za kark lub górną część pleców. Lekko ugnij kolana, napnij brzuch i cofaj biodra, pochylając tułów do przodu przy zachowaniu neutralnej pozycji pleców. Gdy poczujesz wyraźne rozciągnięcie tyłu uda, napnij pośladki i wyprostuj biodra, wracając do pozycji stojącej.",
+    instructions: "Stań na środku długiej gumy oporowej i przełóż jej drugi koniec za kark lub górną część pleców. Lekko ugnij kolana, napnij brzuch i cofaj biodra, pochylając tułów do przodu przy zachowaniu neutralnej pozycji pleców. Gdy poczujesz wyraźne rozciągnięcie tyłu uda, napnij pośladki i wyprostuj biodra, wracając do pozycji stojącej.",
     videoUrl: "https://www.youtube.com/shorts/rQmkPvfcaSU"
   }
 

@@ -2,7 +2,7 @@
    K&K — Czas na Wycisk!
    BAZA ĆWICZEŃ — BRZUCH / CORE
    core.js
-   v1.0
+   v1.1
    ========================================= */
 
 const coreExercises = [
@@ -12,10 +12,9 @@ const coreExercises = [
     name: "Spięcia brzucha",
     primaryBodyPart: "abs",
     secondaryBodyParts: [],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "trunk-flexion",
@@ -28,10 +27,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 150,
-    instructions:
-      "Połóż się na plecach, ugnij kolana i oprzyj stopy o podłoże. Napnij brzuch i unieś górną część pleców, kierując żebra w stronę miednicy. Nie ciągnij głowy rękami i nie odrywaj dolnej części pleców od podłoża.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Dbr2J9375oo"
+    instructions: "Połóż się na plecach, ugnij kolana i oprzyj stopy o podłoże. Napnij brzuch i unieś górną część pleców, kierując żebra w stronę miednicy. Nie ciągnij głowy rękami i nie odrywaj dolnej części pleców od podłoża.",
+    videoUrl: "https://www.youtube.com/shorts/Dbr2J9375oo"
   },
 
   {
@@ -39,10 +36,9 @@ const coreExercises = [
     name: "Odwrotne spięcia brzucha",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "pelvic-flexion",
@@ -55,10 +51,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 150,
-    instructions:
-      "Połóż się na plecach i unieś nogi z kolanami ugiętymi około 90 stopni. Przyciągnij kolana w kierunku klatki i lekko podwiń miednicę. Nie wykonuj ruchu z zamachu.",
-    videoUrl:
-      "https://www.youtube.com/shorts/eX9vjAsdWvY"
+    instructions: "Połóż się na plecach i unieś nogi z kolanami ugiętymi około 90 stopni. Przyciągnij kolana w kierunku klatki i lekko podwiń miednicę. Nie wykonuj ruchu z zamachu.",
+    videoUrl: "https://www.youtube.com/shorts/eX9vjAsdWvY"
   },
 
   {
@@ -66,10 +60,9 @@ const coreExercises = [
     name: "Unoszenie nóg leżąc",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "hip-flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "hip-flexion",
@@ -82,10 +75,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 45, max: 75 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się na plecach z wyprostowanymi nogami. Unieś nogi do góry, utrzymując napięty brzuch i dolną część pleców możliwie blisko podłoża. Opuszczaj nogi powoli i tylko tak nisko, jak pozwala zachować prawidłową pozycję pleców.",
-    videoUrl:
-      "https://www.youtube.com/shorts/FijNSgahpz0"
+    instructions: "Połóż się na plecach z wyprostowanymi nogami. Unieś nogi do góry, utrzymując napięty brzuch i dolną część pleców możliwie blisko podłoża. Opuszczaj nogi powoli i tylko tak nisko, jak pozwala zachować prawidłową pozycję pleców.",
+    videoUrl: "https://www.youtube.com/shorts/FijNSgahpz0"
   },
 
   {
@@ -93,10 +84,9 @@ const coreExercises = [
     name: "Deska",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "glutes", "back"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "anti-extension",
@@ -109,10 +99,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Oprzyj przedramiona i palce stóp o podłoże. Utrzymuj ciało w jednej linii, napnij brzuch i pośladki. Nie pozwalaj biodrom opadać ani unosić się zbyt wysoko.",
-    videoUrl:
-      "https://www.youtube.com/shorts/xe2MXatLTUw"
+    instructions: "Oprzyj przedramiona i palce stóp o podłoże. Utrzymuj ciało w jednej linii, napnij brzuch i pośladki. Nie pozwalaj biodrom opadać ani unosić się zbyt wysoko.",
+    videoUrl: "https://www.youtube.com/shorts/xe2MXatLTUw"
   },
 
   {
@@ -120,10 +108,9 @@ const coreExercises = [
     name: "Brzuszki rowerowe",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-rotation",
@@ -136,10 +123,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się na plecach i unieś nogi. Przyciągaj jedno kolano do klatki, jednocześnie obracając tułów tak, aby przeciwny łokieć zbliżał się do kolana. Zmieniaj strony płynnie i kontrolowanie.",
-    videoUrl:
-      "https://www.youtube.com/shorts/_I2Fiy7ueNw"
+    instructions: "Połóż się na plecach i unieś nogi. Przyciągaj jedno kolano do klatki, jednocześnie obracając tułów tak, aby przeciwny łokieć zbliżał się do kolana. Zmieniaj strony płynnie i kontrolowanie.",
+    videoUrl: "https://www.youtube.com/shorts/_I2Fiy7ueNw"
   },
 
   {
@@ -147,10 +132,9 @@ const coreExercises = [
     name: "Skręty tułowia w siadzie",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "back"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-rotation",
@@ -163,10 +147,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Usiądź z ugiętymi kolanami i lekko odchyl tułów. Obracaj klatkę piersiową naprzemiennie w lewo i w prawo. Utrzymuj napięty brzuch i nie wykonuj ruchu jedynie ramionami.",
-    videoUrl:
-      "https://www.youtube.com/shorts/-cPtvFdT8dc"
+    instructions: "Usiądź z ugiętymi kolanami i lekko odchyl tułów. Obracaj klatkę piersiową naprzemiennie w lewo i w prawo. Utrzymuj napięty brzuch i nie wykonuj ruchu jedynie ramionami.",
+    videoUrl: "https://www.youtube.com/shorts/-cPtvFdT8dc"
   },
 
   {
@@ -174,10 +156,9 @@ const coreExercises = [
     name: "Deska bokiem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-lateral-flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-lateral-flexion",
@@ -190,10 +171,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Oprzyj przedramię pod barkiem i unieś biodra. Utrzymuj ciało w jednej linii, nie pozwalając biodrom opadać ani obracać się do przodu. Po wykonaniu czasu zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/BFOyHDlY2UE"
+    instructions: "Oprzyj przedramię pod barkiem i unieś biodra. Utrzymuj ciało w jednej linii, nie pozwalając biodrom opadać ani obracać się do przodu. Po wykonaniu czasu zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/BFOyHDlY2UE"
   },
 
   {
@@ -201,10 +180,9 @@ const coreExercises = [
     name: "Mountain climbers",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "hip-flexors", "legs"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "dynamic-hip-flexion",
@@ -217,10 +195,32 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w wysokiej desce. Naprzemiennie przyciągaj kolana w kierunku klatki piersiowej, zachowując stabilne biodra i napięty brzuch.",
-    videoUrl:
-      "https://www.youtube.com/shorts/1wDQznFSh3E"
+    instructions: "Ustaw się w wysokiej desce. Naprzemiennie przyciągaj kolana w kierunku klatki piersiowej, zachowując stabilne biodra i napięty brzuch.",
+    videoUrl: "https://www.youtube.com/shorts/1wDQznFSh3E"
+  },
+
+  {
+    id: "bird-dog",
+    name: "Bird dog",
+    primaryBodyPart: "abs",
+    secondaryBodyParts: ["back", "glutes", "shoulders"],
+    strongSecondaryBodyParts: ["back", "glutes"],
+    coreFunction: "anti-rotation",
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
+    equipmentConditions: [],
+    difficulty: 1,
+    movementPattern: "contralateral-stability",
+    movementTags: ["bird-dog", "contralateral", "stability"],
+    workoutRole: "main",
+    fatigue: 1,
+    timed: false,
+    repRange: { min: 8, max: 12 },
+    timeRange: null,
+    setRange: { min: 2, max: 4 },
+    restRange: { min: 30, max: 60 },
+    estimatedSeconds: 150,
+    instructions: "Ustaw się w klęku podpartym. Napnij brzuch i jednocześnie wyprostuj przeciwną rękę oraz nogę, utrzymując biodra i tułów nieruchomo. Wróć kontrolowanie do pozycji wyjściowej i zmień stronę.",
+    videoUrl: ""
   },
 
   {
@@ -228,10 +228,9 @@ const coreExercises = [
     name: "Dead bug",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "back"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "anti-extension",
@@ -244,10 +243,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 150,
-    instructions:
-      "Połóż się na plecach, unieś nogi z kolanami około 90 stopni i wyprostuj ręce nad klatką. Dociśnij lędźwie do podłoża. Opuszczaj jednocześnie przeciwną rękę i nogę bez utraty napięcia brzucha.",
-    videoUrl:
-      "https://www.youtube.com/shorts/DqLL45uk2Tk"
+    instructions: "Połóż się na plecach, unieś nogi z kolanami około 90 stopni i wyprostuj ręce nad klatką. Dociśnij lędźwie do podłoża. Opuszczaj jednocześnie przeciwną rękę i nogę bez utraty napięcia brzucha.",
+    videoUrl: "https://www.youtube.com/shorts/DqLL45uk2Tk"
   },
 
   {
@@ -255,10 +252,9 @@ const coreExercises = [
     name: "Hollow body hold",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-extension",
@@ -271,10 +267,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się na plecach i dociśnij odcinek lędźwiowy do podłoża. Unieś łopatki i nogi nad ziemię. Utrzymuj napięcie bez odrywania dolnej części pleców.",
-    videoUrl:
-      "https://www.youtube.com/shorts/YHBp6fvXYcI"
+    instructions: "Połóż się na plecach i dociśnij odcinek lędźwiowy do podłoża. Unieś łopatki i nogi nad ziemię. Utrzymuj napięcie bez odrywania dolnej części pleców.",
+    videoUrl: "https://www.youtube.com/shorts/YHBp6fvXYcI"
   },
 
   {
@@ -282,10 +276,9 @@ const coreExercises = [
     name: "Nożyce pionowe",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "alternating-hip-flexion",
@@ -298,10 +291,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się na plecach, unieś wyprostowane nogi nad podłoże i wykonuj krótkie naprzemienne ruchy góra-dół. Utrzymuj napięty brzuch i dolną część pleców przy ziemi.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Cz6iXfmgtiw"
+    instructions: "Połóż się na plecach, unieś wyprostowane nogi nad podłoże i wykonuj krótkie naprzemienne ruchy góra-dół. Utrzymuj napięty brzuch i dolną część pleców przy ziemi.",
+    videoUrl: "https://www.youtube.com/shorts/Cz6iXfmgtiw"
   },
 
   {
@@ -309,10 +300,9 @@ const coreExercises = [
     name: "Dotykanie pięt w leżeniu",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "lateral-flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "lateral-flexion",
@@ -325,10 +315,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 150,
-    instructions:
-      "Połóż się na plecach z ugiętymi kolanami. Unieś lekko łopatki i wykonuj naprzemienne skłony boczne, sięgając dłonią w kierunku pięty po tej samej stronie.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Fg4ryGff51M"
+    instructions: "Połóż się na plecach z ugiętymi kolanami. Unieś lekko łopatki i wykonuj naprzemienne skłony boczne, sięgając dłonią w kierunku pięty po tej samej stronie.",
+    videoUrl: "https://www.youtube.com/shorts/Fg4ryGff51M"
   },
 
   {
@@ -336,10 +324,9 @@ const coreExercises = [
     name: "Dotykanie palców stóp",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "trunk-flexion",
@@ -352,10 +339,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 150,
-    instructions:
-      "Połóż się na plecach i unieś nogi pionowo. Unieś łopatki, sięgając dłońmi w stronę stóp. Następnie kontrolowanie wróć, utrzymując nogi stabilnie.",
-    videoUrl:
-      "https://www.youtube.com/shorts/20P7MU4Oaec"
+    instructions: "Połóż się na plecach i unieś nogi pionowo. Unieś łopatki, sięgając dłońmi w stronę stóp. Następnie kontrolowanie wróć, utrzymując nogi stabilnie.",
+    videoUrl: "https://www.youtube.com/shorts/20P7MU4Oaec"
   },
 
   {
@@ -363,10 +348,9 @@ const coreExercises = [
     name: "V-ups",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 3,
     movementPattern: "trunk-and-hip-flexion",
@@ -379,10 +363,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 45, max: 75 },
     estimatedSeconds: 180,
-    instructions:
-      "Leżąc na plecach jednocześnie unieś wyprostowane nogi i górną część tułowia, sięgając dłońmi w kierunku stóp. Nie używaj zamachu.",
-    videoUrl:
-      "https://www.youtube.com/shorts/saHkR_MvIdA"
+    instructions: "Leżąc na plecach jednocześnie unieś wyprostowane nogi i górną część tułowia, sięgając dłońmi w kierunku stóp. Nie używaj zamachu.",
+    videoUrl: "https://www.youtube.com/shorts/saHkR_MvIdA"
   },
 
   {
@@ -390,10 +372,9 @@ const coreExercises = [
     name: "Przyciąganie kolan do klatki w siadzie",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "hip-flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-and-hip-flexion",
@@ -406,10 +387,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Usiądź, lekko odchyl tułów i unieś stopy. Przyciągnij kolana w stronę klatki, a następnie wyprostuj nogi bez odkładania ich na podłoże.",
-    videoUrl:
-      "https://www.youtube.com/shorts/x2umFUuBLRw"
+    instructions: "Usiądź, lekko odchyl tułów i unieś stopy. Przyciągnij kolana w stronę klatki, a następnie wyprostuj nogi bez odkładania ich na podłoże.",
+    videoUrl: "https://www.youtube.com/shorts/x2umFUuBLRw"
   },
 
   {
@@ -417,11 +396,9 @@ const coreExercises = [
     name: "Unoszenie kolan w zwisie",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "forearms", "shoulders"],
+    strongSecondaryBodyParts: [],
     coreFunction: "hip-flexion",
-    requiredEquipment: [
-      { type: "pull-up-bar", quantity: 1 },
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "pull-up-bar", quantity: 1 }, { type: "bodyweight", quantity: 1 }],
     equipmentConditions: ["bar-high"],
     difficulty: 2,
     movementPattern: "hanging-hip-flexion",
@@ -434,10 +411,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 45, max: 90 },
     estimatedSeconds: 180,
-    instructions:
-      "Zawiśnij na drążku i ogranicz kołysanie. Przyciągnij kolana do klatki, lekko podwijając miednicę. Następnie kontrolowanie opuść nogi.",
-    videoUrl:
-      "https://www.youtube.com/shorts/menMCCf0PbE"
+    instructions: "Zawiśnij na drążku i ogranicz kołysanie. Przyciągnij kolana do klatki, lekko podwijając miednicę. Następnie kontrolowanie opuść nogi.",
+    videoUrl: "https://www.youtube.com/shorts/menMCCf0PbE"
   },
 
   {
@@ -445,11 +420,9 @@ const coreExercises = [
     name: "Unoszenie prostych nóg w zwisie",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "forearms", "shoulders"],
+    strongSecondaryBodyParts: [],
     coreFunction: "hip-flexion",
-    requiredEquipment: [
-      { type: "pull-up-bar", quantity: 1 },
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "pull-up-bar", quantity: 1 }, { type: "bodyweight", quantity: 1 }],
     equipmentConditions: ["bar-high"],
     difficulty: 3,
     movementPattern: "hanging-hip-flexion",
@@ -462,10 +435,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 60, max: 90 },
     estimatedSeconds: 210,
-    instructions:
-      "Zawiśnij stabilnie na drążku. Unieś możliwie wyprostowane nogi przed siebie co najmniej do wysokości bioder. Kontrolowanie opuść je bez rozpędzania ciała.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Z9ryXTU4FBQ"
+    instructions: "Zawiśnij stabilnie na drążku. Unieś możliwie wyprostowane nogi przed siebie co najmniej do wysokości bioder. Kontrolowanie opuść je bez rozpędzania ciała.",
+    videoUrl: "https://www.youtube.com/shorts/Z9ryXTU4FBQ"
   },
 
   {
@@ -473,10 +444,9 @@ const coreExercises = [
     name: "Deska z dotykaniem barków",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "triceps", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-rotation",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-rotation",
@@ -489,10 +459,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w wysokiej desce. Oderwij jedną dłoń i dotknij przeciwnego barku, starając się nie obracać bioder. Powtórz drugą stroną.",
-    videoUrl:
-      "https://www.youtube.com/shorts/VfwCQ14soUo"
+    instructions: "Ustaw się w wysokiej desce. Oderwij jedną dłoń i dotknij przeciwnego barku, starając się nie obracać bioder. Powtórz drugą stroną.",
+    videoUrl: "https://www.youtube.com/shorts/VfwCQ14soUo"
   },
 
   {
@@ -500,10 +468,9 @@ const coreExercises = [
     name: "Deska z przyciąganiem kolana do łokcia",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "hip-flexors", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "plank-hip-flexion",
@@ -516,10 +483,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w wysokiej desce. Przyciągnij kolano w kierunku łokcia po tej samej stronie, zachowując stabilny tułów. Wróć i zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/vhnQR5lCF-U"
+    instructions: "Ustaw się w wysokiej desce. Przyciągnij kolano w kierunku łokcia po tej samej stronie, zachowując stabilny tułów. Wróć i zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/vhnQR5lCF-U"
   },
 
   {
@@ -527,10 +492,9 @@ const coreExercises = [
     name: "Deska bokiem z opuszczaniem bioder",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "lateral-flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "lateral-flexion",
@@ -543,10 +507,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w desce bokiem. Kontrolowanie opuść biodra w kierunku podłoża, a następnie unieś je z powrotem. Po serii zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/fZ9PoqS-Yi0"
+    instructions: "Ustaw się w desce bokiem. Kontrolowanie opuść biodra w kierunku podłoża, a następnie unieś je z powrotem. Po serii zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/fZ9PoqS-Yi0"
   },
 
   {
@@ -554,10 +516,9 @@ const coreExercises = [
     name: "Wyjścia z podporu do deski",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "triceps", "back"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-extension",
@@ -570,25 +531,22 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Pochyl się i oprzyj dłonie o podłoże. Przesuwaj je do przodu aż do wysokiej deski. Utrzymaj napięty brzuch, a następnie wróć dłońmi w kierunku stóp.",
-    videoUrl:
-      "https://www.youtube.com/shorts/AU9X0HVJCPI"
+    instructions: "Pochyl się i oprzyj dłonie o podłoże. Przesuwaj je do przodu aż do wysokiej deski. Utrzymaj napięty brzuch, a następnie wróć dłońmi w kierunku stóp.",
+    videoUrl: "https://www.youtube.com/shorts/AU9X0HVJCPI"
   },
 
   {
     id: "resistance-band-woodchop",
-    name: "Ściąganie gumy po skosie",
+    name: "Ściąganie długiej gumy po skosie",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "back", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "bands", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "resistance-band", quantity: 1 }],
     equipmentConditions: ["anchor-high"],
     difficulty: 2,
     movementPattern: "trunk-rotation",
-    movementTags: ["woodchop", "diagonal"],
+    movementTags: ["woodchop", "diagonal", "band"],
     workoutRole: "main",
     fatigue: 3,
     timed: false,
@@ -597,10 +555,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Zamocuj gumę wysoko z boku. Chwyć ją oburącz i prowadź po skosie w dół w kierunku przeciwnego biodra, obracając tułów kontrolowanie. Po serii zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/64RP6a4zK7Q"
+    instructions: "Zamocuj długą gumę oporową wysoko z boku. Chwyć ją oburącz i prowadź po skosie w dół w kierunku przeciwnego biodra, obracając tułów kontrolowanie. Po serii zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/64RP6a4zK7Q"
   },
 
   {
@@ -608,10 +564,9 @@ const coreExercises = [
     name: "Skręty tułowia z hantlem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "shoulders"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "dumbbells", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "dumbbells", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-rotation",
@@ -624,10 +579,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Usiądź i lekko odchyl tułów. Trzymaj jeden hantel oburącz przed klatką i obracaj tułów naprzemiennie na obie strony.",
-    videoUrl:
-      "https://www.youtube.com/shorts/aRUMRbl7KS4"
+    instructions: "Usiądź i lekko odchyl tułów. Trzymaj jeden hantel oburącz przed klatką i obracaj tułów naprzemiennie na obie strony.",
+    videoUrl: "https://www.youtube.com/shorts/aRUMRbl7KS4"
   },
 
   {
@@ -635,10 +588,9 @@ const coreExercises = [
     name: "Skręty tułowia z kettlebell",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "shoulders"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "kettlebell", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "kettlebell", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-rotation",
@@ -651,10 +603,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Usiądź i lekko odchyl tułów. Trzymaj kettlebell oburącz przed klatką i obracaj tułów naprzemiennie na obie strony.",
-    videoUrl:
-      "https://www.youtube.com/shorts/rTTBzWIsUIM"
+    instructions: "Usiądź i lekko odchyl tułów. Trzymaj kettlebell oburącz przed klatką i obracaj tułów naprzemiennie na obie strony.",
+    videoUrl: "https://www.youtube.com/shorts/rTTBzWIsUIM"
   },
 
   {
@@ -662,10 +612,9 @@ const coreExercises = [
     name: "Skłony boczne z hantlem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
     coreFunction: "lateral-flexion",
-    requiredEquipment: [
-      { type: "dumbbells", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "dumbbells", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "lateral-flexion",
@@ -678,10 +627,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Trzymaj jeden hantel przy boku. Wykonaj kontrolowany skłon tułowia w bok, a następnie wróć do pionu. Po serii zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/44DazvtgpGE"
+    instructions: "Trzymaj jeden hantel przy boku. Wykonaj kontrolowany skłon tułowia w bok, a następnie wróć do pionu. Po serii zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/44DazvtgpGE"
   },
 
   {
@@ -689,10 +636,9 @@ const coreExercises = [
     name: "Skłony boczne z kettlebell",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
     coreFunction: "lateral-flexion",
-    requiredEquipment: [
-      { type: "kettlebell", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "kettlebell", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 1,
     movementPattern: "lateral-flexion",
@@ -705,10 +651,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Trzymaj kettlebell w jednej dłoni przy boku. Wykonaj kontrolowany skłon tułowia w bok, a następnie wróć do pionu. Po serii zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Rl_MsU1yI44"
+    instructions: "Trzymaj kettlebell w jednej dłoni przy boku. Wykonaj kontrolowany skłon tułowia w bok, a następnie wróć do pionu. Po serii zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/Rl_MsU1yI44"
   },
 
   {
@@ -716,19 +660,13 @@ const coreExercises = [
     name: "Spacer farmera jednorącz z ciężarem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["forearms", "shoulders", "back", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-lateral-flexion",
-
     requiredEquipment: [],
-
     equipmentOptions: [
-      [
-        { type: "dumbbells", quantity: 1 }
-      ],
-      [
-        { type: "kettlebell", quantity: 1 }
-      ]
+      [{ type: "dumbbells", quantity: 1 }],
+      [{ type: "kettlebell", quantity: 1 }]
     ],
-
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "loaded-carry",
@@ -741,10 +679,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Trzymaj hantel albo kettlebell w jednej dłoni. Maszeruj, utrzymując pionowy tułów i nie pozwalając ciężarowi przechylać ciała. Po czasie zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/w76_JnzMfXM"
+    instructions: "Trzymaj hantel albo kettlebell w jednej dłoni. Maszeruj, utrzymując pionowy tułów i nie pozwalając ciężarowi przechylać ciała. Po czasie zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/w76_JnzMfXM"
   },
 
   {
@@ -752,19 +688,13 @@ const coreExercises = [
     name: "Spacer farmera z ciężarami",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["forearms", "shoulders", "back", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-
     requiredEquipment: [],
-
     equipmentOptions: [
-      [
-        { type: "dumbbells", quantity: 2 }
-      ],
-      [
-        { type: "kettlebell", quantity: 2 }
-      ]
+      [{ type: "dumbbells", quantity: 2 }],
+      [{ type: "kettlebell", quantity: 2 }]
     ],
-
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "loaded-carry",
@@ -777,10 +707,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Trzymaj dwa hantle albo dwa kettlebell po bokach ciała. Maszeruj kontrolowanie, utrzymując napięty brzuch, stabilny tułów i wyprostowaną sylwetkę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Ozp9nI_w4xo"
+    instructions: "Trzymaj dwa hantle albo dwa kettlebell po bokach ciała. Maszeruj kontrolowanie, utrzymując napięty brzuch, stabilny tułów i wyprostowaną sylwetkę.",
+    videoUrl: "https://www.youtube.com/shorts/Ozp9nI_w4xo"
   },
 
   {
@@ -788,11 +716,9 @@ const coreExercises = [
     name: "Deska z przeciąganiem hantla",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "triceps", "back", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-rotation",
-    requiredEquipment: [
-      { type: "dumbbells", quantity: 1 },
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "dumbbells", quantity: 1 }, { type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-rotation",
@@ -805,10 +731,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w wysokiej desce z hantlem obok dłoni. Przeciągnij ciężar pod tułowiem na drugą stronę, starając się nie obracać bioder. Powtarzaj naprzemiennie.",
-    videoUrl:
-      "https://www.youtube.com/shorts/5gR0_CcEYvw"
+    instructions: "Ustaw się w wysokiej desce z hantlem obok dłoni. Przeciągnij ciężar pod tułowiem na drugą stronę, starając się nie obracać bioder. Powtarzaj naprzemiennie.",
+    videoUrl: "https://www.youtube.com/shorts/5gR0_CcEYvw"
   },
 
   {
@@ -816,11 +740,9 @@ const coreExercises = [
     name: "Deska z przeciąganiem kettlebell",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "triceps", "back", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-rotation",
-    requiredEquipment: [
-      { type: "kettlebell", quantity: 1 },
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "kettlebell", quantity: 1 }, { type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-rotation",
@@ -833,10 +755,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w wysokiej desce z kettlebell obok dłoni. Przeciągnij ciężar pod tułowiem na drugą stronę bez rotowania bioder. Powtarzaj naprzemiennie.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Vk3qLh6QywM"
+    instructions: "Ustaw się w wysokiej desce z kettlebell obok dłoni. Przeciągnij ciężar pod tułowiem na drugą stronę bez rotowania bioder. Powtarzaj naprzemiennie.",
+    videoUrl: "https://www.youtube.com/shorts/Vk3qLh6QywM"
   },
 
   {
@@ -844,10 +764,9 @@ const coreExercises = [
     name: "Kołyski w pozycji hollow body",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 3,
     movementPattern: "anti-extension",
@@ -860,10 +779,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Przyjmij pozycję hollow body. Zachowując niezmienny kształt ciała, wykonuj niewielkie kontrolowane kołyski do przodu i do tyłu.",
-    videoUrl:
-      "https://www.youtube.com/shorts/tWZBamV2tjc"
+    instructions: "Przyjmij pozycję hollow body. Zachowując niezmienny kształt ciała, wykonuj niewielkie kontrolowane kołyski do przodu i do tyłu.",
+    videoUrl: "https://www.youtube.com/shorts/tWZBamV2tjc"
   },
 
   {
@@ -871,10 +788,9 @@ const coreExercises = [
     name: "Dead bug z hantlem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "dumbbells", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "dumbbells", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-extension",
@@ -887,10 +803,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się na plecach i trzymaj lekki hantel nad klatką. Utrzymuj lędźwie przy podłożu i naprzemiennie opuszczaj nogę w kierunku ziemi bez utraty napięcia brzucha.",
-    videoUrl:
-      "https://www.youtube.com/shorts/VAVrsPX9GHY"
+    instructions: "Połóż się na plecach i trzymaj lekki hantel nad klatką. Utrzymuj lędźwie przy podłożu i naprzemiennie opuszczaj nogę w kierunku ziemi bez utraty napięcia brzucha.",
+    videoUrl: "https://www.youtube.com/shorts/VAVrsPX9GHY"
   },
 
   {
@@ -898,10 +812,9 @@ const coreExercises = [
     name: "Dead bug z kettlebell trzymanym nad klatką",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "kettlebell", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "kettlebell", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-extension",
@@ -914,10 +827,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się na plecach i trzymaj kettlebell oburącz nad klatką. Dociśnij dolną część pleców do ziemi i naprzemiennie opuszczaj nogi bez poruszania ciężarem.",
-    videoUrl:
-      "https://www.youtube.com/shorts/El5o_avIaqI"
+    instructions: "Połóż się na plecach i trzymaj kettlebell oburącz nad klatką. Dociśnij dolną część pleców do ziemi i naprzemiennie opuszczaj nogi bez poruszania ciężarem.",
+    videoUrl: "https://www.youtube.com/shorts/El5o_avIaqI"
   },
 
   {
@@ -925,10 +836,9 @@ const coreExercises = [
     name: "Spięcia brzucha z hantlem",
     primaryBodyPart: "abs",
     secondaryBodyParts: [],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "dumbbells", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "dumbbells", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-flexion",
@@ -941,10 +851,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Leżąc z ugiętymi kolanami trzymaj hantel przy klatce. Unieś górną część pleców, kierując żebra w stronę miednicy. Nie wykonuj ruchu z zamachu.",
-    videoUrl:
-      "https://www.youtube.com/shorts/G9XfQJPBJVI"
+    instructions: "Leżąc z ugiętymi kolanami trzymaj hantel przy klatce. Unieś górną część pleców, kierując żebra w stronę miednicy. Nie wykonuj ruchu z zamachu.",
+    videoUrl: "https://www.youtube.com/shorts/G9XfQJPBJVI"
   },
 
   {
@@ -952,10 +860,9 @@ const coreExercises = [
     name: "Spięcia brzucha z kettlebell",
     primaryBodyPart: "abs",
     secondaryBodyParts: [],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "kettlebell", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "kettlebell", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-flexion",
@@ -968,10 +875,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Leżąc z ugiętymi kolanami trzymaj kettlebell oburącz przy klatce. Unieś górną część pleców, kierując żebra w stronę miednicy. Kontrolowanie wróć.",
-    videoUrl:
-      "https://www.youtube.com/shorts/JkaEmrdtyoA"
+    instructions: "Leżąc z ugiętymi kolanami trzymaj kettlebell oburącz przy klatce. Unieś górną część pleców, kierując żebra w stronę miednicy. Kontrolowanie wróć.",
+    videoUrl: "https://www.youtube.com/shorts/JkaEmrdtyoA"
   },
 
   {
@@ -979,10 +884,9 @@ const coreExercises = [
     name: "Brzuszki z hantlem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "dumbbells", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "dumbbells", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-and-hip-flexion",
@@ -995,10 +899,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się z ugiętymi kolanami i trzymaj hantel przy klatce. Unieś tułów do pozycji siedzącej bez używania zamachu, a następnie powoli wróć.",
-    videoUrl:
-      "https://www.youtube.com/shorts/nAaLDMzlAMQ"
+    instructions: "Połóż się z ugiętymi kolanami i trzymaj hantel przy klatce. Unieś tułów do pozycji siedzącej bez używania zamachu, a następnie powoli wróć.",
+    videoUrl: "https://www.youtube.com/shorts/nAaLDMzlAMQ"
   },
 
   {
@@ -1006,10 +908,9 @@ const coreExercises = [
     name: "Brzuszki z kettlebell",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "kettlebell", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "kettlebell", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-and-hip-flexion",
@@ -1022,10 +923,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się z ugiętymi kolanami i trzymaj kettlebell przy klatce. Unieś tułów do pozycji siedzącej bez zamachu, a następnie kontrolowanie wróć.",
-    videoUrl:
-      "https://www.youtube.com/shorts/Eu5c4VBuS80"
+    instructions: "Połóż się z ugiętymi kolanami i trzymaj kettlebell przy klatce. Unieś tułów do pozycji siedzącej bez zamachu, a następnie kontrolowanie wróć.",
+    videoUrl: "https://www.youtube.com/shorts/Eu5c4VBuS80"
   },
 
   {
@@ -1033,10 +932,9 @@ const coreExercises = [
     name: "Wycieraczki nóg w leżeniu",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "back"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 3,
     movementPattern: "trunk-rotation",
@@ -1049,10 +947,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 45, max: 75 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się na plecach i rozłóż ramiona na boki. Unieś nogi i kontrolowanie opuszczaj je raz na jedną, raz na drugą stronę, nie odrywając barków od podłoża.",
-    videoUrl:
-      "https://www.youtube.com/shorts/CZS3m8zBVSA"
+    instructions: "Połóż się na plecach i rozłóż ramiona na boki. Unieś nogi i kontrolowanie opuszczaj je raz na jedną, raz na drugą stronę, nie odrywając barków od podłoża.",
+    videoUrl: "https://www.youtube.com/shorts/CZS3m8zBVSA"
   },
 
   {
@@ -1060,11 +956,9 @@ const coreExercises = [
     name: "Unoszenie kolan w zwisie po skosie",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "forearms", "shoulders"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "pull-up-bar", quantity: 1 },
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "pull-up-bar", quantity: 1 }, { type: "bodyweight", quantity: 1 }],
     equipmentConditions: ["bar-high"],
     difficulty: 3,
     movementPattern: "hanging-rotation",
@@ -1077,10 +971,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 45, max: 90 },
     estimatedSeconds: 210,
-    instructions:
-      "Zawiśnij na drążku. Przyciągnij kolana w kierunku jednej strony klatki, lekko skręcając miednicę. Wróć i wykonaj ruch na drugą stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/UBL5xMB4Pa4"
+    instructions: "Zawiśnij na drążku. Przyciągnij kolana w kierunku jednej strony klatki, lekko skręcając miednicę. Wróć i wykonaj ruch na drugą stronę.",
+    videoUrl: "https://www.youtube.com/shorts/UBL5xMB4Pa4"
   },
 
   {
@@ -1088,11 +980,9 @@ const coreExercises = [
     name: "Wycieraczki nóg w zwisie",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors", "forearms", "shoulders", "back"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "pull-up-bar", quantity: 1 },
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "pull-up-bar", quantity: 1 }, { type: "bodyweight", quantity: 1 }],
     equipmentConditions: ["bar-high"],
     difficulty: 4,
     movementPattern: "hanging-rotation",
@@ -1105,10 +995,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 60, max: 120 },
     estimatedSeconds: 240,
-    instructions:
-      "Zawiśnij stabilnie na drążku i unieś nogi przed siebie. Prowadź je kontrolowanie na jedną i drugą stronę bez używania zamachu. Dobierz zakres ruchu do swoich możliwości.",
-    videoUrl:
-      "https://youtube.com/shorts/xvw_r7VZ2S8"
+    instructions: "Zawiśnij stabilnie na drążku i unieś nogi przed siebie. Prowadź je kontrolowanie na jedną i drugą stronę bez używania zamachu. Dobierz zakres ruchu do swoich możliwości.",
+    videoUrl: "https://youtube.com/shorts/xvw_r7VZ2S8"
   },
 
   {
@@ -1116,10 +1004,9 @@ const coreExercises = [
     name: "Deska niedźwiedzia",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "triceps", "legs"],
+    strongSecondaryBodyParts: [],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "anti-extension",
@@ -1132,10 +1019,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się na dłoniach i kolanach, a następnie unieś kolana kilka centymetrów nad podłoże. Utrzymuj napięty brzuch, neutralne plecy i stabilne biodra.",
-    videoUrl:
-      "https://www.youtube.com/shorts/M1LgdyUDLsc"
+    instructions: "Ustaw się na dłoniach i kolanach, a następnie unieś kolana kilka centymetrów nad podłoże. Utrzymuj napięty brzuch, neutralne plecy i stabilne biodra.",
+    videoUrl: "https://www.youtube.com/shorts/M1LgdyUDLsc"
   },
 
   {
@@ -1143,10 +1028,9 @@ const coreExercises = [
     name: "Chód niedźwiedzia",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "triceps", "legs", "glutes"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "locomotion",
@@ -1159,10 +1043,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w pozycji niedźwiedzia z kolanami nad ziemią. Przemieszczaj się małymi krokami, poruszając jednocześnie przeciwną ręką i nogą. Ogranicz kołysanie tułowia.",
-    videoUrl:
-      "https://www.youtube.com/shorts/iuR17xUXLeA"
+    instructions: "Ustaw się w pozycji niedźwiedzia z kolanami nad ziemią. Przemieszczaj się małymi krokami, poruszając jednocześnie przeciwną ręką i nogą. Ogranicz kołysanie tułowia.",
+    videoUrl: "https://www.youtube.com/shorts/iuR17xUXLeA"
   },
 
   {
@@ -1170,10 +1052,9 @@ const coreExercises = [
     name: "Mountain climbers ze skrętem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "hip-flexors", "legs"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "dynamic-rotation",
@@ -1186,10 +1067,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w wysokiej desce. Naprzemiennie przyciągaj kolano w kierunku przeciwnego łokcia, lekko rotując tułów i utrzymując kontrolę bioder.",
-    videoUrl:
-      "https://www.youtube.com/shorts/UDPHAuf9I2k"
+    instructions: "Ustaw się w wysokiej desce. Naprzemiennie przyciągaj kolano w kierunku przeciwnego łokcia, lekko rotując tułów i utrzymując kontrolę bioder.",
+    videoUrl: "https://www.youtube.com/shorts/UDPHAuf9I2k"
   },
 
   {
@@ -1197,10 +1076,9 @@ const coreExercises = [
     name: "Deska bokiem z przełożeniem ręki pod tułowiem",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "glutes", "back"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-rotation",
@@ -1213,10 +1091,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w desce bokiem. Przeprowadź wolną rękę pod tułowiem, lekko rotując klatkę, a następnie otwórz ją z powrotem. Po serii zmień stronę.",
-    videoUrl:
-      "https://www.youtube.com/shorts/46hHgDE1Z80"
+    instructions: "Ustaw się w desce bokiem. Przeprowadź wolną rękę pod tułowiem, lekko rotując klatkę, a następnie otwórz ją z powrotem. Po serii zmień stronę.",
+    videoUrl: "https://www.youtube.com/shorts/46hHgDE1Z80"
   },
 
   {
@@ -1224,10 +1100,9 @@ const coreExercises = [
     name: "Brzuszki z prostymi nogami",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "flexion",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "trunk-and-hip-flexion",
@@ -1240,10 +1115,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Połóż się z nogami wyprostowanymi. Unieś tułów do pozycji siedzącej bez gwałtownego zamachu ramion, a następnie kontrolowanie wróć do leżenia.",
-    videoUrl:
-      "https://www.youtube.com/shorts/z0GiuqW9t5U"
+    instructions: "Połóż się z nogami wyprostowanymi. Unieś tułów do pozycji siedzącej bez gwałtownego zamachu ramion, a następnie kontrolowanie wróć do leżenia.",
+    videoUrl: "https://www.youtube.com/shorts/z0GiuqW9t5U"
   },
 
   {
@@ -1251,10 +1124,9 @@ const coreExercises = [
     name: "Deska odwrócona",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["glutes", "hamstrings", "shoulders", "triceps"],
+    strongSecondaryBodyParts: ["glutes", "legs"],
     coreFunction: "anti-extension",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "posterior-chain-isometric",
@@ -1267,10 +1139,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Usiądź z wyprostowanymi nogami i oprzyj dłonie za sobą. Unieś biodra, tworząc możliwie prostą linię od barków do pięt. Napnij brzuch i pośladki.",
-    videoUrl:
-      "https://www.youtube.com/shorts/q37j_H0g5BY"
+    instructions: "Usiądź z wyprostowanymi nogami i oprzyj dłonie za sobą. Unieś biodra, tworząc możliwie prostą linię od barków do pięt. Napnij brzuch i pośladki.",
+    videoUrl: "https://www.youtube.com/shorts/q37j_H0g5BY"
   },
 
   {
@@ -1278,10 +1148,9 @@ const coreExercises = [
     name: "Przyciąganie kolan w pozycji hollow body",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "hollow-body-hip-flexion",
@@ -1294,10 +1163,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Przyjmij pozycję hollow body. Przyciągnij kolana do klatki bez utraty napięcia brzucha, a następnie ponownie wyprostuj nogi przed siebie.",
-    videoUrl:
-      "https://www.youtube.com/shorts/UKeSJFUz2L4"
+    instructions: "Przyjmij pozycję hollow body. Przyciągnij kolana do klatki bez utraty napięcia brzucha, a następnie ponownie wyprostuj nogi przed siebie.",
+    videoUrl: "https://www.youtube.com/shorts/UKeSJFUz2L4"
   },
 
   {
@@ -1305,10 +1172,9 @@ const coreExercises = [
     name: "Deska z pajacykami nóg",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["shoulders", "glutes", "legs"],
+    strongSecondaryBodyParts: [],
     coreFunction: "dynamic-stability",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 2,
     movementPattern: "dynamic-plank",
@@ -1321,10 +1187,8 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Ustaw się w wysokiej desce. Dynamicznie rozsuwaj i złączaj stopy jak przy pajacykach, utrzymując możliwie nieruchomy tułów i napięty brzuch.",
-    videoUrl:
-      "https://www.youtube.com/shorts/kjvqHqVvUME"
+    instructions: "Ustaw się w wysokiej desce. Dynamicznie rozsuwaj i złączaj stopy jak przy pajacykach, utrzymując możliwie nieruchomy tułów i napięty brzuch.",
+    videoUrl: "https://www.youtube.com/shorts/kjvqHqVvUME"
   },
 
   {
@@ -1332,10 +1196,9 @@ const coreExercises = [
     name: "Naprzemienne V-ups",
     primaryBodyPart: "abs",
     secondaryBodyParts: ["hip-flexors"],
+    strongSecondaryBodyParts: [],
     coreFunction: "rotation",
-    requiredEquipment: [
-      { type: "bodyweight", quantity: 1 }
-    ],
+    requiredEquipment: [{ type: "bodyweight", quantity: 1 }],
     equipmentConditions: [],
     difficulty: 3,
     movementPattern: "trunk-and-hip-flexion",
@@ -1348,18 +1211,14 @@ const coreExercises = [
     setRange: { min: 2, max: 4 },
     restRange: { min: 30, max: 60 },
     estimatedSeconds: 180,
-    instructions:
-      "Leżąc na plecach unieś jedną nogę oraz przeciwną rękę i zbliż dłoń do stopy. Wróć kontrolowanie i wykonaj ruch drugą stroną.",
-    videoUrl:
-      "https://www.youtube.com/shorts/-ipF-Xl5eY4"
+    instructions: "Leżąc na plecach unieś jedną nogę oraz przeciwną rękę i zbliż dłoń do stopy. Wróć kontrolowanie i wykonaj ruch drugą stroną.",
+    videoUrl: "https://www.youtube.com/shorts/-ipF-Xl5eY4"
   }
 
 ];
-
 
 /* =========================================
    UDOSTĘPNIENIE MODUŁU
    ========================================= */
 
-window.CoreExercises =
-  coreExercises;
+window.CoreExercises = coreExercises;

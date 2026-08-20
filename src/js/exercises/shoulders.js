@@ -2,7 +2,7 @@
    K&K — Czas na Wycisk!
    BAZA ĆWICZEŃ — BARKI
    shoulders.js
-   v1.0
+   v1.1
    ========================================= */
 
 const shoulderExercises = [
@@ -18,6 +18,8 @@ const shoulderExercises = [
       "chest",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -78,6 +80,8 @@ const shoulderExercises = [
       "chest",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -140,6 +144,8 @@ const shoulderExercises = [
       "traps"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -199,6 +205,8 @@ const shoulderExercises = [
       "traps"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -249,7 +257,7 @@ const shoulderExercises = [
 
   {
     id: "resistance-band-lateral-raise",
-    name: "Unoszenie ramion bokiem z gumą",
+    name: "Unoszenie ramion bokiem z długą gumą",
 
     primaryBodyPart: "shoulders",
 
@@ -257,9 +265,11 @@ const shoulderExercises = [
       "traps"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -298,7 +308,7 @@ const shoulderExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na środku gumy i chwyć jej końce po bokach ciała. Unieś ramiona na boki do mniej więcej wysokości barków. Utrzymuj tułów nieruchomo i nie pomagaj sobie zamachem. Następnie powoli opuść ramiona.",
+      "Stań na środku długiej gumy oporowej i chwyć jej końce po bokach ciała. Unieś ramiona na boki do mniej więcej wysokości barków. Utrzymuj tułów nieruchomo i nie pomagaj sobie zamachem. Następnie powoli opuść ramiona.",
 
     videoUrl:
       "https://www.youtube.com/shorts/__0jIbOwnfI"
@@ -307,7 +317,7 @@ const shoulderExercises = [
 
   {
     id: "resistance-band-front-raise",
-    name: "Unoszenie ramion w przód z gumą",
+    name: "Unoszenie ramion w przód z długą gumą",
 
     primaryBodyPart: "shoulders",
 
@@ -316,9 +326,11 @@ const shoulderExercises = [
       "traps"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -357,7 +369,7 @@ const shoulderExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na środku gumy i trzymaj jej końce przed udami. Unieś ramiona przed siebie mniej więcej do wysokości barków. Nie odchylaj tułowia i nie używaj zamachu. Następnie powoli opuść ramiona.",
+      "Stań na środku długiej gumy oporowej i trzymaj jej końce przed udami. Unieś ramiona przed siebie mniej więcej do wysokości barków. Nie odchylaj tułowia i nie używaj zamachu. Następnie powoli opuść ramiona.",
 
     videoUrl:
       "https://www.youtube.com/shorts/pYVlZiu2Mps"
@@ -374,6 +386,8 @@ const shoulderExercises = [
       "triceps",
       "chest"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -437,6 +451,8 @@ const shoulderExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "bodyweight",
@@ -490,7 +506,7 @@ const shoulderExercises = [
 
   {
     id: "resistance-band-shoulder-press",
-    name: "Wyciskanie gumy nad głowę",
+    name: "Wyciskanie długiej gumy nad głowę",
 
     primaryBodyPart: "shoulders",
 
@@ -500,9 +516,11 @@ const shoulderExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -541,7 +559,7 @@ const shoulderExercises = [
     estimatedSeconds: 210,
 
     instructions:
-      "Stań na środku gumy i trzymaj jej końce na wysokości barków. Napnij brzuch i pośladki, a następnie wypchnij dłonie pionowo nad głowę. Nie odchylaj tułowia do tyłu. Kontrolowanie wróć do pozycji wyjściowej.",
+      "Stań na środku długiej gumy oporowej i trzymaj jej końce na wysokości barków. Napnij brzuch i pośladki, a następnie wypchnij dłonie pionowo nad głowę. Nie odchylaj tułowia do tyłu. Kontrolowanie wróć do pozycji wyjściowej.",
 
     videoUrl:
       "https://www.youtube.com/shorts/3KFECHGL9vM"
@@ -558,6 +576,8 @@ const shoulderExercises = [
       "traps",
       "forearms"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -621,6 +641,8 @@ const shoulderExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "kettlebell",
@@ -682,6 +704,8 @@ const shoulderExercises = [
       "biceps",
       "forearms"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -745,6 +769,8 @@ const shoulderExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "kettlebell",
@@ -803,6 +829,8 @@ const shoulderExercises = [
       "back",
       "traps"
     ],
+
+    strongSecondaryBodyParts: ["back"],
 
     requiredEquipment: [
       {
@@ -867,6 +895,8 @@ const shoulderExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -929,6 +959,8 @@ const shoulderExercises = [
       "chest"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -982,7 +1014,7 @@ const shoulderExercises = [
 
   {
     id: "resistance-band-upright-row",
-    name: "Podciąganie gumy wzdłuż tułowia",
+    name: "Podciąganie długiej gumy wzdłuż tułowia",
 
     primaryBodyPart: "shoulders",
 
@@ -992,9 +1024,11 @@ const shoulderExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -1033,7 +1067,7 @@ const shoulderExercises = [
     estimatedSeconds: 180,
 
     instructions:
-      "Stań na środku gumy i chwyć jej końce przed udami. Przyciągnij dłonie wzdłuż tułowia, prowadząc łokcie na boki i ku górze. Zatrzymaj ruch w komfortowym zakresie i kontrolowanie opuść ręce.",
+      "Stań na środku długiej gumy oporowej i chwyć jej końce przed udami. Przyciągnij dłonie wzdłuż tułowia, prowadząc łokcie na boki i ku górze. Zatrzymaj ruch w komfortowym zakresie i kontrolowanie opuść ręce.",
 
     videoUrl:
       "https://www.youtube.com/shorts/VyS7ifbL8vw"
@@ -1050,6 +1084,8 @@ const shoulderExercises = [
       "back",
       "forearms"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -1104,7 +1140,7 @@ const shoulderExercises = [
 
   {
     id: "resistance-band-external-rotation",
-    name: "Rotacja zewnętrzna barku z gumą",
+    name: "Rotacja zewnętrzna barku z długą gumą",
 
     primaryBodyPart: "shoulders",
 
@@ -1113,9 +1149,11 @@ const shoulderExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -1159,7 +1197,7 @@ const shoulderExercises = [
     estimatedSeconds: 150,
 
     instructions:
-      "Zamocuj gumę mniej więcej na wysokości łokcia i stań bokiem do punktu zaczepienia. Utrzymuj łokieć przy tułowiu i obracaj przedramię na zewnątrz. Powoli wróć i po serii zmień stronę.",
+      "Zamocuj długą gumę oporową mniej więcej na wysokości łokcia i stań bokiem do punktu zaczepienia. Utrzymuj łokieć przy tułowiu i obracaj przedramię na zewnątrz. Powoli wróć i po serii zmień stronę.",
 
     videoUrl:
       "https://www.youtube.com/shorts/FeCio_IImxc"
@@ -1177,6 +1215,8 @@ const shoulderExercises = [
       "back",
       "abs"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -1241,6 +1281,8 @@ const shoulderExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -1303,6 +1345,8 @@ const shoulderExercises = [
       "forearms"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
         type: "dumbbells",
@@ -1357,7 +1401,7 @@ const shoulderExercises = [
 
   {
     id: "single-arm-diagonal-band-press",
-    name: "Jednorącz wyciskanie gumy po skosie w górę",
+    name: "Jednorącz wyciskanie długiej gumy po skosie w górę",
 
     primaryBodyPart: "shoulders",
 
@@ -1367,9 +1411,11 @@ const shoulderExercises = [
       "abs"
     ],
 
+    strongSecondaryBodyParts: [],
+
     requiredEquipment: [
       {
-        type: "bands",
+        type: "resistance-band",
         quantity: 1
       }
     ],
@@ -1413,7 +1459,7 @@ const shoulderExercises = [
     estimatedSeconds: 210,
 
     instructions:
-      "Zamocuj gumę nisko za sobą i chwyć ją jedną ręką na wysokości barku. Wypchnij dłoń po skosie do góry i lekko przed siebie. Utrzymuj stabilny tułów, kontrolowanie wróć i po serii zmień stronę.",
+      "Zamocuj długą gumę oporową nisko za sobą i chwyć ją jedną ręką na wysokości barku. Wypchnij dłoń po skosie do góry i lekko przed siebie. Utrzymuj stabilny tułów, kontrolowanie wróć i po serii zmień stronę.",
 
     videoUrl:
       "https://www.youtube.com/shorts/h4y1HPWPYMg"
@@ -1431,6 +1477,8 @@ const shoulderExercises = [
       "traps",
       "biceps"
     ],
+
+    strongSecondaryBodyParts: ["back"],
 
     requiredEquipment: [
       {
@@ -1493,6 +1541,8 @@ const shoulderExercises = [
       "traps",
       "back"
     ],
+
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
