@@ -75,7 +75,7 @@ const armExercises = [
     armTarget: "biceps",
 
     secondaryBodyParts: ["forearms"],
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
@@ -359,7 +359,7 @@ const armExercises = [
     armTarget: "biceps",
 
     secondaryBodyParts: ["forearms"],
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
@@ -416,7 +416,7 @@ const armExercises = [
     armTarget: "biceps",
 
     secondaryBodyParts: ["forearms"],
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       { type: "resistance-band", quantity: 1 }
@@ -474,7 +474,7 @@ const armExercises = [
     armTarget: "biceps",
 
     secondaryBodyParts: ["forearms"],
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
@@ -533,7 +533,7 @@ const armExercises = [
     armTarget: "biceps",
 
     secondaryBodyParts: ["forearms"],
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       { type: "dumbbells", quantity: 2 }
@@ -592,7 +592,7 @@ const armExercises = [
     armTarget: "biceps",
 
     secondaryBodyParts: ["forearms"],
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       { type: "resistance-band", quantity: 1 }
@@ -649,7 +649,7 @@ const armExercises = [
     armTarget: "biceps",
 
     secondaryBodyParts: ["forearms"],
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       { type: "kettlebell", quantity: 1 }

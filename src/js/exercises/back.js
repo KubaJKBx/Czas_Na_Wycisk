@@ -89,7 +89,7 @@ const backExercises = [
       "abs"
     ],
 
-    strongSecondaryBodyParts: ["biceps"],
+    strongSecondaryBodyParts: ["arms"],
 
     requiredEquipment: [
       {
@@ -380,7 +380,7 @@ const backExercises = [
       "abs"
     ],
 
-    strongSecondaryBodyParts: ["biceps"],
+    strongSecondaryBodyParts: ["arms"],
 
     requiredEquipment: [
       {
@@ -1571,7 +1571,7 @@ const backExercises = [
       "abs"
     ],
 
-    strongSecondaryBodyParts: ["forearms"],
+    strongSecondaryBodyParts: [],
 
     requiredEquipment: [
       {
@@ -1714,10 +1714,7 @@ const backExercises = [
       "shoulders"
     ],
 
-    strongSecondaryBodyParts: [
-      "glutes",
-      "hamstrings"
-    ],
+    strongSecondaryBodyParts: ["glutes"],
 
     requiredEquipment: [
       {
