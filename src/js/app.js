@@ -4667,3 +4667,582 @@ profileButtons.forEach(
     );
   }
 );
+/* =========================================
+   v0.10.9 — OTWIERANIE BAZY ĆWICZEŃ
+   ========================================= */
+
+const exerciseLibraryScreen =
+  document.querySelector(
+    "#exerciseLibraryScreen"
+  );
+
+const exerciseLibraryOpenButton =
+  document.querySelector(
+    "#exerciseLibraryOpenButton"
+  );
+
+const exerciseLibraryBackButton =
+  document.querySelector(
+    "#exerciseLibraryBackButton"
+  );
+
+
+exerciseLibraryOpenButton?.addEventListener(
+  "click",
+  () => {
+    showScreen(
+      exerciseLibraryScreen
+    );
+  }
+);
+
+
+exerciseLibraryBackButton?.addEventListener(
+  "click",
+  () => {
+    showScreen(
+      welcomeScreen
+    );
+  }
+);
+/* =========================================
+   v0.11.0 — LISTA ĆWICZEŃ W BAZIE
+   ========================================= */
+
+const exerciseLibraryList =
+  document.querySelector(
+    "#exerciseLibraryList"
+  );
+
+const exerciseLibraryEmpty =
+  document.querySelector(
+    "#exerciseLibraryEmpty"
+  );
+
+const exerciseLibraryBodyPartButtons =
+  document.querySelectorAll(
+    ".exercise-library-body-part"
+  );
+
+let currentExerciseLibraryBody =
+  "all";
+
+
+/* =========================================
+   FILTRY PARTII
+   ========================================= */
+
+exerciseLibraryBodyPartButtons.forEach(
+  (button) => {
+    button.addEventListener(
+      "click",
+      () => {
+        currentExerciseLibraryBody =
+          button.dataset.libraryBody ||
+          "all";
+
+        exerciseLibraryBodyPartButtons
+          .forEach(
+            (bodyButton) => {
+              bodyButton.classList.toggle(
+                "is-selected",
+                bodyButton === button
+              );
+            }
+          );
+
+        renderExerciseLibrary();
+      }
+    );
+  }
+);
+
+
+/* =========================================
+   RENDER BAZY
+   ========================================= */
+
+function renderExerciseLibrary() {
+  if (
+    !exerciseLibraryList ||
+    !exerciseLibraryEmpty
+  ) {
+    return;
+  }
+
+  exerciseLibraryList.innerHTML =
+    "";
+
+  const database =
+    Array.isArray(
+      window.ExercisesDatabase
+    )
+      ? window.ExercisesDatabase
+      : [];
+
+  const exercises =
+    database
+      .filter(
+        (exercise) => {
+          if (
+            currentExerciseLibraryBody ===
+            "all"
+          ) {
+            return true;
+          }
+
+          return (
+            exercise.primaryBodyPart ===
+            currentExerciseLibraryBody
+          );
+        }
+      )
+      .sort(
+        (a, b) =>
+          a.name.localeCompare(
+            b.name,
+            "pl"
+          )
+      );
+
+  if (
+    exercises.length === 0
+  ) {
+    exerciseLibraryEmpty
+      .classList
+      .remove(
+        "is-hidden"
+      );
+
+    const title =
+      exerciseLibraryEmpty
+        .querySelector(
+          "p"
+        );
+
+    const description =
+      exerciseLibraryEmpty
+        .querySelector(
+          "span"
+        );
+
+    if (title) {
+      title.textContent =
+        "Brak ćwiczeń.";
+    }
+
+    if (description) {
+      description.textContent =
+        "Nie znaleźliśmy ćwiczeń dla tej partii.";
+    }
+
+    return;
+  }
+
+  exerciseLibraryEmpty
+    .classList
+    .add(
+      "is-hidden"
+    );
+
+  exercises.forEach(
+    (exercise) => {
+      exerciseLibraryList
+        .appendChild(
+          createExerciseLibraryCard(
+            exercise
+          )
+        );
+    }
+  );
+}
+
+
+/* =========================================
+   KARTA ĆWICZENIA W BAZIE
+   ========================================= */
+
+function createExerciseLibraryCard(
+  exercise
+) {
+  const card =
+    document.createElement(
+      "article"
+    );
+
+  card.className =
+    "exercise-library-card";
+
+  const equipment =
+    Array.isArray(
+      exercise.requiredEquipment
+    )
+      ? exercise.requiredEquipment.map(
+          (item) =>
+            item.type
+        )
+      : [];
+
+  const primaryBodyPart =
+    getBodyPartsLabel(
+      [
+        exercise.primaryBodyPart
+      ]
+    );
+
+  const secondaryBodyParts =
+    Array.isArray(
+      exercise.secondaryBodyParts
+    )
+      ? exercise.secondaryBodyParts
+      : [];
+
+  const strongSecondaryBodyParts =
+    Array.isArray(
+      exercise.strongSecondaryBodyParts
+    )
+      ? exercise.strongSecondaryBodyParts
+      : [];
+
+  const difficulty =
+    createDifficultyDisplay(
+      exercise.difficulty
+    );
+
+  const instructions =
+    exercise.instructions ||
+    "Instrukcja nie została jeszcze dodana.";
+
+  const videoUrl =
+    exercise.videoUrl ||
+    "";
+
+  card.innerHTML = `
+    <button
+      class="exercise-library-card-main"
+      type="button"
+      aria-expanded="false"
+    >
+
+      <div class="exercise-library-card-info">
+
+        <h2>
+          ${exercise.name}
+        </h2>
+
+        <div class="exercise-library-card-meta">
+
+          <span>
+            ${primaryBodyPart}
+          </span>
+
+          <span>
+            ${getEquipmentLabel(equipment)}
+          </span>
+
+          <span class="difficulty">
+            ${difficulty}
+          </span>
+
+        </div>
+
+      </div>
+
+      <span
+        class="exercise-library-card-arrow"
+        aria-hidden="true"
+      >
+        ↓
+      </span>
+
+    </button>
+
+
+    <div
+      class="exercise-library-card-details is-hidden"
+    >
+
+      <div class="exercise-library-detail-section">
+
+        <span class="exercise-library-detail-label">
+          Główna partia
+        </span>
+
+        <strong>
+          ${primaryBodyPart}
+        </strong>
+
+      </div>
+
+
+      ${
+        secondaryBodyParts.length > 0
+          ? `
+            <div class="exercise-library-detail-section">
+
+              <span class="exercise-library-detail-label">
+                Partie pomocnicze
+              </span>
+
+              <strong>
+                ${getSecondaryBodyPartsLabel(
+  secondaryBodyParts
+)}
+              </strong>
+
+            </div>
+          `
+          : ""
+      }
+
+
+      ${
+        strongSecondaryBodyParts.length > 0
+          ? `
+            <div class="exercise-library-detail-section">
+
+              <span class="exercise-library-detail-label">
+                Mocno angażuje również
+              </span>
+
+              <strong>
+                ${getBodyPartsLabel(
+                  strongSecondaryBodyParts
+                )}
+              </strong>
+
+            </div>
+          `
+          : ""
+      }
+
+
+      <div class="exercise-library-detail-section">
+
+        <span class="exercise-library-detail-label">
+          Sprzęt
+        </span>
+
+        <strong>
+          ${getEquipmentLabel(equipment)}
+        </strong>
+
+      </div>
+
+
+      <div class="exercise-library-detail-section">
+
+        <span class="exercise-library-detail-label">
+          Trudność
+        </span>
+
+        <div class="difficulty">
+          ${difficulty}
+        </div>
+
+      </div>
+
+
+      <div class="exercise-library-detail-instructions">
+
+        <span class="exercise-library-detail-label">
+          Jak wykonać?
+        </span>
+
+        <p>
+          ${instructions}
+        </p>
+
+      </div>
+
+
+      ${
+        videoUrl
+          ? `
+            <a
+              class="exercise-library-video-link"
+              href="${videoUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Otwórz film instruktażowy ↗
+            </a>
+          `
+          : ""
+      }
+
+    </div>
+  `;
+
+
+  const mainButton =
+    card.querySelector(
+      ".exercise-library-card-main"
+    );
+
+  const details =
+    card.querySelector(
+      ".exercise-library-card-details"
+    );
+
+  const arrow =
+    card.querySelector(
+      ".exercise-library-card-arrow"
+    );
+
+
+  mainButton?.addEventListener(
+    "click",
+    () => {
+      const isOpen =
+        !details.classList.contains(
+          "is-hidden"
+        );
+
+      details.classList.toggle(
+        "is-hidden"
+      );
+
+      mainButton.setAttribute(
+        "aria-expanded",
+        String(!isOpen)
+      );
+
+      card.classList.toggle(
+        "is-open",
+        !isOpen
+      );
+
+      if (arrow) {
+        arrow.textContent =
+          isOpen
+            ? "↓"
+            : "↑";
+      }
+    }
+  );
+
+
+  return card;
+}
+
+
+/* =========================================
+   ODŚWIEŻANIE PRZY OTWARCIU
+   ========================================= */
+
+exerciseLibraryOpenButton?.addEventListener(
+  "click",
+  () => {
+    currentExerciseLibraryBody =
+      "all";
+
+    exerciseLibraryBodyPartButtons
+      .forEach(
+        (button) => {
+          button.classList.toggle(
+            "is-selected",
+            button.dataset.libraryBody ===
+              "all"
+          );
+        }
+      );
+
+    renderExerciseLibrary();
+  }
+);
+/* =========================================
+   v0.11.3 — POLSKIE NAZWY PARTII POMOCNICZYCH
+   ========================================= */
+
+function getSecondaryBodyPartsLabel(
+  bodyParts
+) {
+  const labels = {
+    chest: "klatka",
+    back: "plecy",
+    shoulders: "barki",
+    arms: "ramiona",
+    abs: "brzuch",
+    glutes: "pośladki",
+    legs: "nogi",
+
+    biceps: "biceps",
+    triceps: "triceps",
+    forearms: "przedramiona",
+
+    "hip-flexors":
+      "zginacze bioder",
+
+    hamstrings:
+      "tył uda",
+
+    quadriceps:
+      "przód uda",
+
+    quads:
+      "przód uda",
+
+    calves:
+      "łydki",
+
+    adductors:
+      "przywodziciele uda",
+
+    abductors:
+      "odwodziciele uda",
+
+    obliques:
+      "mięśnie skośne brzucha",
+
+    lats:
+      "mięśnie najszersze grzbietu",
+
+    traps:
+      "mięśnie czworoboczne",
+
+    rhomboids:
+      "mięśnie równoległoboczne",
+
+    "lower-back":
+      "dolna część pleców",
+
+    "upper-back":
+      "górna część pleców",
+
+    "rear-delts":
+      "tył barków",
+
+    "front-delts":
+      "przód barków",
+
+    "side-delts":
+      "bok barków",
+
+    serratus:
+      "mięsień zębaty przedni",
+
+    "spinal-erectors":
+      "prostowniki grzbietu",
+
+    grip:
+      "chwyt"
+  };
+
+  return (
+    bodyParts ||
+    []
+  )
+    .map(
+      (bodyPart) =>
+        labels[bodyPart] ||
+        bodyPart
+          .replaceAll(
+            "-",
+            " "
+          )
+    )
+    .join(
+      " • "
+    );
+}

@@ -102,13 +102,25 @@
       </div>
 
 
-      <button
-        class="history-open-button"
-        id="historyOpenButton"
-        type="button"
-      >
-        Historia treningów
-      </button>
+            <div class="welcome-secondary-actions">
+
+        <button
+          class="history-open-button"
+          id="historyOpenButton"
+          type="button"
+        >
+          Historia treningów
+        </button>
+
+        <button
+          class="exercise-library-open-button"
+          id="exerciseLibraryOpenButton"
+          type="button"
+        >
+          Baza ćwiczeń
+        </button>
+
+      </div>
 
     </div>
 
@@ -206,6 +218,136 @@
           Ukończ trening i kliknij „Gotowe”, a pojawi się tutaj.
         </span>
 
+      </div>
+
+    </div>
+
+  </section>
+    <!-- =====================================
+       BAZA ĆWICZEŃ
+       ===================================== -->
+
+  <section
+    class="screen exercise-library-screen is-hidden"
+    id="exerciseLibraryScreen"
+  >
+
+    <div class="exercise-library">
+
+      <button
+        class="back-button"
+        id="exerciseLibraryBackButton"
+        type="button"
+        aria-label="Wróć"
+      >
+        ←
+      </button>
+
+
+      <header class="exercise-library-header">
+
+        <p class="exercise-library-kicker">
+          Poznaj ćwiczenia
+        </p>
+
+        <h1>
+          Baza ćwiczeń
+        </h1>
+
+        <p class="exercise-library-description">
+          Przeglądaj ćwiczenia, sprawdzaj technikę
+          i dopasuj bazę do siebie.
+        </p>
+
+      </header>
+
+
+      <div class="exercise-library-body-parts">
+
+        <button
+          class="exercise-library-body-part is-selected"
+          type="button"
+          data-library-body="all"
+        >
+          Wszystkie
+        </button>
+
+        <button
+          class="exercise-library-body-part"
+          type="button"
+          data-library-body="chest"
+        >
+          Klatka
+        </button>
+
+        <button
+          class="exercise-library-body-part"
+          type="button"
+          data-library-body="back"
+        >
+          Plecy
+        </button>
+
+        <button
+          class="exercise-library-body-part"
+          type="button"
+          data-library-body="shoulders"
+        >
+          Barki
+        </button>
+
+        <button
+          class="exercise-library-body-part"
+          type="button"
+          data-library-body="arms"
+        >
+          Ramiona
+        </button>
+
+        <button
+          class="exercise-library-body-part"
+          type="button"
+          data-library-body="abs"
+        >
+          Brzuch
+        </button>
+
+        <button
+          class="exercise-library-body-part"
+          type="button"
+          data-library-body="legs"
+        >
+          Nogi
+        </button>
+
+        <button
+          class="exercise-library-body-part"
+          type="button"
+          data-library-body="glutes"
+        >
+          Pośladki
+        </button>
+
+      </div>
+
+
+      <div
+        class="exercise-library-list"
+        id="exerciseLibraryList"
+      ></div>
+
+
+      <div
+        class="exercise-library-empty"
+        id="exerciseLibraryEmpty"
+      >
+        <p>
+          Baza ćwiczeń jest gotowa do załadowania.
+        </p>
+
+        <span>
+          W następnym kroku wyświetlimy tutaj ćwiczenia.
+        </span>
       </div>
 
     </div>
