@@ -1,7 +1,7 @@
 /* =========================================
    K&K — Czas na Wycisk!
    GENERATOR TRENINGU
-   v0.10.3
+   v0.12.0
 
    Nowości:
    - modularna baza window.ExercisesDatabase,
@@ -12,7 +12,8 @@
    - repRange / timeRange / setRange / restRange,
    - ❤️ / 👎 i historia ostatnich treningów,
    - mocniejsza różnorodność ruchów,
-   - dopasowanie objętości do wybranego czasu,
+   - inteligentniejsza objętość zależna od roli i intensywności,
+   - łagodniejsze dopasowanie treningu do wybranego czasu,
    - dokładna obsługa ilości i możliwości sprzętu.
    ========================================= */
 
@@ -369,13 +370,6 @@ function createEquipmentInventory(
           : 2;
   }
 
-  /*
-    Nowy konfigurator używa osobnych
-    wartości resistance-band i mini-band.
-
-    "bands" zostawiamy wyłącznie jako
-    zgodność wsteczną ze starszą wersją.
-  */
   if (
     selected.includes(
       "resistance-band"
@@ -595,10 +589,6 @@ function isEquipmentConditionAvailable(
     );
   }
 
-  /*
-    To nie są osobne elementy wyposażenia
-    w obecnym konfiguratorze.
-  */
   const temporaryHouseholdConditions = [
     "stable-elevated-surface",
     "stable-seated-surface",
@@ -657,6 +647,8 @@ function isExerciseEquipmentAvailable(
     )
   );
 }
+
+
 /* =========================================
    TRUDNOŚĆ
    ========================================= */
@@ -900,7 +892,9 @@ function getSelectionBodyPart(
    ========================================= */
 
 function getTargetExerciseCount(
-  time
+  time,
+  level,
+  intensity
 ) {
   const minutes =
     Number(time);
@@ -910,6 +904,10 @@ function getTargetExerciseCount(
   }
 
   if (minutes <= 25) {
+    if (level === "beginner") {
+      return 5;
+    }
+
     return 4;
   }
 
@@ -1055,80 +1053,90 @@ function chooseSets(
       config
     );
 
-  let sets;
+  const level =
+    config.level ||
+    "intermediate";
 
-  if (role === "main") {
-    sets =
-      config.level ===
-        "beginner"
-        ? 2
-        : config.level ===
-            "advanced"
-          ? 4
-          : 3;
-  } else if (
-    role === "secondary"
-  ) {
-    sets =
-      config.level ===
-        "beginner"
-        ? 2
-        : 3;
-  } else {
-    sets =
-      config.level ===
-        "beginner"
-        ? 1
-        : 2;
-  }
+  const intensity =
+    config.intensity ||
+    "normal";
 
-  if (
-    config.intensity === "light"
-  ) {
-    sets -= 1;
-  }
+  const volumeProfiles = {
+    beginner: {
+      light: {
+        main: 2,
+        secondary: 2,
+        accessory: 1,
+        finisher: 1
+      },
+      normal: {
+        main: 2,
+        secondary: 2,
+        accessory: 2,
+        finisher: 1
+      },
+      hard: {
+        main: 3,
+        secondary: 2,
+        accessory: 2,
+        finisher: 2
+      }
+    },
 
-  if (
-    config.intensity === "hard"
-  ) {
-    if (
-      role === "main"
-    ) {
-      sets += 1;
+    intermediate: {
+      light: {
+        main: 3,
+        secondary: 2,
+        accessory: 2,
+        finisher: 1
+      },
+      normal: {
+        main: 3,
+        secondary: 3,
+        accessory: 2,
+        finisher: 2
+      },
+      hard: {
+        main: 4,
+        secondary: 3,
+        accessory: 3,
+        finisher: 2
+      }
+    },
+
+    advanced: {
+      light: {
+        main: 3,
+        secondary: 3,
+        accessory: 2,
+        finisher: 2
+      },
+      normal: {
+        main: 4,
+        secondary: 3,
+        accessory: 3,
+        finisher: 2
+      },
+      hard: {
+        main: 4,
+        secondary: 4,
+        accessory: 3,
+        finisher: 3
+      }
     }
+  };
 
-    if (
-      role === "secondary" &&
-      Math.random() < 0.35
-    ) {
-      sets += 1;
-    }
+  const levelProfile =
+    volumeProfiles[level] ||
+    volumeProfiles.intermediate;
 
-    if (
-      role === "accessory" &&
-      Math.random() < 0.15
-    ) {
-      sets += 1;
-    }
-  }
+  const intensityProfile =
+    levelProfile[intensity] ||
+    levelProfile.normal;
 
-  /*
-    Przy dłuższych treningach
-    zwiększamy przede wszystkim objętość,
-    a nie bez końca liczbę ćwiczeń.
-  */
-  if (
-    Number(
-      config.time
-    ) >= 45 &&
-    (
-      role === "main" ||
-      role === "secondary"
-    ) &&
-    Math.random() < 0.45
-  ) {
-    sets += 1;
-  }
+  let sets =
+    intensityProfile[role] ??
+    intensityProfile.secondary;
 
   if (
     exercise.difficulty >= 4 &&
@@ -1323,10 +1331,6 @@ function estimateExerciseSeconds(
         prescription.maxReps
       ) / 2;
 
-    /*
-      Około 3 sekundy na jedno
-      kontrolowane powtórzenie.
-    */
     workPerSet =
       averageRepetitions * 3;
   }
@@ -1342,10 +1346,6 @@ function estimateExerciseSeconds(
     ) *
     averageRest;
 
-  /*
-    Kilkanaście sekund na ustawienie
-    ciężaru / pozycji przed ćwiczeniem.
-  */
   const setupTime = 20;
 
   return Math.round(
@@ -1388,11 +1388,6 @@ function getEstimatedTransitionSeconds(
     return 0;
   }
 
-  /*
-    Naturalne przejście:
-    odłożenie ciężaru,
-    przeczytanie następnego ćwiczenia itd.
-  */
   return (
     workout.length - 1
   ) * 20;
@@ -1481,10 +1476,10 @@ function getVolumeIncreasePriority(
 
       return (
         Number(
-          b.fatigue || 0
+          a.fatigue || 0
         ) -
         Number(
-          a.fatigue || 0
+          b.fatigue || 0
         )
       );
     }
@@ -1508,82 +1503,159 @@ function fitWorkoutVolumeToTime(
       config.time
     ) * 60;
 
-  /*
-    Trening może być ok. 5 minut
-    krótszy od deklarowanego czasu.
-  */
   const minimumDesiredSeconds =
     Math.max(
       1,
       targetSeconds - 300
     );
 
+  if (
+    getWorkoutEstimatedSeconds(
+      workout
+    ) >= minimumDesiredSeconds
+  ) {
+    return workout;
+  }
+
   const candidates =
     getVolumeIncreasePriority(
       workout
     );
 
-  let safetyCounter = 0;
+  const intensity =
+    config.intensity ||
+    "normal";
 
-  while (
-    getWorkoutEstimatedSeconds(
-      workout
-    ) <
-      minimumDesiredSeconds &&
-    safetyCounter < 30
+  const minutes =
+    Number(
+      config.time
+    );
+
+  let extraSetBudget;
+
+  if (intensity === "light") {
+    extraSetBudget =
+      minutes >= 45
+        ? 2
+        : 1;
+  } else if (
+    intensity === "hard"
   ) {
-    let increasedSomething =
-      false;
-
-    for (
-      const exercise of candidates
-    ) {
-      const limits =
-        getExerciseSetLimits(
-          exercise,
-          config
-        );
-
-      const currentSets =
-        Number(
-          exercise.sets
-        ) || limits.min;
-
-      if (
-        currentSets >=
-        limits.max
-      ) {
-        continue;
-      }
-
-      updateExercisePrescriptionSets(
-        exercise,
-        currentSets + 1,
-        config
+    extraSetBudget =
+      Math.max(
+        2,
+        Math.ceil(
+          workout.length * 0.6
+        )
       );
+  } else {
+    extraSetBudget =
+      Math.max(
+        1,
+        Math.ceil(
+          workout.length * 0.35
+        )
+      );
+  }
 
-      increasedSomething =
-        true;
+  const maxExtraByRole =
+    intensity === "hard"
+      ? {
+          main: 1,
+          secondary: 1,
+          accessory: 1,
+          finisher: 0
+        }
+      : intensity === "light"
+        ? {
+            main: 1,
+            secondary: 0,
+            accessory: 0,
+            finisher: 0
+          }
+        : {
+            main: 1,
+            secondary: 1,
+            accessory: 1,
+            finisher: 0
+          };
 
-      if (
-        getWorkoutEstimatedSeconds(
-          workout
-        ) >=
-          minimumDesiredSeconds
-      ) {
-        break;
-      }
-    }
+  let usedExtraSets = 0;
 
-    if (!increasedSomething) {
+  for (
+    const exercise of candidates
+  ) {
+    if (
+      usedExtraSets >=
+      extraSetBudget
+    ) {
       break;
     }
 
-    safetyCounter += 1;
+    if (
+      getWorkoutEstimatedSeconds(
+        workout
+      ) >= minimumDesiredSeconds
+    ) {
+      break;
+    }
+
+    const limits =
+      getExerciseSetLimits(
+        exercise,
+        config
+      );
+
+    const currentSets =
+      Number(
+        exercise.sets
+      ) || limits.min;
+
+    const baseSets =
+      Number(
+        exercise.baseSets
+      ) || currentSets;
+
+    const allowedExtra =
+      maxExtraByRole[
+        exercise.role
+      ] ?? 0;
+
+    const currentExtra =
+      Math.max(
+        0,
+        currentSets -
+          baseSets
+      );
+
+    if (
+      allowedExtra <= 0 ||
+      currentExtra >= allowedExtra ||
+      currentSets >= limits.max
+    ) {
+      continue;
+    }
+
+    if (
+      exercise.difficulty >= 4 &&
+      exercise.role !== "main"
+    ) {
+      continue;
+    }
+
+    updateExercisePrescriptionSets(
+      exercise,
+      currentSets + 1,
+      config
+    );
+
+    usedExtraSets += 1;
   }
 
   return workout;
 }
+
+
 /* =========================================
    PRZERWA MIĘDZY ĆWICZENIAMI
    ========================================= */
@@ -1838,10 +1910,6 @@ function scoreExercise(
   score -=
     bodyCount * 18;
 
-  /*
-    Bardzo mocna kara za dokładnie
-    ten sam wzorzec ruchu.
-  */
   const sameMovementCount =
     selectedExercises.filter(
       (selectedExercise) =>
@@ -1853,21 +1921,12 @@ function scoreExercise(
   score -=
     sameMovementCount * 55;
 
-  /*
-    Jeśli już mamy dwa ćwiczenia
-    o identycznym wzorcu ruchu,
-    trzecie jest mocno niepożądane.
-  */
   if (
     sameMovementCount >= 2
   ) {
     score -= 80;
   }
 
-  /*
-    Dodatkowo ograniczamy bardzo podobne
-    warianty opisane tymi samymi tagami.
-  */
   const sharedMovementTags =
     getSharedMovementTagCount(
       exercise,
@@ -2185,6 +2244,8 @@ function orderWorkout(
 
   return ordered;
 }
+
+
 /* =========================================
    GENEROWANIE
    ========================================= */
@@ -2214,7 +2275,9 @@ function generateWorkout(
   const targetExerciseCount =
     Math.min(
       getTargetExerciseCount(
-        config.time
+        config.time,
+        config.level,
+        config.intensity
       ),
       GENERATOR_CONFIG
         .maxExercises
@@ -2364,6 +2427,9 @@ function generateWorkout(
           sets:
             prescription.sets,
 
+          baseSets:
+            prescription.sets,
+
           rest,
 
           estimatedSeconds:
@@ -2375,12 +2441,6 @@ function generateWorkout(
       }
     );
 
-  /*
-    Jeżeli trening wychodzi wyraźnie
-    krótszy niż czas wybrany przez użytkownika,
-    najpierw zwiększamy liczbę serii
-    w rozsądnych granicach.
-  */
   workout =
     fitWorkoutVolumeToTime(
       workout,
@@ -2599,11 +2659,6 @@ function findReplacement(
       replacement
     );
 
-  /*
-    Przy zastąpieniu zachowujemy
-    mniej więcej objętość starego ćwiczenia,
-    o ile nowy rekord na to pozwala.
-  */
   const replacementLimits =
     getExerciseSetLimits(
       replacement,
